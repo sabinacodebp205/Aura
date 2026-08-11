@@ -29,7 +29,7 @@ export default function ProductPage() {
       .then((all) => {
         if (!cancelled) setRelated(all.filter((p) => p.id !== id).slice(0, 2));
       })
-      .catch(() => {});
+      .catch(() => { });
 
     return () => { cancelled = true; };
   }, [id]);

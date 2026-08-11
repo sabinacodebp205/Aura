@@ -676,9 +676,9 @@ button {
 .mini-product {
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 4px;
   background: var(--paper);
-  box-shadow: 0 16px 40px rgba(16, 17, 20, 0.08);
+  box-shadow: 0 4px 20px rgba(16, 17, 20, 0.04);
 }
 
 .collection-card {
@@ -689,6 +689,12 @@ button {
 .collection-card img {
   height: 100%;
   object-fit: cover;
+  background: var(--soft);
+  transition: transform 500ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.collection-card:hover img {
+  transform: scale(1.02);
 }
 
 .collection-card div {
@@ -697,15 +703,21 @@ button {
   bottom: 18px;
   left: 18px;
   padding: 18px;
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.78);
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(14px);
 }
 
 .mini-product img {
-  aspect-ratio: 4 / 4.6;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  transition: 500ms ease;
+  background: var(--soft);
+  transition: transform 500ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.mini-product:hover img {
+  transform: scale(1.03);
 }
 
 .mini-product h3,

@@ -1,5 +1,8 @@
-﻿using Aura.Application.DTOs.Auth;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Aura.Application.DTOs.Auth;
 using Aura.Application.Sevices.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aura.API.Controllers
@@ -9,10 +12,12 @@ namespace Aura.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IAppUserService _appUserService;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IAppUserService appUserService)
         {
             _authService = authService;
+            _appUserService = appUserService;
         }
 
         [HttpPost("register")]
@@ -35,6 +40,27 @@ namespace Aura.API.Controllers
             {
                 Token = token
             });
+        }
+
+        [Authorize]
+        [HttpGet("me")]
+        public async Task<IActionResult> GetMe()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                ?? User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+
+            if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid token claims.");
+            }
+
+            var user = await _appUserService.GetByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            return Ok(user);
         }
     }
 }

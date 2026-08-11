@@ -116,9 +116,13 @@ namespace Aura.API
             app.UseSwagger();
             app.UseSwaggerUI();
 
-            app.UseHttpsRedirection();
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
             app.UseStaticFiles();
             app.UseCors(FrontendCorsPolicy);
+            app.UseMiddleware<Aura.API.Middlewares.ExceptionMiddleware>();
 
             app.UseAuthentication();
 

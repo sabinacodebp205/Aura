@@ -37,6 +37,13 @@ export function FavoritesProvider({ children }) {
 
   useEffect(() => {
     fetchFavorites();
+
+    const handleLogout = () => {
+      setFavorites([]);
+      setFavoriteIds([]);
+    };
+    window.addEventListener('aura_logout', handleLogout);
+    return () => window.removeEventListener('aura_logout', handleLogout);
   }, [fetchFavorites]);
 
   const value = useMemo(() => {

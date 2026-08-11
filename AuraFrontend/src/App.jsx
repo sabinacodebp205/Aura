@@ -1,14 +1,17 @@
+import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import AppRoutes from './router';
 
 function App() {
   return (
-    <FavoritesProvider>
-      <CartProvider>
-        <AppRoutes />
-      </CartProvider>
-    </FavoritesProvider>
+    <AuthProvider>
+      <FavoritesProvider>
+        <CartProvider>
+          <AppRoutes />
+        </CartProvider>
+      </FavoritesProvider>
+    </AuthProvider>
   );
 }
 

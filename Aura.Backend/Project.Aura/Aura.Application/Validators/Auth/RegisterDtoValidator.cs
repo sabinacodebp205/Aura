@@ -1,10 +1,5 @@
-﻿using Aura.Application.DTOs.Auth;
+using Aura.Application.DTOs.Auth;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aura.Application.Validators.Auth
 {
@@ -27,7 +22,7 @@ namespace Aura.Application.Validators.Auth
 
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Email is required.")
-                .EmailAddress().WithMessage("Invalid email format.");
+                .Matches(@"^[^@\s]+@[^@\s]+\.[^@\s]+$").WithMessage("Invalid email address format (e.g. user@example.com).");
 
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("Password is required.")

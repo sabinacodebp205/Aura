@@ -1,40 +1,72 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Brand from '../../components/atoms/Brand/Brand';
 import SearchBar from '../../components/molecules/SearchBar/SearchBar';
-import CategoryStrip from '../../components/molecules/CategoryStrip/CategoryStrip';
+import CategoryFilterBar from '../../components/molecules/CategoryFilterBar/CategoryFilterBar';
 import SectionHeading from '../../components/molecules/SectionHeading/SectionHeading';
 import HeroBanner from '../../components/organisms/HeroBanner/HeroBanner';
-import EditorialGrid from '../../components/organisms/EditorialGrid/EditorialGrid';
 import ProductGrid from '../../components/organisms/ProductGrid/ProductGrid';
 import AIPromptPanel from '../../components/organisms/AIPromptPanel/AIPromptPanel';
 import { getAllProducts } from '../../api/productService';
+import { getAllCategories } from '../../api/categoryService';
 import { newArrivals } from '../../data/products';
 import styles from './HomePage.module.css';
 
-const categories = [
-  { id: 'women', label: 'Women' },
-  { id: 'men', label: 'Men' },
-  { id: 'tees', label: 'T-Shirts' },
-  { id: 'hoodies', label: 'Hoodies' },
-  { id: 'dresses', label: 'Dresses' },
-  { id: 'skirts', label: 'Skirts' },
-  { id: 'pants', label: 'Pants' },
-  { id: 'jackets', label: 'Jackets' },
-  { id: 'accessories', label: 'Accessories' },
-];
-
 export default function HomePage() {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [loading, setLoading] = useState(true);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
 
   useEffect(() => {
     let cancelled = false;
-    getAllProducts()
-      .then((data) => { if (!cancelled) setProducts(data); })
-      .catch((err) => console.error('Failed to load products:', err))
-      .finally(() => { if (!cancelled) setLoading(false); });
-    return () => { cancelled = true; };
+
+    Promise.all([getAllProducts(), getAllCategories()])
+      .then(([productsData, categoriesData]) => {
+        if (!cancelled) {
+          setProducts(productsData || []);
+          setCategories(categoriesData || []);
+        }
+      })
+      .catch((err) => console.error('Failed to load initial data:', err))
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
+
+  const handleSearchChange = (e) => {
+    const val = e.target.value;
+    const nextParams = new URLSearchParams(searchParams);
+    if (val) {
+      nextParams.set('search', val);
+    } else {
+      nextParams.delete('search');
+    }
+    setSearchParams(nextParams, { replace: true });
+  };
+
+  const filteredProducts = products.filter((product) => {
+    const matchesCategory =
+      selectedCategory.toLowerCase() === 'all' ||
+      (product.category && product.category.toLowerCase() === selectedCategory.toLowerCase()) ||
+      (product.categoryName && product.categoryName.toLowerCase() === selectedCategory.toLowerCase());
+
+    const trimmedQuery = searchQuery.trim().toLowerCase();
+    const matchesSearch =
+      !trimmedQuery ||
+      product.name?.toLowerCase().includes(trimmedQuery) ||
+      product.description?.toLowerCase().includes(trimmedQuery) ||
+      (product.category && product.category.toLowerCase().includes(trimmedQuery));
+
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <>
@@ -46,14 +78,30 @@ export default function HomePage() {
             <h1>AURA</h1>
           </div>
         </div>
-        <SearchBar placeholder="Search hoodies, dresses, embroidery ideas..." />
-        <CategoryStrip categories={categories} activeCategory="women" />
+        <SearchBar
+          placeholder="Search hoodies, dresses, embroidery ideas..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
       </section>
       <HeroBanner />
-      <EditorialGrid />
-      <section className="section-pad">
+      <section className={`section-pad ${styles['tight-section']}`}>
         <SectionHeading eyebrow="Trending this week" title="Fashion first, customization ready" linkText="View inspiration" linkTo="/inspiration" />
-        {loading ? <p className="loading-text">Loading products…</p> : <ProductGrid products={products} />}
+        <CategoryFilterBar
+          categories={categories}
+          activeCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+        />
+        {loading ? (
+          <p className="loading-text">Loading products…</p>
+        ) : filteredProducts.length > 0 ? (
+          <ProductGrid products={filteredProducts} />
+        ) : (
+          <div className={styles['empty-state']}>
+            <h3>No products found</h3>
+            <p>Try adjusting your search terms or selecting a different category.</p>
+          </div>
+        )}
       </section>
       <AIPromptPanel />
       <section className="section-pad">

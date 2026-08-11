@@ -55,6 +55,16 @@ export function CartProvider({ children }) {
   const [activeOrderId, setActiveOrderId] = useState(null);
   const [syncing, setSyncing] = useState(false);
 
+  /* ---- listen for logout to reset state ---- */
+  useEffect(() => {
+    const handleLogout = () => {
+      setItems([]);
+      setActiveOrderId(null);
+    };
+    window.addEventListener('aura_logout', handleLogout);
+    return () => window.removeEventListener('aura_logout', handleLogout);
+  }, []);
+
   /* ---- persist to localStorage on every change ---- */
   useEffect(() => { saveLocal(items); }, [items]);
 

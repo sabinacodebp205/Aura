@@ -1,6 +1,7 @@
-﻿using Aura.Application.DTOs.Auth;
+using Aura.Application.DTOs.Auth;
 using Aura.Application.Sevices.Interfaces;
 using Aura.Core.Entities;
+using Aura.Core.Exceptions;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -32,14 +33,14 @@ namespace Aura.Application.Sevices.Implementations
             var existUser = await _userManager.FindByEmailAsync(dto.Email);
 
             if (existUser != null)
-                throw new Exception("User already exists.");
+                throw new ConflictException("User already exists.");
 
             var user = _mapper.Map<AppUser>(dto);
 
             var result = await _userManager.CreateAsync(user, dto.Password);
 
             if (!result.Succeeded)
-                throw new Exception(result.Errors.First().Description);
+                throw new BadRequestException(result.Errors.First().Description);
         }
 
         public async Task<string> LoginAsync(LoginDto dto)
@@ -47,12 +48,12 @@ namespace Aura.Application.Sevices.Implementations
             var user = await _userManager.FindByEmailAsync(dto.Email);
 
             if (user == null)
-                throw new Exception("Email or Password is incorrect.");
+                throw new UnauthorizedException("Email or Password is incorrect.");
 
             var isPasswordCorrect = await _userManager.CheckPasswordAsync(user, dto.Password);
 
             if (!isPasswordCorrect)
-                throw new Exception("Email or Password is incorrect.");
+                throw new UnauthorizedException("Email or Password is incorrect.");
 
             // JWT Token yaratılır
             var token = _tokenService.CreateToken(user);
