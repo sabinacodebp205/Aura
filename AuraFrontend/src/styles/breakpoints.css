@@ -1,0 +1,5 @@
+:root {
+  /* Shared legacy breakpoints: 900px for layout compression, 560px for phone refinements. */
+  --breakpoint-tablet: 900px;
+  --breakpoint-phone: 560px;
+}

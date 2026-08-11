@@ -1,0 +1,9 @@
+.rating {
+  padding: 0 16px 16px;
+  color: var(--gold);
+  font-size: 13px;
+}
+
+.rating span {
+  color: var(--muted);
+}

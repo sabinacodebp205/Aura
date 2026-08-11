@@ -1,0 +1,8 @@
+.root {
+  position: sticky;
+}
+
+.favorite {
+  position: static;
+  float: right;
+}

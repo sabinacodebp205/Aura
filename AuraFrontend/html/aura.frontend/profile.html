@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AURA | Profile</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="AURA home">
+        <span class="brand-mark">A</span>
+        <span>AURA</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="inspiration.html">Inspiration</a>
+        <a href="community.html">Community</a>
+        <a href="studio.html">AI Studio</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-button" href="favorites.html" aria-label="Favorites">♡</a>
+        <a class="icon-button" href="cart.html" aria-label="Shopping cart">⌁</a>
+        <a class="profile-chip active" href="profile.html">
+          <span class="avatar-mini"></span>
+          <span>Arda</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="profile-hero">
+        <img
+          src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=85"
+          alt="Profile portrait"
+        />
+        <div>
+          <p class="eyebrow">AURA member</p>
+          <h1>Arda Mammadov</h1>
+          <p>arda@example.com</p>
+        </div>
+        <button class="button button-dark" type="button">Edit Profile</button>
+      </section>
+
+      <section class="profile-grid">
+        <article class="profile-card">
+          <span>01</span>
+          <h2>Order History</h2>
+          <p>3 recent orders, 2 custom proofs approved.</p>
+        </article>
+        <article class="profile-card">
+          <span>02</span>
+          <h2>Saved Addresses</h2>
+          <p>Baku primary shipping address active.</p>
+        </article>
+        <article class="profile-card">
+          <span>03</span>
+          <h2>Payment Methods</h2>
+          <p>Visa ending in 2048 and Apple Pay enabled.</p>
+        </article>
+        <article class="profile-card">
+          <span>04</span>
+          <h2>Favorite Products</h2>
+          <p>12 products and 8 community designs saved.</p>
+        </article>
+        <article class="profile-card">
+          <span>05</span>
+          <h2>Settings</h2>
+          <p>Size profile, notifications, privacy, and AI preferences.</p>
+        </article>
+        <article class="profile-card logout-card">
+          <span>06</span>
+          <h2>Logout</h2>
+          <p>Securely end this session.</p>
+        </article>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Mobile navigation">
+      <a href="index.html"><span>⌂</span>Home</a>
+      <a href="favorites.html"><span>♡</span>Favorites</a>
+      <a href="cart.html"><span>⌁</span>Cart</a>
+      <a href="profile.html" class="active"><span>◉</span>Profile</a>
+    </nav>
+
+    <script src="app.js"></script>
+  </body>
+</html>

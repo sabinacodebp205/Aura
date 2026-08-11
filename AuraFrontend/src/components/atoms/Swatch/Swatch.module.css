@@ -1,0 +1,16 @@
+.swatch {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.swatch.active {
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+.black { background: #111; }
+.white { background: #fff; }
+.grey { background: #aaa; }
+.blush { background: var(--rose); }

@@ -1,0 +1,14 @@
+.summary-row,
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.summary-total {
+  margin-bottom: 18px;
+  border-bottom: 0;
+  font-size: 22px;
+}

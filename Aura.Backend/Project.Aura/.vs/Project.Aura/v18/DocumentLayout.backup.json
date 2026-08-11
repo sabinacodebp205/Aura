@@ -1,0 +1,773 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D609FCF3-76B2-479F-86FB-9C3D46988F5B}|Solution Items{D609FCF3-76B2-479F-86FB-9C3D46988F5B}|C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Dockerfile.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{D609FCF3-76B2-479F-86FB-9C3D46988F5B}|Solution Items{D609FCF3-76B2-479F-86FB-9C3D46988F5B}|solutionrelative:Dockerfile.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\aura.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\aura.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\common\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\common\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\sevices\\interfaces\\ifileuploadservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\sevices\\interfaces\\ifileuploadservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\sevices\\fileupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\sevices\\fileupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\validators\\productimage\\productimageupdatedtovalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\validators\\productimage\\productimageupdatedtovalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\validators\\productimage\\productimagecreatedtovalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\validators\\productimage\\productimagecreatedtovalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\sevices\\implementations\\productimageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\sevices\\implementations\\productimageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\sevices\\interfaces\\iproductimageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\sevices\\interfaces\\iproductimageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\controllers\\productimagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\controllers\\productimagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\sevices\\implementations\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\sevices\\implementations\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\mapping\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\mapping\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\dtos\\productimage\\productimageupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\dtos\\productimage\\productimageupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\dtos\\productimage\\productimagecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\dtos\\productimage\\productimagecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\dtos\\category\\categorycreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\dtos\\category\\categorycreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2D6FF49-6D77-4324-AD4F-BDE8F86005B4}|..\\Aura.Database\\Aura.Database.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.database\\contexts\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2D6FF49-6D77-4324-AD4F-BDE8F86005B4}|..\\Aura.Database\\Aura.Database.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.database\\repositories\\implementations\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA76783C-9C4A-C1EC-F957-DE1E4229B7ED}|..\\Aura.Core\\Aura.Core.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.core\\interfaces\\repositories\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\dtos\\productimage\\productimagegetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\dtos\\productimage\\productimagegetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA76783C-9C4A-C1EC-F957-DE1E4229B7ED}|..\\Aura.Core\\Aura.Core.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.core\\interfaces\\repositories\\iproductimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2D6FF49-6D77-4324-AD4F-BDE8F86005B4}|..\\Aura.Database\\Aura.Database.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.database\\repositories\\implementations\\productimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA76783C-9C4A-C1EC-F957-DE1E4229B7ED}|..\\Aura.Core\\Aura.Core.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.core\\entities\\productimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\dtos\\orderitem\\orderitemcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\dtos\\orderitem\\orderitemcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\sevices\\implementations\\orderitemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\sevices\\implementations\\orderitemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\sevices\\implementations\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\sevices\\implementations\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA76783C-9C4A-C1EC-F957-DE1E4229B7ED}|..\\Aura.Core\\Aura.Core.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.core\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA76783C-9C4A-C1EC-F957-DE1E4229B7ED}|..\\Aura.Core\\Aura.Core.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.core\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\controllers\\orderitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\controllers\\orderitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\controllers\\favoritecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\controllers\\favoritecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2D6FF49-6D77-4324-AD4F-BDE8F86005B4}|..\\Aura.Database\\Aura.Database.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.database\\repositories\\implementations\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2D6FF49-6D77-4324-AD4F-BDE8F86005B4}|..\\Aura.Database\\Aura.Database.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.database\\repositories\\implementations\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2D6FF49-6D77-4324-AD4F-BDE8F86005B4}|..\\Aura.Database\\Aura.Database.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.database\\repositories\\implementations\\reviewrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA76783C-9C4A-C1EC-F957-DE1E4229B7ED}|..\\Aura.Core\\Aura.Core.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.core\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\dtos\\category\\categoryupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\dtos\\category\\categoryupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2D6FF49-6D77-4324-AD4F-BDE8F86005B4}|..\\Aura.Database\\Aura.Database.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\aura.database\\repositories\\implementations\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.application\\sevices\\implementations\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7F9CBBA-25E6-46ED-A16C-74BF059017DA}|Aura.Application\\Aura.Application.csproj|solutionrelative:aura.application\\sevices\\implementations\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\aura.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\aura.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Arda\\source\\repos\\Aura.Database\\Contexts\\AppDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|c:\\users\\arda\\desktop\\aura\\aura.backend\\project.aura\\aura.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DCA1B6C-6953-4D45-9D29-039F2472D2E3}|Aura.API\\Aura.API.csproj|solutionrelative:aura.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Arda\\source\\repos\\Aura.Database\\AppDbContextFactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Arda\\Desktop\\Aura\\Aura.Database\\Contexts\\AppDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Dockerfile.txt",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Dockerfile.txt",
+              "RelativeDocumentMoniker": "Dockerfile.txt",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Dockerfile.txt",
+              "RelativeToolTip": "Dockerfile.txt",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-08-05T17:27:46.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Aura.API.csproj",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
+              "RelativeDocumentMoniker": "Aura.API\\Aura.API.csproj",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
+              "RelativeToolTip": "Aura.API\\Aura.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-08-05T17:08:40.676Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Aura.API\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\appsettings.Development.json",
+              "RelativeToolTip": "Aura.API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-05T10:34:35.101Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.Production.json",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\appsettings.Production.json",
+              "RelativeDocumentMoniker": "Aura.API\\appsettings.Production.json",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\appsettings.Production.json",
+              "RelativeToolTip": "Aura.API\\appsettings.Production.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-05T09:32:57.237Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "JwtSettings.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Common\\JwtSettings.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\Common\\JwtSettings.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Common\\JwtSettings.cs",
+              "RelativeToolTip": "Aura.Application\\Common\\JwtSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-05T10:38:31.745Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Program.cs",
+              "RelativeDocumentMoniker": "Aura.API\\Program.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Program.cs",
+              "RelativeToolTip": "Aura.API\\Program.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAUwHQAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:27:09.707Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProductImageService.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Implementations\\ProductImageService.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\Sevices\\Implementations\\ProductImageService.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Implementations\\ProductImageService.cs",
+              "RelativeToolTip": "Aura.Application\\Sevices\\Implementations\\ProductImageService.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAowGYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T16:58:24.231Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Aura.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\appsettings.json",
+              "RelativeToolTip": "Aura.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-02T09:26:54.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ProductImageUpdateDtoValidator.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Validators\\ProductImage\\ProductImageUpdateDtoValidator.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\Validators\\ProductImage\\ProductImageUpdateDtoValidator.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Validators\\ProductImage\\ProductImageUpdateDtoValidator.cs",
+              "RelativeToolTip": "Aura.Application\\Validators\\ProductImage\\ProductImageUpdateDtoValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T19:02:27.319Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FileUpload.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Sevices\\FileUpload.cs",
+              "RelativeDocumentMoniker": "Aura.API\\Sevices\\FileUpload.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Sevices\\FileUpload.cs",
+              "RelativeToolTip": "Aura.API\\Sevices\\FileUpload.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAD8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T18:58:49.57Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ProductImageController.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\ProductImageController.cs",
+              "RelativeDocumentMoniker": "Aura.API\\Controllers\\ProductImageController.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\ProductImageController.cs",
+              "RelativeToolTip": "Aura.API\\Controllers\\ProductImageController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T16:57:53.632Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IFileUploadService.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Interfaces\\IFileUploadService.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\Sevices\\Interfaces\\IFileUploadService.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Interfaces\\IFileUploadService.cs",
+              "RelativeToolTip": "Aura.Application\\Sevices\\Interfaces\\IFileUploadService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T17:14:41.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProductImageCreateDtoValidator.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Validators\\ProductImage\\ProductImageCreateDtoValidator.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\Validators\\ProductImage\\ProductImageCreateDtoValidator.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Validators\\ProductImage\\ProductImageCreateDtoValidator.cs",
+              "RelativeToolTip": "Aura.Application\\Validators\\ProductImage\\ProductImageCreateDtoValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T19:00:27.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IProductImageService.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Interfaces\\IProductImageService.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\Sevices\\Interfaces\\IProductImageService.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Interfaces\\IProductImageService.cs",
+              "RelativeToolTip": "Aura.Application\\Sevices\\Interfaces\\IProductImageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T17:05:39.861Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Implementations\\ProductService.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\Sevices\\Implementations\\ProductService.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Implementations\\ProductService.cs",
+              "RelativeToolTip": "Aura.Application\\Sevices\\Implementations\\ProductService.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAgwEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:54:39.812Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Mapping\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\Mapping\\MappingProfile.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Mapping\\MappingProfile.cs",
+              "RelativeToolTip": "Aura.Application\\Mapping\\MappingProfile.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAowHAAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:14:14.407Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ProductImageUpdateDto.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\ProductImage\\ProductImageUpdateDto.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\DTOs\\ProductImage\\ProductImageUpdateDto.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\ProductImage\\ProductImageUpdateDto.cs",
+              "RelativeToolTip": "Aura.Application\\DTOs\\ProductImage\\ProductImageUpdateDto.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T17:04:57.082Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ProductImageCreateDto.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\ProductImage\\ProductImageCreateDto.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\DTOs\\ProductImage\\ProductImageCreateDto.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\ProductImage\\ProductImageCreateDto.cs",
+              "RelativeToolTip": "Aura.Application\\DTOs\\ProductImage\\ProductImageCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T16:59:56.639Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "CategoryCreateDto.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\Category\\CategoryCreateDto.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\DTOs\\Category\\CategoryCreateDto.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\Category\\CategoryCreateDto.cs",
+              "RelativeToolTip": "Aura.Application\\DTOs\\Category\\CategoryCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T17:19:09.249Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "RelativeToolTip": "..\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAqwCYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T17:07:43.237Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Interfaces\\Repositories\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Core\\Interfaces\\Repositories\\IUnitOfWork.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Interfaces\\Repositories\\IUnitOfWork.cs",
+              "RelativeToolTip": "..\\Aura.Core\\Interfaces\\Repositories\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T17:06:10.241Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ProductImageGetDto.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\ProductImage\\ProductImageGetDto.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\DTOs\\ProductImage\\ProductImageGetDto.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\ProductImage\\ProductImageGetDto.cs",
+              "RelativeToolTip": "Aura.Application\\DTOs\\ProductImage\\ProductImageGetDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T17:04:42.017Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Database\\Repositories\\Implementations\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\UnitOfWork.cs",
+              "RelativeToolTip": "..\\Aura.Database\\Repositories\\Implementations\\UnitOfWork.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAowDcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:15:49.162Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "IProductImageRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Interfaces\\Repositories\\IProductImageRepository.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Core\\Interfaces\\Repositories\\IProductImageRepository.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Interfaces\\Repositories\\IProductImageRepository.cs",
+              "RelativeToolTip": "..\\Aura.Core\\Interfaces\\Repositories\\IProductImageRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T16:59:27.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ProductImage.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Entities\\ProductImage.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Core\\Entities\\ProductImage.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Entities\\ProductImage.cs",
+              "RelativeToolTip": "..\\Aura.Core\\Entities\\ProductImage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T16:57:17.577Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Implementations\\OrderService.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\Sevices\\Implementations\\OrderService.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Implementations\\OrderService.cs",
+              "RelativeToolTip": "Aura.Application\\Sevices\\Implementations\\OrderService.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAADwv3oAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T14:58:40.887Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Entities\\Order.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Core\\Entities\\Order.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Entities\\Order.cs",
+              "RelativeToolTip": "..\\Aura.Core\\Entities\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T14:56:58.345Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "OrderItemService.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Implementations\\OrderItemService.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\Sevices\\Implementations\\OrderItemService.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Implementations\\OrderItemService.cs",
+              "RelativeToolTip": "Aura.Application\\Sevices\\Implementations\\OrderItemService.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAIwFgAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T14:41:46.775Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ProductImageRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\ProductImageRepository.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Database\\Repositories\\Implementations\\ProductImageRepository.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\ProductImageRepository.cs",
+              "RelativeToolTip": "..\\Aura.Database\\Repositories\\Implementations\\ProductImageRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:55:56.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "OrderItemController.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\OrderItemController.cs",
+              "RelativeDocumentMoniker": "Aura.API\\Controllers\\OrderItemController.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\OrderItemController.cs",
+              "RelativeToolTip": "Aura.API\\Controllers\\OrderItemController.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAkwD4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T14:40:59.289Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "OrderItem.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Entities\\OrderItem.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Core\\Entities\\OrderItem.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Entities\\OrderItem.cs",
+              "RelativeToolTip": "..\\Aura.Core\\Entities\\OrderItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T14:39:53.424Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "OrderItemCreateDto.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\OrderItem\\OrderItemCreateDto.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\DTOs\\OrderItem\\OrderItemCreateDto.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\OrderItem\\OrderItemCreateDto.cs",
+              "RelativeToolTip": "Aura.Application\\DTOs\\OrderItem\\OrderItemCreateDto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAoAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T14:38:40.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "FavoriteController.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\FavoriteController.cs",
+              "RelativeDocumentMoniker": "Aura.API\\Controllers\\FavoriteController.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\FavoriteController.cs",
+              "RelativeToolTip": "Aura.API\\Controllers\\FavoriteController.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAowDoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T12:15:34.165Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ReviewRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\ReviewRepository.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Database\\Repositories\\Implementations\\ReviewRepository.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\ReviewRepository.cs",
+              "RelativeToolTip": "..\\Aura.Database\\Repositories\\Implementations\\ReviewRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:56:27.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "ProductRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\ProductRepository.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Database\\Repositories\\Implementations\\ProductRepository.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\ProductRepository.cs",
+              "RelativeToolTip": "..\\Aura.Database\\Repositories\\Implementations\\ProductRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:55:01.867Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Database\\Repositories\\Implementations\\GenericRepository.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\GenericRepository.cs",
+              "RelativeToolTip": "..\\Aura.Database\\Repositories\\Implementations\\GenericRepository.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwA0AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:15:08.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Entities\\Category.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Core\\Entities\\Category.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Entities\\Category.cs",
+              "RelativeToolTip": "..\\Aura.Core\\Entities\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:23:13.019Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "CategoryUpdateDto.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\Category\\CategoryUpdateDto.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\DTOs\\Category\\CategoryUpdateDto.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\DTOs\\Category\\CategoryUpdateDto.cs",
+              "RelativeToolTip": "Aura.Application\\DTOs\\Category\\CategoryUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:22:14.29Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "CategoryRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\CategoryRepository.cs",
+              "RelativeDocumentMoniker": "..\\Aura.Database\\Repositories\\Implementations\\CategoryRepository.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Repositories\\Implementations\\CategoryRepository.cs",
+              "RelativeToolTip": "..\\Aura.Database\\Repositories\\Implementations\\CategoryRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:13:46.319Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "CategoryService.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Implementations\\CategoryService.cs",
+              "RelativeDocumentMoniker": "Aura.Application\\Sevices\\Implementations\\CategoryService.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Sevices\\Implementations\\CategoryService.cs",
+              "RelativeToolTip": "Aura.Application\\Sevices\\Implementations\\CategoryService.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAA/wFQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-02T09:12:54.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "Aura.API\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "Aura.API\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-30T18:31:26.927Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "Aura.API\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "Aura.API\\Controllers\\OrderController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-30T18:31:25.768Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "Aura.API\\Controllers\\CategoryController.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "Aura.API\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAkwDwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-30T18:31:24.609Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Aura.API",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
+              "RelativeDocumentMoniker": "Aura.API\\Aura.API.csproj",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
+              "RelativeToolTip": "Aura.API\\Aura.API.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-07-30T18:31:20.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "..\\..\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "RelativeToolTip": "..\\..\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-30T18:31:10.685Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\source\\repos\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\source\\repos\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Arda\\source\\repos\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\source\\repos\\Aura.Database\\Contexts\\AppDbContext.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-30T17:19:18.377Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "AppDbContextFactory.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\source\\repos\\Aura.Database\\AppDbContextFactory.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\source\\repos\\Aura.Database\\AppDbContextFactory.cs",
+              "ToolTip": "C:\\Users\\Arda\\source\\repos\\Aura.Database\\AppDbContextFactory.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\source\\repos\\Aura.Database\\AppDbContextFactory.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-30T17:19:12.024Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Aura.API\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Aura.API\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-30T16:07:07.849Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AURA | Inspiration Gallery</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="AURA home">
+        <span class="brand-mark">A</span>
+        <span>AURA</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="inspiration.html" class="active">Inspiration</a>
+        <a href="community.html">Community</a>
+        <a href="studio.html">AI Studio</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-button" href="favorites.html" aria-label="Favorites">♡</a>
+        <a class="icon-button" href="cart.html" aria-label="Shopping cart">⌁</a>
+        <a class="profile-chip" href="profile.html">
+          <span class="avatar-mini"></span>
+          <span>Arda</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="inspiration-hero">
+        <div>
+          <p class="eyebrow">Pinterest for clothing ideas</p>
+          <h1>Inspiration Gallery</h1>
+          <p>Save any idea, edit it with AI, or apply it directly to a product.</p>
+        </div>
+        <label class="search-shell compact-search">
+          <span>⌕</span>
+          <input type="search" placeholder="Search cyberpunk, floral, streetwear..." />
+        </label>
+      </section>
+
+      <section class="masonry-grid">
+        <article class="inspo-card large">
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=85" alt="Streetwear inspiration" />
+          <div>
+            <h2>Cyberpunk oversized tee</h2>
+            <p>Apply to black shirt</p>
+          </div>
+        </article>
+        <article class="inspo-card">
+          <img src="https://images.unsplash.com/photo-1550246140-5119ae4790b8?auto=format&fit=crop&w=800&q=85" alt="Embroidery inspiration" />
+          <div>
+            <h2>Gold floral embroidery</h2>
+            <p>Edit pattern</p>
+          </div>
+        </article>
+        <article class="inspo-card">
+          <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=85" alt="Pastel fashion inspiration" />
+          <div>
+            <h2>Pink aesthetic hoodie</h2>
+            <p>Generate variants</p>
+          </div>
+        </article>
+        <article class="inspo-card tall">
+          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=85" alt="Luxury outfit inspiration" />
+          <div>
+            <h2>Minimal luxury mark</h2>
+            <p>Save design</p>
+          </div>
+        </article>
+        <article class="inspo-card">
+          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=85" alt="Streetwear jacket inspiration" />
+          <div>
+            <h2>Japanese streetwear patch</h2>
+            <p>Apply to jacket</p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Mobile navigation">
+      <a href="index.html"><span>⌂</span>Home</a>
+      <a href="favorites.html"><span>♡</span>Favorites</a>
+      <a href="cart.html"><span>⌁</span>Cart</a>
+      <a href="profile.html"><span>◉</span>Profile</a>
+    </nav>
+
+    <script src="app.js"></script>
+  </body>
+</html>

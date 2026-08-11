@@ -1,0 +1,9 @@
+.avatar-mini {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background:
+    linear-gradient(135deg, rgba(216, 194, 106, 0.9), rgba(140, 203, 214, 0.8)),
+    #ddd;
+}

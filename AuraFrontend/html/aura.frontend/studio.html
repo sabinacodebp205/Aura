@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AURA | AI Design Studio</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="AURA home">
+        <span class="brand-mark">A</span>
+        <span>AURA</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="inspiration.html">Inspiration</a>
+        <a href="community.html">Community</a>
+        <a href="studio.html" class="active">AI Studio</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-button" href="favorites.html" aria-label="Favorites">♡</a>
+        <a class="icon-button" href="cart.html" aria-label="Shopping cart">⌁</a>
+        <a class="profile-chip" href="profile.html">
+          <span class="avatar-mini"></span>
+          <span>Arda</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="studio-layout">
+      <aside class="tool-panel">
+        <div class="panel-header">
+          <p class="eyebrow">Design Studio</p>
+          <h1>Customize Hoodie</h1>
+        </div>
+        <div class="tool-tabs" role="tablist">
+          <button class="active" type="button" data-studio-mode="print">Print +$5</button>
+          <button type="button" data-studio-mode="embroidery">Embroidery +$10</button>
+        </div>
+
+        <label class="field">
+          <span>AI prompt</span>
+          <textarea id="designPrompt" rows="4">Minimal luxury embroidery with a silver moon and architectural lines</textarea>
+        </label>
+        <button class="button button-dark full-width" type="button" data-generate-design>Generate Design</button>
+
+        <div class="studio-controls">
+          <label class="field">
+            <span>Add text</span>
+            <input id="customText" type="text" value="AURA" />
+          </label>
+          <label class="field">
+            <span>Thread / print color</span>
+            <input id="customColor" type="color" value="#d8c26a" />
+          </label>
+          <label class="field">
+            <span>Scale</span>
+            <input id="customScale" type="range" min="70" max="150" value="100" />
+          </label>
+          <label class="field">
+            <span>Rotation</span>
+            <input id="customRotate" type="range" min="-25" max="25" value="-4" />
+          </label>
+        </div>
+
+        <div class="tool-actions">
+          <button class="icon-tool" type="button" title="Undo">↶</button>
+          <button class="icon-tool" type="button" title="Redo">↷</button>
+          <button class="icon-tool" type="button" title="Zoom">⌕</button>
+          <button class="icon-tool" type="button" title="Remove background">▧</button>
+          <button class="icon-tool" type="button" title="Smart alignment">╋</button>
+        </div>
+
+        <div class="smart-note">
+          <strong>AI suggestion</strong>
+          <span id="aiSuggestion">Black hoodie matches best with gold embroidery centered high on the chest.</span>
+        </div>
+      </aside>
+
+      <section class="canvas-area" aria-label="Clothing preview">
+        <div class="studio-topline">
+          <div class="segmented">
+            <button class="active" type="button">Front</button>
+            <button type="button">Back</button>
+            <button type="button">Model</button>
+            <button type="button">3D</button>
+          </div>
+          <div class="button-row compact">
+            <button class="button button-light" type="button">Save</button>
+            <button class="button button-dark" type="button" data-add-cart>Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="garment-picker" aria-label="Virtual clothing preview">
+          <button class="active" type="button" data-garment="black">Black Hoodie</button>
+          <button type="button" data-garment="white">White Shirt</button>
+          <button type="button" data-garment="grey">Grey Tee</button>
+          <button type="button" data-garment="dress">Dress</button>
+          <button type="button" data-garment="skirt">Skirt</button>
+          <button type="button" data-garment="jacket">Jacket</button>
+        </div>
+
+        <div class="garment-stage">
+          <div class="garment-preview" id="garmentPreview" data-garment="black">
+            <div class="hoodie-shape">
+              <div class="hood"></div>
+              <div class="sleeve sleeve-left"></div>
+              <div class="sleeve sleeve-right"></div>
+              <div class="body-shape"></div>
+              <div class="design-layer" id="designLayer">
+                <span class="design-icon">✦</span>
+                <strong id="previewText">AURA</strong>
+                <small id="previewMode">embroidered concept</small>
+              </div>
+            </div>
+          </div>
+          <div class="layers-panel">
+            <p class="eyebrow">Layers</p>
+            <button class="layer-row active" type="button"><span></span>Text layer</button>
+            <button class="layer-row" type="button"><span></span>AI artwork</button>
+            <button class="layer-row" type="button"><span></span>Garment base</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="ideas-panel">
+        <p class="eyebrow">Generated concepts</p>
+        <div class="concept-list">
+          <button class="concept-card active" type="button" data-concept="AURA">
+            <span class="concept-art gold"></span>
+            <strong>Minimal luxury</strong>
+          </button>
+          <button class="concept-card" type="button" data-concept="TOKYO">
+            <span class="concept-art red"></span>
+            <strong>Japanese streetwear</strong>
+          </button>
+          <button class="concept-card" type="button" data-concept="BLOOM">
+            <span class="concept-art pink"></span>
+            <strong>Butterfly bloom</strong>
+          </button>
+        </div>
+        <div class="upload-box">
+          <span>＋</span>
+          <strong>Upload artwork</strong>
+          <p>Drop PNG, JPG, or vector artwork for live preview.</p>
+        </div>
+      </aside>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Mobile navigation">
+      <a href="index.html"><span>⌂</span>Home</a>
+      <a href="favorites.html"><span>♡</span>Favorites</a>
+      <a href="cart.html"><span>⌁</span>Cart</a>
+      <a href="profile.html"><span>◉</span>Profile</a>
+    </nav>
+
+    <script src="app.js"></script>
+  </body>
+</html>
