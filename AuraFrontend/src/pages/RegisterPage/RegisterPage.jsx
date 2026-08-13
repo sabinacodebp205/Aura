@@ -7,17 +7,33 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@.]+\.[^\s@]+$/;
 
 function parseErrorMessage(err) {
   if (!err?.response) return 'Unable to connect to server. Please check your backend connection.';
+  const status = err.response.status;
   const data = err.response.data;
-  if (data?.message) return data.message;
+
+  if (data?.message) {
+    if (data.errors && typeof data.errors === 'object') {
+      const fieldMsgs = Object.values(data.errors).flat().filter(Boolean);
+      if (fieldMsgs.length > 0 && fieldMsgs.join(' ') !== data.message) {
+        return `${data.message} ${fieldMsgs.join(' ')}`;
+      }
+    }
+    return data.message;
+  }
+
   if (data?.errors && typeof data.errors === 'object') {
     const messages = Object.values(data.errors).flat().filter(Boolean);
     if (messages.length > 0) return messages.join(' ');
   }
+
   if (typeof data === 'string' && !data.includes('System.Exception') && !data.includes('at Aura.')) {
     return data;
   }
-  if (data?.title) return data.title;
-  return 'Registration failed. Please check your information.';
+
+  if (status === 409) return 'This email or username is already registered.';
+  if (status === 400) return 'Invalid registration data. Please verify all fields.';
+  if (status === 401) return 'Unauthorized request.';
+
+  return data?.title || 'Registration failed. Please check your information.';
 }
 
 export default function RegisterPage() {

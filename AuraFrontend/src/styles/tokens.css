@@ -5,7 +5,9 @@
   --color-line: #e8e8ea;
   --color-paper: #ffffff;
   --color-soft: #f6f6f4;
-  --color-gold: #d8c26a;
+  --color-gold: #f59e0b;
+  --color-star: #f59e0b;
+  --color-favorite-active: #e63946;
   --color-rose: #f1b6c8;
   --color-cyan: #8ccbd6;
   --radius-sm: 6px;
@@ -22,7 +24,9 @@
   --paper: #ffffff;
   --soft: #f6f6f4;
   --mist: rgba(255, 255, 255, 0.74);
-  --gold: #d8c26a;
+  --gold: #f59e0b;
+  --star: #f59e0b;
+  --favorite-active: #e63946;
   --rose: #f1b6c8;
   --cyan: #8ccbd6;
   --shadow: 0 24px 70px rgba(16, 17, 20, 0.12);

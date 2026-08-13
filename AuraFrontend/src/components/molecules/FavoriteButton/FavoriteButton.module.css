@@ -7,13 +7,22 @@
   width: 38px;
   height: 38px;
   place-items: center;
-  border: 0;
+  border: 1px solid var(--line);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.84);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(10px);
+  font-size: 18px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.favorite-button:hover {
+  transform: scale(1.08);
 }
 
 .is-saved {
-  color: var(--paper);
-  background: var(--ink);
+  color: var(--favorite-active, #e63946);
+  border-color: rgba(230, 57, 70, 0.3);
+  background: #ffffff;
 }

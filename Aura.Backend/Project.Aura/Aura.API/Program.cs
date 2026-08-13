@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using Aura.Application.Sevices.Interfaces;
-using Aura.API.Services;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Aura.API
 {
@@ -21,8 +21,31 @@ namespace Aura.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Controllers
+            // Controllers & FluentValidation
             builder.Services.AddControllers();
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = actionContext =>
+                {
+                    var errors = actionContext.ModelState
+                        .Where(e => e.Value != null && e.Value.Errors.Count > 0)
+                        .ToDictionary(
+                            kvp => kvp.Key,
+                            kvp => kvp.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
+                        );
+
+                    var firstError = errors.Values.FirstOrDefault()?.FirstOrDefault() ?? "Validation failed.";
+
+                    var responseBody = new
+                    {
+                        message = firstError,
+                        errors = errors
+                    };
+
+                    return new BadRequestObjectResult(responseBody);
+                };
+            });
 
             // Application
             builder.Services.AddApplication();

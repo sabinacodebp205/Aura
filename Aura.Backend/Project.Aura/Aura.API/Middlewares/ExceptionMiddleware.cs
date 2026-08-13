@@ -50,7 +50,8 @@ namespace Aura.API.Middlewares
 
             var response = new
             {
-                message = responseMessage
+                message = responseMessage,
+                errors = (object?)null
             };
 
             var options = new JsonSerializerOptions

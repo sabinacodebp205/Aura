@@ -61,7 +61,12 @@ export default function ProductPage() {
           <p>Add matching accessories before checkout for a complete custom set.</p>
         </article>
       </section>
-      <ReviewsGrid />
+      <ReviewsGrid
+        productId={product.id}
+        onReviewAdded={() => {
+          getProductById(id).then(setProduct).catch(() => {});
+        }}
+      />
       <section className="section-pad">
         <SectionHeading eyebrow="Related products" title="More design-ready pieces" />
         <ProductGrid products={related} />

@@ -30,12 +30,20 @@ namespace Aura.Application.Sevices.Implementations
 
         public async Task RegisterAsync(RegisterDto dto)
         {
-            var existUser = await _userManager.FindByEmailAsync(dto.Email);
+            var emailTrimmed = dto.Email?.Trim() ?? string.Empty;
+            var userNameTrimmed = dto.UserName?.Trim() ?? string.Empty;
 
+            var existUser = await _userManager.FindByEmailAsync(emailTrimmed);
             if (existUser != null)
-                throw new ConflictException("User already exists.");
+                throw new ConflictException("User with this email already exists.");
+
+            var existUserName = await _userManager.FindByNameAsync(userNameTrimmed);
+            if (existUserName != null)
+                throw new ConflictException("Username is already taken.");
 
             var user = _mapper.Map<AppUser>(dto);
+            user.Email = emailTrimmed;
+            user.UserName = userNameTrimmed;
 
             var result = await _userManager.CreateAsync(user, dto.Password);
 
@@ -45,9 +53,10 @@ namespace Aura.Application.Sevices.Implementations
 
         public async Task<string> LoginAsync(LoginDto dto)
         {
-            var user = await _userManager.FindByEmailAsync(dto.Email);
+            var emailTrimmed = dto.Email?.Trim() ?? string.Empty;
+            var user = await _userManager.FindByEmailAsync(emailTrimmed);
 
-            if (user == null)
+            if (user == null || string.IsNullOrEmpty(user.PasswordHash))
                 throw new UnauthorizedException("Email or Password is incorrect.");
 
             var isPasswordCorrect = await _userManager.CheckPasswordAsync(user, dto.Password);

@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Aura.Application.DTOs.Auth;
+using Aura.Application.DTOs.AppUser;
 using Aura.Application.Sevices.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -61,6 +62,26 @@ namespace Aura.API.Controllers
             }
 
             return Ok(user);
+        }
+
+        [Authorize]
+        [HttpPut("profile")]
+        public async Task<IActionResult> UpdateProfile(UpdateProfileDto dto)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                ?? User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+
+            if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid token claims.");
+            }
+
+            await _appUserService.UpdateProfileAsync(userId, dto);
+
+            return Ok(new
+            {
+                Message = "Profile updated successfully."
+            });
         }
     }
 }

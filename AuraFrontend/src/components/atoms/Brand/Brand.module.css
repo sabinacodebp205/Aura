@@ -1,19 +1,49 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: opacity 0.2s ease;
 }
 
-.brand-mark {
+.brand:hover {
+  opacity: 0.85;
+}
+
+.brand-emblem {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   place-items: center;
-  border: 1px solid var(--ink);
-  border-radius: 6px;
-  font-size: 17px;
-  letter-spacing: 0;
+  background: var(--ink);
+  color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.logo-svg {
+  width: 22px;
+  height: 22px;
+}
+
+.brand-text-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.brand-title {
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+}
+
+.brand-sub {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  margin-top: 3px;
 }

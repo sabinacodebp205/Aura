@@ -3,7 +3,6 @@ import MainLayout from './components/templates/MainLayout/MainLayout';
 import StudioLayout from './components/templates/StudioLayout/StudioLayout';
 import HomePage from './pages/HomePage/HomePage';
 import InspirationPage from './pages/InspirationPage/InspirationPage';
-import CommunityPage from './pages/CommunityPage/CommunityPage';
 import StudioPage from './pages/StudioPage/StudioPage';
 import CartPage from './pages/CartPage/CartPage';
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
@@ -19,7 +18,6 @@ export default function AppRoutes() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/inspiration" element={<InspirationPage />} />
-        <Route path="/community" element={<CommunityPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/login" element={<LoginPage />} />

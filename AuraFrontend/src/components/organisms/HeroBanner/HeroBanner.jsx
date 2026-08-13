@@ -12,15 +12,15 @@ export default function HeroBanner() {
         />
       </div>
       <div className="hero-content">
-        <Eyebrow>New collection</Eyebrow>
-        <h1>Architectural Customwear</h1>
+        <Eyebrow>AURA AI FASHION CUSTOMIZATION</Eyebrow>
+        <h1>Design it. Make it yours.</h1>
         <p>
-          Shop premium silhouettes, then turn them into personal pieces with AI prints,
-          embroidery, and live clothing previews.
+          Shop premium apparel, or customize any piece with live AI graphics, 
+          embroidery, and personal fashion styling.
         </p>
         <div className="hero-actions">
-          <Button to="/studio">Start Designing</Button>
-          <Button to="/inspiration" variant="light">Explore Ideas</Button>
+          <Button to="/studio">Customize with AI</Button>
+          <Button to="/inspiration" variant="light">Fashion Inspiration</Button>
         </div>
       </div>
     </section>

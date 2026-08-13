@@ -42,13 +42,36 @@ export function AuthProvider({ children }) {
   }, [refetchUser]);
 
   const login = useCallback(async (email, password) => {
-    const res = await apiLogin({ email, password });
-    const userData = await refetchUser();
-    return { response: res, user: userData };
+    // Purge any stale session state prior to executing a new login attempt
+    apiLogout();
+    setUser(null);
+
+    try {
+      const res = await apiLogin({ email, password });
+      const userData = await refetchUser();
+      if (!userData) {
+        throw new Error('Failed to retrieve user profile after login.');
+      }
+      return { response: res, user: userData };
+    } catch (err) {
+      apiLogout();
+      setUser(null);
+      throw err;
+    }
   }, [refetchUser]);
 
   const register = useCallback(async (dto) => {
-    return await apiRegister(dto);
+    // Purge any stale session state prior to executing a new registration attempt
+    apiLogout();
+    setUser(null);
+
+    try {
+      return await apiRegister(dto);
+    } catch (err) {
+      apiLogout();
+      setUser(null);
+      throw err;
+    }
   }, []);
 
   const logout = useCallback(() => {

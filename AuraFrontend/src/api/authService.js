@@ -17,11 +17,19 @@ export async function register(dto) {
  * Response: { token: "JWT..." }
  */
 export async function login(dto) {
-  const { data } = await client.post('/Auth/login', dto);
-  if (data?.token) {
-    localStorage.setItem('jwt', data.token);
+  try {
+    const { data } = await client.post('/Auth/login', dto);
+    if (data?.token) {
+      localStorage.setItem('jwt', data.token);
+    } else {
+      throw new Error('No token returned from authentication endpoint.');
+    }
+    return data;
+  } catch (err) {
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('user');
+    throw err;
   }
-  return data;
 }
 
 /**
@@ -34,6 +42,16 @@ export async function getMe() {
   if (data) {
     localStorage.setItem('user', JSON.stringify(data));
   }
+  return data;
+}
+
+/**
+ * Update authenticated user profile details.
+ * Backend route: PUT /api/Auth/profile
+ * Payload: { name, surname, userName, email, profileImageUrl }
+ */
+export async function updateProfile(dto) {
+  const { data } = await client.put('/Auth/profile', dto);
   return data;
 }
 
