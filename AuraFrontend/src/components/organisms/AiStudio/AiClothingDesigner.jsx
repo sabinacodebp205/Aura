@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useAiStudio } from '../../../context/AiStudioContext';
 import { generateDesign, uploadPattern } from '../../../api/aiStudioService';
+import { getImageUrl, handleImageError } from '../../../utils/imageUrl';
 import styles from './AiClothingDesigner.module.css';
+
 
 const GARMENT_OPTIONS = [
   { id: 'hoodie', name: 'Oversized Hoodie', icon: '🧥', price: 124 },
@@ -274,10 +276,12 @@ export default function AiClothingDesigner() {
                       {spec.uploadedPatternUrl ? (
                         <>
                           <img
-                            src={spec.uploadedPatternUrl}
+                            src={getImageUrl(spec.uploadedPatternUrl)}
                             alt="Uploaded graphic pattern preview"
                             className={styles.patternPreview}
+                            onError={handleImageError}
                           />
+
                           <span className={styles.dropzoneText}>Pattern Uploaded! Click to replace.</span>
                         </>
                       ) : (

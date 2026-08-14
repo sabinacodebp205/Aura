@@ -1,4 +1,4 @@
-﻿using Aura.Core.Entities.Common;
+using Aura.Core.Entities.Common;
 using Aura.Core.Interfaces.Repositories;
 using Aura.Database.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -22,15 +22,16 @@ namespace Aura.Database.Repositories.Implementations
             _dbSet = context.Set<T>();
         }
 
-        public async Task<ICollection<T>> GetAllAsync()
+        public virtual async Task<ICollection<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<T?> GetByIdAsync(Guid id)
+        public virtual async Task<T?> GetByIdAsync(Guid id)
         {
             return await _dbSet.FindAsync(id);
         }
+
 
         public async Task<ICollection<T>> FindAllAsync(Expression<Func<T, bool>> expression)
         {

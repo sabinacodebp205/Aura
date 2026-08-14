@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.Product;
+using Aura.Application.DTOs.Product;
 using Aura.Application.Sevices.Interfaces;
 using Aura.Core.Entities;
 using Aura.Core.Interfaces.Repositories;
@@ -39,8 +39,10 @@ namespace Aura.Application.Sevices.Implementations
             if (product == null)
                 return null;
 
+
             return _mapper.Map<ProductDetailsDto>(product);
         }
+
 
         public async Task CreateAsync(ProductCreateDto dto)
         {

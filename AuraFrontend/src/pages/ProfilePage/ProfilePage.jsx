@@ -8,7 +8,9 @@ import { getAllOrders } from '../../api/orderService';
 import { getAllDesigns } from '../../api/designService';
 import { getSavedDesigns, duplicateDesign, deleteSavedDesign, createCustomProduct } from '../../api/aiStudioService';
 import { getAllAddresses } from '../../api/addressService';
+import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 import styles from './ProfilePage.module.css';
+
 
 
 export default function ProfilePage() {
@@ -306,9 +308,13 @@ export default function ProfilePage() {
               </div>
             ) : (
               <div className={styles['fav-grid']}>
-                {favorites.map((fav) => (
-                  <article key={fav.id || fav.productId} className={styles['fav-card']}>
-                    <img src={fav.imageUrl || '/placeholder.jpg'} alt={fav.productName} />
+                {favorites.map((fav, index) => (
+                  <article key={fav.id || fav.productId || `fav-${index}`} className={styles['fav-card']}>
+                    <img
+                      src={getImageUrl(fav.imageUrl)}
+                      alt={fav.productName || 'Favorite Product'}
+                      onError={handleImageError}
+                    />
                     <div className={styles['fav-info']}>
                       <h3>{fav.productName || 'Custom Piece'}</h3>
                       <p className={styles['fav-price']}>${fav.price}</p>
@@ -334,12 +340,14 @@ export default function ProfilePage() {
               </div>
             ) : (
               <div className={styles['designs-grid']}>
-                {designs.map((design) => (
-                  <article key={design.id} className={styles['design-card']}>
+                {designs.map((design, index) => (
+                  <article key={design.id || `design-${index}`} className={styles['design-card']}>
                     <img
-                      src={design.generatedImageUrl || design.imageUrl || 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=85'}
+                      src={getImageUrl(design.generatedImageUrl || design.imageUrl)}
                       alt={design.name || design.prompt || 'Saved AI Design'}
+                      onError={handleImageError}
                     />
+
                     <div className={styles['design-info']}>
                       <h3>{design.name || `Custom ${design.color || 'Piece'}`}</h3>
                       <p className={styles['design-prompt']}>

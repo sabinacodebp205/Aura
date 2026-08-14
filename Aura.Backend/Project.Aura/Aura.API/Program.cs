@@ -49,7 +49,10 @@ namespace Aura.API
 
             // Application
             builder.Services.AddApplication();
+            Aura.Application.Mapping.MappingProfile.BaseUrl = builder.Configuration["AppSettings:BaseUrl"] ?? "http://localhost:5083";
+
             const string FrontendCorsPolicy = "FrontendCorsPolicy";
+
 
             builder.Services.AddCors(options =>
             {
@@ -65,7 +68,9 @@ namespace Aura.API
                     .AllowCredentials();
                 });
             });
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<IFileUploadService, FileUploadService>();
+
 
             // Database
             builder.Services.AddDatabase(builder.Configuration);
@@ -144,6 +149,27 @@ namespace Aura.API
             var designsUploadPath = Path.Combine(app.Environment.ContentRootPath, "wwwroot", "uploads", "designs");
             if (!Directory.Exists(designsUploadPath))
                 Directory.CreateDirectory(designsUploadPath);
+
+            // One-time data fix: Convert any legacy relative image URLs to full production URLs
+            try
+            {
+                using var scope = app.Services.CreateScope();
+                var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                var relativeImages = dbContext.ProductImages.Where(pi => pi.ImageUrl.StartsWith("/uploads/")).ToList();
+                if (relativeImages.Any())
+                {
+                    foreach (var img in relativeImages)
+                    {
+                        img.ImageUrl = $"https://aura-gfiv.onrender.com{img.ImageUrl}";
+                    }
+                    dbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Self-healing image URL update skipped: {ex.Message}");
+            }
+
 
             app.UseSwagger();
             app.UseSwaggerUI();

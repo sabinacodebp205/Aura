@@ -4,7 +4,9 @@ import { useAiStudio } from '../../../context/AiStudioContext';
 import { useCart } from '../../../context/CartContext';
 import { useAuth } from '../../../context/AuthContext';
 import { saveDesign, createCustomProduct, generateDesign } from '../../../api/aiStudioService';
+import { getImageUrl, handleImageError } from '../../../utils/imageUrl';
 import styles from './AiResultScreen.module.css';
+
 
 export default function AiResultScreen() {
   const {
@@ -154,13 +156,12 @@ export default function AiResultScreen() {
         <div className={styles.mockupViewer}>
           <span className={styles.badgeTag}>AI Engineered Render</span>
           <img
-            src={
-              spec.generatedImageUrl ||
-              'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1200&q=85'
-            }
+            src={getImageUrl(spec.generatedImageUrl)}
             alt="Custom AI Garment Mockup"
             className={styles.mockupImage}
+            onError={handleImageError}
           />
+
         </div>
       </div>
 

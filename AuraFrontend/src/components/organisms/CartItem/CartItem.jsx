@@ -1,21 +1,28 @@
 import QuantityControl from '../../molecules/QuantityControl/QuantityControl';
+import { getImageUrl, handleImageError } from '../../../utils/imageUrl';
 import styles from './CartItem.module.css';
 
 export default function CartItem({ item, onRemove, onQtyChange, total }) {
+  if (!item) return null;
+
+  const imageSrc = getImageUrl(item.image || item.imageUrl);
+
   return (
     <article className={`cart-item ${styles.root}`}>
-      <img src={item.image} alt={item.alt} />
+      <img src={imageSrc} alt={item.alt || item.name || 'Cart item'} onError={handleImageError} />
       <div>
         <h2>{item.name}</h2>
         <p>{item.detail}</p>
-        <div className="cart-tags">
-          {item.fees.map((fee) => (
-            <span key={fee.label}>{fee.label} +${fee.amount}</span>
-          ))}
-        </div>
+        {item.fees && item.fees.length > 0 && (
+          <div className="cart-tags">
+            {item.fees.map((fee, index) => (
+              <span key={`${fee.label}-${index}`}>{fee.label} +${fee.amount}</span>
+            ))}
+          </div>
+        )}
       </div>
       <QuantityControl value={item.quantity} onChange={(quantity) => onQtyChange(item.id, quantity)} />
-      <strong>${total.toFixed(2)}</strong>
+      <strong>${(total || 0).toFixed(2)}</strong>
       <button className="remove-button" type="button" onClick={() => onRemove(item.id)}>
         Remove
       </button>

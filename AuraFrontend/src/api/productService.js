@@ -1,20 +1,18 @@
 import client from './client';
+import { getImageUrl } from '../utils/imageUrl';
 
 /**
  * Maps a product object from the backend DTO shape to the shape
  * the frontend components expect.
- *
- * Backend (ProductGetDto / ProductDetailsDto) → Frontend product:
- *   imageUrls   → images
- *   categoryName → category
- *   averageRating → rating   (only present on detail DTO)
- *   reviewCount  → reviews   (only present on detail DTO)
- *   (no alt)     → alt       (synthesized from name)
  */
 function mapProduct(dto) {
+  const images = (dto.imageUrls && dto.imageUrls.length > 0)
+    ? dto.imageUrls.map(getImageUrl)
+    : [];
+
   return {
     ...dto,
-    images: dto.imageUrls ?? [],
+    images: images,
     category: dto.categoryName ?? '',
     rating: dto.averageRating ?? null,
     reviews: dto.reviewCount ?? null,
@@ -25,9 +23,6 @@ function mapProduct(dto) {
 /**
  * Fetch all products.
  * Backend route: GET /api/Product  → ProductGetDto[]
- *
- * Note: the list DTO does NOT include averageRating or reviewCount,
- * so `rating` and `reviews` will be null on list items.
  */
 export async function getAllProducts() {
   const { data } = await client.get('/Product');

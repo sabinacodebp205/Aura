@@ -15,14 +15,16 @@ namespace Aura.API.Services
     {
         private readonly IWebHostEnvironment _env;
         private readonly IConfiguration _config;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         private static readonly string[] _allowedExtensions = { ".jpg", ".jpeg", ".png", ".webp" };
         private const long _maxFileSize = 5 * 1024 * 1024; // 5 MB
 
-        public FileUploadService(IWebHostEnvironment env, IConfiguration config)
+        public FileUploadService(IWebHostEnvironment env, IConfiguration config, IHttpContextAccessor httpContextAccessor)
         {
             _env = env;
             _config = config;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         private string GetRootPath()
@@ -38,6 +40,16 @@ namespace Aura.API.Services
                 Directory.CreateDirectory(fallback);
             }
             return fallback;
+        }
+
+        private string GetBaseUrl()
+        {
+            var req = _httpContextAccessor.HttpContext?.Request;
+            if (req != null)
+            {
+                return $"{req.Scheme}://{req.Host}";
+            }
+            return string.Empty;
         }
 
         private bool IsCloudStorageConfigured(out string endpoint, out string bucketName, out string accessKey, out string secretKey, out string publicBaseUrl)
@@ -121,7 +133,10 @@ namespace Aura.API.Services
                     await file.CopyToAsync(stream);
                 }
 
-                return $"/uploads/products/{fileName}";
+                var baseUrl = GetBaseUrl();
+                var relativePath = $"/uploads/products/{fileName}";
+
+                return string.IsNullOrEmpty(baseUrl) ? relativePath : $"{baseUrl}{relativePath}";
             }
         }
 
@@ -177,7 +192,10 @@ namespace Aura.API.Services
                     await file.CopyToAsync(stream);
                 }
 
-                return $"/uploads/designs/{fileName}";
+                var baseUrl = GetBaseUrl();
+                var relativePath = $"/uploads/designs/{fileName}";
+
+                return string.IsNullOrEmpty(baseUrl) ? relativePath : $"{baseUrl}{relativePath}";
             }
         }
 
