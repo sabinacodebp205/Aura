@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
+
 import Brand from '../../components/atoms/Brand/Brand';
 import SearchBar from '../../components/molecules/SearchBar/SearchBar';
 import CategoryFilterBar from '../../components/molecules/CategoryFilterBar/CategoryFilterBar';
@@ -105,24 +106,44 @@ export default function HomePage() {
       </section>
       <AIPromptPanel />
       <section className="section-pad">
-        <SectionHeading eyebrow="Women first assortment" title="New arrivals" linkText="Open product page" linkTo={products[0] ? `/product/${products[0].id}` : '/product'} />
+        <SectionHeading eyebrow="Customize blank silhouettes" title="BASIC, YOUR WAY" linkText="Open AI Studio" linkTo="/ai-studio" />
         <div className="collection-grid">
           <article className="collection-card tall">
             <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=85" alt="Woman wearing a jacket" />
             <div>
-              <h3>Outfit inspiration</h3>
-              <p>Layered city looks ready for custom patches.</p>
+              <h3>AI Customization Platform</h3>
+              <p>Turn any blank canvas piece into an architectural statement design.</p>
             </div>
           </article>
-          {newArrivals.map((item) => (
-            <article className="mini-product" key={item.id}>
-              <img src={item.image} alt={item.alt} />
-              <h3>{item.name}</h3>
-              <p>${item.price.toFixed(2)}</p>
-            </article>
-          ))}
+          {newArrivals.map((item) => {
+            const garmentType = item.name.toLowerCase().includes('hoodie') ? 'hoodie' : 'tshirt';
+            return (
+              <article className="mini-product" key={item.id}>
+                <img src={item.image} alt={item.alt} />
+                <h3>{item.name}</h3>
+                <p>${item.price.toFixed(2)}</p>
+                <Link
+                  to={`/ai-studio?mode=generator&garmentType=${garmentType}&color=black`}
+                  style={{
+                    display: 'inline-block',
+                    marginTop: 8,
+                    padding: '6px 14px',
+                    background: '#111111',
+                    color: '#ffffff',
+                    borderRadius: 6,
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    textDecoration: 'none',
+                  }}
+                >
+                  DESIGN THIS →
+                </Link>
+              </article>
+            );
+          })}
         </div>
       </section>
     </>
   );
 }
+

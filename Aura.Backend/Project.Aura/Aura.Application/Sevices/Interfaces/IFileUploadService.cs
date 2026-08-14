@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 namespace Aura.Application.Sevices.Interfaces
@@ -7,6 +7,9 @@ namespace Aura.Application.Sevices.Interfaces
     {
         Task<string> SaveProductImageAsync(IFormFile file);
 
+        Task<string> SaveDesignPatternAsync(IFormFile file);
+
         void DeleteProductImage(string imageUrl);
+
     }
 }

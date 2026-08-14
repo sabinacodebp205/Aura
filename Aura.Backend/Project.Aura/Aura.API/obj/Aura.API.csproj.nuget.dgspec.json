@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj": {}
+    "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj": {
+    "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj",
+        "projectUniqueName": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj",
         "projectName": "Aura.Core",
-        "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj",
+        "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj",
         "packagesPath": "C:\\Users\\Arda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\obj\\",
+        "outputPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -76,14 +76,14 @@
         }
       }
     },
-    "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj": {
+    "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj",
+        "projectUniqueName": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj",
         "projectName": "Aura.Database",
-        "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj",
+        "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj",
         "packagesPath": "C:\\Users\\Arda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\obj\\",
+        "outputPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -105,8 +105,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj": {
-                "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj"
+              "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj": {
+                "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj"
               }
             }
           }
@@ -179,14 +179,14 @@
         }
       }
     },
-    "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj": {
+    "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
+        "projectUniqueName": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
         "projectName": "Aura.API",
-        "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
+        "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
         "packagesPath": "C:\\Users\\Arda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\obj\\",
+        "outputPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -208,14 +208,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj": {
-                "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj"
+              "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj": {
+                "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj"
               },
-              "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj": {
-                "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj"
+              "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj": {
+                "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj"
               },
-              "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj": {
-                "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj"
+              "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj": {
+                "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj"
               }
             }
           }
@@ -236,6 +236,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.7.307, )"
+            },
             "FluentValidation.AspNetCore": {
               "target": "Package",
               "version": "[11.3.1, )"
@@ -286,14 +290,14 @@
         }
       }
     },
-    "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj": {
+    "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj",
+        "projectUniqueName": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj",
         "projectName": "Aura.Application",
-        "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj",
+        "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj",
         "packagesPath": "C:\\Users\\Arda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\obj\\",
+        "outputPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -315,8 +319,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj": {
-                "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj"
+              "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj": {
+                "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj"
               }
             }
           }

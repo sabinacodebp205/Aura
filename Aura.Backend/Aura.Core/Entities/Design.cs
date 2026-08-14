@@ -1,4 +1,4 @@
-﻿using Aura.Core.Entities.Common;
+using Aura.Core.Entities.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +9,39 @@ namespace Aura.Core.Entities
 {
     public class Design : BaseEntity
     {
-        public string Prompt { get; set; } = null!;
+        public string Name { get; set; } = "Custom AI Design";
 
-        public string ImageUrl { get; set; } = null!;
+        public string GarmentType { get; set; } = "hoodie";
 
-        public decimal ExtraPrice { get; set; }
+        public string Color { get; set; } = "black";
 
-        public Guid UserId { get; set; }
+        public string? Prompt { get; set; }
 
-        public AppUser User { get; set; } = null!;
+        public string ImageUrl { get; set; } = string.Empty;
 
-        public Guid ProductId { get; set; }
+        public string? UploadedPatternUrl { get; set; }
 
-        public Product Product { get; set; } = null!;
+        public string? Style { get; set; }
+
+        public string? Placement { get; set; }
+
+        public string? PrintSize { get; set; }
+
+        public string Status { get; set; } = "draft";
+
+        public int GenerationAttempts { get; set; } = 1;
+
+        public bool IsFavorite { get; set; } = false;
+
+        public decimal ExtraPrice { get; set; } = 15.00m;
+
+        public Guid? UserId { get; set; }
+
+        public AppUser? User { get; set; }
+
+        public Guid? ProductId { get; set; }
+
+        public Product? Product { get; set; }
     }
+
 }

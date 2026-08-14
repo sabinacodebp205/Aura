@@ -2,11 +2,14 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useFavorites } from '../../context/FavoritesContext';
+import { useCart } from '../../context/CartContext';
 import { updateProfile } from '../../api/authService';
 import { getAllOrders } from '../../api/orderService';
 import { getAllDesigns } from '../../api/designService';
+import { getSavedDesigns, duplicateDesign, deleteSavedDesign, createCustomProduct } from '../../api/aiStudioService';
 import { getAllAddresses } from '../../api/addressService';
 import styles from './ProfilePage.module.css';
+
 
 export default function ProfilePage() {
   const { user, logout, refetchUser } = useAuth();
@@ -44,22 +47,36 @@ export default function ProfilePage() {
     }
   }, [user]);
 
+  const { addItem } = useCart();
+
   // Load backend user collections
   const loadUserData = useCallback(async () => {
     setLoadingData(true);
     try {
-      const [ordersRes, designsRes, addressesRes] = await Promise.allSettled([
+      const [ordersRes, designsRes, aiDesignsRes, addressesRes] = await Promise.allSettled([
         getAllOrders(),
         getAllDesigns(),
+        getSavedDesigns(),
         getAllAddresses(),
       ]);
 
       if (ordersRes.status === 'fulfilled' && Array.isArray(ordersRes.value)) {
         setOrders(ordersRes.value);
       }
-      if (designsRes.status === 'fulfilled' && Array.isArray(designsRes.value)) {
-        setDesigns(designsRes.value);
+      
+      let combinedDesigns = [];
+      if (aiDesignsRes.status === 'fulfilled' && Array.isArray(aiDesignsRes.value)) {
+        combinedDesigns = aiDesignsRes.value;
       }
+      if (designsRes.status === 'fulfilled' && Array.isArray(designsRes.value)) {
+        // Merge legacy designs if needed
+        const existingIds = new Set(combinedDesigns.map((d) => d.id));
+        designsRes.value.forEach((d) => {
+          if (!existingIds.has(d.id)) combinedDesigns.push(d);
+        });
+      }
+      setDesigns(combinedDesigns);
+
       if (addressesRes.status === 'fulfilled' && Array.isArray(addressesRes.value)) {
         setAddresses(addressesRes.value);
       }
@@ -69,6 +86,62 @@ export default function ProfilePage() {
       setLoadingData(false);
     }
   }, []);
+
+  const handleDuplicateDesign = async (id) => {
+    try {
+      await duplicateDesign(id);
+      loadUserData();
+    } catch (err) {
+      console.warn('Failed to duplicate design:', err);
+    }
+  };
+
+  const handleDeleteDesign = async (id) => {
+    if (window.confirm('Are you sure you want to delete this custom design?')) {
+      try {
+        await deleteSavedDesign(id);
+        setDesigns((prev) => prev.filter((d) => d.id !== id));
+      } catch (err) {
+        console.warn('Failed to delete design:', err);
+        setDesigns((prev) => prev.filter((d) => d.id !== id));
+      }
+    }
+  };
+
+  const handleAddDesignToBag = async (design) => {
+    try {
+      const garmentType = design.garmentType || 'hoodie';
+      const color = design.color || 'black';
+      const basePrice = garmentType === 'tshirt' ? 58 : 124;
+      const customizationFee = 15;
+      const finalPrice = basePrice + customizationFee;
+
+      const customProd = await createCustomProduct({
+        sourceDesignId: design.id,
+        garmentType,
+        color,
+        generatedImageUrl: design.generatedImageUrl || design.imageUrl,
+        basePrice,
+        customizationFee,
+      });
+
+      addItem({
+        id: customProd?.id || `custom-${Date.now()}`,
+        productId: customProd?.id || `custom-${Date.now()}`,
+        name: customProd?.name || design.name || `Custom ${color} ${garmentType}`,
+        productType: 'custom',
+        detail: `Saved AI Design (${design.placement || 'center'})`,
+        quantity: 1,
+        unitPrice: finalPrice,
+        fees: [{ label: 'AI Customization Fee', amount: customizationFee }],
+        image: design.generatedImageUrl || design.imageUrl || '/placeholder.jpg',
+        alt: design.name || 'Custom AI Design',
+      });
+    } catch (err) {
+      console.warn('Failed to add design to bag:', err);
+    }
+  };
+
 
   useEffect(() => {
     loadUserData();
@@ -257,18 +330,51 @@ export default function ProfilePage() {
             {designs.length === 0 ? (
               <div className={styles['empty-box']}>
                 <p>No custom AI designs created yet.</p>
-                <Link to="/studio" className={styles['action-link']}>Create in AI Studio</Link>
+                <Link to="/ai-studio" className={styles['action-link']}>OPEN AI STUDIO</Link>
               </div>
             ) : (
               <div className={styles['designs-grid']}>
                 {designs.map((design) => (
                   <article key={design.id} className={styles['design-card']}>
-                    <img src={design.imageUrl || '/placeholder.jpg'} alt={design.prompt} />
+                    <img
+                      src={design.generatedImageUrl || design.imageUrl || 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=85'}
+                      alt={design.name || design.prompt || 'Saved AI Design'}
+                    />
                     <div className={styles['design-info']}>
-                      <p className={styles['design-prompt']}>"{design.prompt}"</p>
-                      {design.extraPrice > 0 && (
-                        <span className={styles['design-price']}>+${design.extraPrice}</span>
-                      )}
+                      <h3>{design.name || `Custom ${design.color || 'Piece'}`}</h3>
+                      <p className={styles['design-prompt']}>
+                        {design.garmentType ? `${design.garmentType.replace(/_/g, ' ')} • ${design.color}` : `"${design.prompt}"`}
+                      </p>
+                      <div style={{ display: 'flex', gap: 6, marginTop: 12, flexWrap: 'wrap' }}>
+                        <Link
+                          to={`/ai-studio?mode=generator&garmentType=${design.garmentType || 'hoodie'}&color=${design.color || 'black'}`}
+                          className={styles['fav-view-btn']}
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          type="button"
+                          className={styles['fav-view-btn']}
+                          onClick={() => handleDuplicateDesign(design.id)}
+                        >
+                          Duplicate
+                        </button>
+                        <button
+                          type="button"
+                          className={styles['fav-view-btn']}
+                          onClick={() => handleAddDesignToBag(design)}
+                        >
+                          Add to Bag
+                        </button>
+                        <button
+                          type="button"
+                          className={styles['fav-view-btn']}
+                          style={{ borderColor: '#ff4d4f', color: '#ff4d4f' }}
+                          onClick={() => handleDeleteDesign(design.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   </article>
                 ))}
@@ -276,6 +382,7 @@ export default function ProfilePage() {
             )}
           </div>
         )}
+
 
         {/* Addresses Tab */}
         {activeTab === 'addresses' && (

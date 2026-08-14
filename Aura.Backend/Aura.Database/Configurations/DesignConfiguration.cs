@@ -1,4 +1,4 @@
-﻿using Aura.Core.Entities;
+using Aura.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -24,12 +24,14 @@ namespace Aura.Database.Configurations
 
             builder.HasOne(x => x.User)
                    .WithMany(x => x.Designs)
-                   .HasForeignKey(x => x.UserId);
+                   .HasForeignKey(x => x.UserId)
+                   .IsRequired(false);
 
-          
             builder.HasOne(x => x.Product)
                    .WithMany(x => x.Designs)
-                   .HasForeignKey(x => x.ProductId);
+                   .HasForeignKey(x => x.ProductId)
+                   .IsRequired(false);
         }
+
     }
 }

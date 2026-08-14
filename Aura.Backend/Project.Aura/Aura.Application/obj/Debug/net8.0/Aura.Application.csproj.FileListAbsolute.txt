@@ -29,3 +29,6 @@ C:\Users\Arda\Desktop\Aura\Aura.Backend\Project.Aura\Aura.Application\obj\Debug\
 C:\Users\Arda\Desktop\Aura\Aura.Backend\Project.Aura\Aura.Application\obj\Debug\net8.0\refint\Aura.Application.dll
 C:\Users\Arda\Desktop\Aura\Aura.Backend\Project.Aura\Aura.Application\obj\Debug\net8.0\Aura.Application.pdb
 C:\Users\Arda\Desktop\Aura\Aura.Backend\Project.Aura\Aura.Application\obj\Debug\net8.0\ref\Aura.Application.dll
+c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.Application.deps.json
+c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.Application.dll
+c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.Application.pdb

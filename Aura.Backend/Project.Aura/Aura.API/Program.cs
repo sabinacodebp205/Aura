@@ -136,6 +136,15 @@ namespace Aura.API
 
             var app = builder.Build();
 
+            // Self-healing runtime guard for uploads directories
+            var uploadsPath = Path.Combine(app.Environment.ContentRootPath, "wwwroot", "uploads", "products");
+            if (!Directory.Exists(uploadsPath))
+                Directory.CreateDirectory(uploadsPath);
+
+            var designsUploadPath = Path.Combine(app.Environment.ContentRootPath, "wwwroot", "uploads", "designs");
+            if (!Directory.Exists(designsUploadPath))
+                Directory.CreateDirectory(designsUploadPath);
+
             app.UseSwagger();
             app.UseSwaggerUI();
 
@@ -144,6 +153,7 @@ namespace Aura.API
                 app.UseHttpsRedirection();
             }
             app.UseStaticFiles();
+
             app.UseCors(FrontendCorsPolicy);
             app.UseMiddleware<Aura.API.Middlewares.ExceptionMiddleware>();
 

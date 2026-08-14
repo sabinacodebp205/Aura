@@ -31,6 +31,35 @@
           "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
+      "AWSSDK.Core/3.7.302.20": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "AWSSDK.S3/3.7.307": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "[3.7.302.20, 4.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.S3.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.S3.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Azure.Core/1.25.0": {
         "type": "package",
         "dependencies": {
@@ -1882,6 +1911,67 @@
         "automapper.extensions.microsoft.dependencyinjection.nuspec",
         "icon.png",
         "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+      ]
+    },
+    "AWSSDK.Core/3.7.302.20": {
+      "sha512": "Cz7+i1LeBL6+7G6SmZ/ElRPgM+4uViBErjtwVodccPNVgjrZzh8ZzDyu5Fh0eUJjDgK7X+LD1aGlzamSJLDCbA==",
+      "type": "package",
+      "path": "awssdk.core/3.7.302.20",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "awssdk.core.3.7.302.20.nupkg.sha512",
+        "awssdk.core.nuspec",
+        "images/AWSLogo.png",
+        "lib/net35/AWSSDK.Core.dll",
+        "lib/net35/AWSSDK.Core.pdb",
+        "lib/net35/AWSSDK.Core.xml",
+        "lib/net45/AWSSDK.Core.dll",
+        "lib/net45/AWSSDK.Core.pdb",
+        "lib/net45/AWSSDK.Core.xml",
+        "lib/net8.0/AWSSDK.Core.dll",
+        "lib/net8.0/AWSSDK.Core.pdb",
+        "lib/net8.0/AWSSDK.Core.xml",
+        "lib/netcoreapp3.1/AWSSDK.Core.dll",
+        "lib/netcoreapp3.1/AWSSDK.Core.pdb",
+        "lib/netcoreapp3.1/AWSSDK.Core.xml",
+        "lib/netstandard2.0/AWSSDK.Core.dll",
+        "lib/netstandard2.0/AWSSDK.Core.pdb",
+        "lib/netstandard2.0/AWSSDK.Core.xml",
+        "tools/account-management.ps1"
+      ]
+    },
+    "AWSSDK.S3/3.7.307": {
+      "sha512": "ylbyYwwQx4zyBHHIe756yt74AyO4+ejtj60eYLGQoOqEpxAlwGXmwxpNFqV4LhkvYhlA8uzBDoiLfZ6KSDieXw==",
+      "type": "package",
+      "path": "awssdk.s3/3.7.307",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.S3.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.s3.3.7.307.nupkg.sha512",
+        "awssdk.s3.nuspec",
+        "images/AWSLogo.png",
+        "lib/net35/AWSSDK.S3.dll",
+        "lib/net35/AWSSDK.S3.pdb",
+        "lib/net35/AWSSDK.S3.xml",
+        "lib/net45/AWSSDK.S3.dll",
+        "lib/net45/AWSSDK.S3.pdb",
+        "lib/net45/AWSSDK.S3.xml",
+        "lib/net8.0/AWSSDK.S3.dll",
+        "lib/net8.0/AWSSDK.S3.pdb",
+        "lib/net8.0/AWSSDK.S3.xml",
+        "lib/netcoreapp3.1/AWSSDK.S3.dll",
+        "lib/netcoreapp3.1/AWSSDK.S3.pdb",
+        "lib/netcoreapp3.1/AWSSDK.S3.xml",
+        "lib/netstandard2.0/AWSSDK.S3.dll",
+        "lib/netstandard2.0/AWSSDK.S3.pdb",
+        "lib/netstandard2.0/AWSSDK.S3.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
       ]
     },
     "Azure.Core/1.25.0": {
@@ -4803,6 +4893,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "AWSSDK.S3 >= 3.7.307",
       "Aura.Application >= 1.0.0",
       "Aura.Core >= 1.0.0",
       "Aura.Database >= 1.0.0",
@@ -4821,11 +4912,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
+      "projectUniqueName": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
       "projectName": "Aura.API",
-      "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
+      "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
       "packagesPath": "C:\\Users\\Arda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\obj\\",
+      "outputPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4847,14 +4938,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj": {
-              "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj"
+            "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj": {
+              "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj"
             },
-            "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj": {
-              "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj"
+            "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj": {
+              "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj"
             },
-            "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj": {
-              "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj"
+            "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj": {
+              "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.Application\\Aura.Application.csproj"
             }
           }
         }
@@ -4875,6 +4966,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "AWSSDK.S3": {
+            "target": "Package",
+            "version": "[3.7.307, )"
+          },
           "FluentValidation.AspNetCore": {
             "target": "Package",
             "version": "[11.3.1, )"

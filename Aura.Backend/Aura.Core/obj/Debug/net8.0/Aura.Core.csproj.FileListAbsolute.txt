@@ -24,3 +24,6 @@ C:\Users\Arda\Desktop\Aura\Aura.Backend\Aura.Core\obj\Debug\net8.0\Aura.Core.dll
 C:\Users\Arda\Desktop\Aura\Aura.Backend\Aura.Core\obj\Debug\net8.0\refint\Aura.Core.dll
 C:\Users\Arda\Desktop\Aura\Aura.Backend\Aura.Core\obj\Debug\net8.0\Aura.Core.pdb
 C:\Users\Arda\Desktop\Aura\Aura.Backend\Aura.Core\obj\Debug\net8.0\ref\Aura.Core.dll
+c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.Core.deps.json
+c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.Core.dll
+c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.Core.pdb

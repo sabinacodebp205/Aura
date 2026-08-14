@@ -1,22 +1,71 @@
-﻿using Aura.Application.Sevices.Interfaces;
+using Amazon.S3;
+using Amazon.S3.Model;
+using Aura.Application.Sevices.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
+
 namespace Aura.API.Services
 {
     public class FileUploadService : IFileUploadService
     {
         private readonly IWebHostEnvironment _env;
+        private readonly IConfiguration _config;
 
         private static readonly string[] _allowedExtensions = { ".jpg", ".jpeg", ".png", ".webp" };
         private const long _maxFileSize = 5 * 1024 * 1024; // 5 MB
 
-        public FileUploadService(IWebHostEnvironment env)
+        public FileUploadService(IWebHostEnvironment env, IConfiguration config)
         {
             _env = env;
+            _config = config;
+        }
+
+        private string GetRootPath()
+        {
+            if (!string.IsNullOrEmpty(_env.WebRootPath))
+            {
+                return _env.WebRootPath;
+            }
+
+            var fallback = Path.Combine(_env.ContentRootPath, "wwwroot");
+            if (!Directory.Exists(fallback))
+            {
+                Directory.CreateDirectory(fallback);
+            }
+            return fallback;
+        }
+
+        private bool IsCloudStorageConfigured(out string endpoint, out string bucketName, out string accessKey, out string secretKey, out string publicBaseUrl)
+        {
+            endpoint = _config["Storage:Endpoint"] ?? string.Empty;
+            bucketName = _config["Storage:BucketName"] ?? string.Empty;
+            accessKey = _config["Storage:AccessKey"] ?? string.Empty;
+            secretKey = _config["Storage:SecretKey"] ?? string.Empty;
+            publicBaseUrl = _config["Storage:PublicBaseUrl"] ?? string.Empty;
+
+            return !string.IsNullOrWhiteSpace(accessKey) &&
+                   !string.IsNullOrWhiteSpace(secretKey) &&
+                   !string.IsNullOrWhiteSpace(bucketName);
+        }
+
+        private AmazonS3Client CreateS3Client(string endpoint, string accessKey, string secretKey)
+        {
+            var config = new AmazonS3Config
+            {
+                ForcePathStyle = true
+            };
+
+            if (!string.IsNullOrWhiteSpace(endpoint))
+            {
+                config.ServiceURL = endpoint;
+            }
+
+            return new AmazonS3Client(accessKey, secretKey, config);
         }
 
         public async Task<string> SaveProductImageAsync(IFormFile file)
@@ -34,19 +83,102 @@ namespace Aura.API.Services
 
             var fileName = $"{Guid.NewGuid()}{extension}";
 
-            var folderPath = Path.Combine(_env.WebRootPath, "uploads", "products");
-
-            if (!Directory.Exists(folderPath))
-                Directory.CreateDirectory(folderPath);
-
-            var filePath = Path.Combine(folderPath, fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            if (IsCloudStorageConfigured(out var endpoint, out var bucketName, out var accessKey, out var secretKey, out var publicBaseUrl))
             {
-                await file.CopyToAsync(stream);
-            }
+                var objectKey = $"uploads/products/{fileName}";
+                using var client = CreateS3Client(endpoint, accessKey, secretKey);
+                using var stream = file.OpenReadStream();
 
-            return $"/uploads/products/{fileName}";
+                var putRequest = new PutObjectRequest
+                {
+                    BucketName = bucketName,
+                    Key = objectKey,
+                    InputStream = stream,
+                    ContentType = file.ContentType ?? "image/jpeg"
+                };
+
+                await client.PutObjectAsync(putRequest);
+
+                if (!string.IsNullOrWhiteSpace(publicBaseUrl))
+                {
+                    return $"{publicBaseUrl.TrimEnd('/')}/{objectKey}";
+                }
+
+                return $"{endpoint.TrimEnd('/')}/{bucketName}/{objectKey}";
+            }
+            else
+            {
+                var rootPath = GetRootPath();
+                var folderPath = Path.Combine(rootPath, "uploads", "products");
+
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                var filePath = Path.Combine(folderPath, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                return $"/uploads/products/{fileName}";
+            }
+        }
+
+        public async Task<string> SaveDesignPatternAsync(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                throw new Exception("File is empty.");
+
+            const long maxPatternSize = 10 * 1024 * 1024; // 10 MB limit as per prompt spec
+            if (file.Length > maxPatternSize)
+                throw new Exception("File size exceeds the 10 MB limit.");
+
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (extension != ".png" && extension != ".jpg" && extension != ".jpeg" && extension != ".webp")
+                throw new Exception("Invalid pattern file type. Only PNG, JPG, JPEG, and WebP are allowed.");
+
+            var fileName = $"{Guid.NewGuid()}{extension}";
+
+            if (IsCloudStorageConfigured(out var endpoint, out var bucketName, out var accessKey, out var secretKey, out var publicBaseUrl))
+            {
+                var objectKey = $"uploads/designs/{fileName}";
+                using var client = CreateS3Client(endpoint, accessKey, secretKey);
+                using var stream = file.OpenReadStream();
+
+                var putRequest = new PutObjectRequest
+                {
+                    BucketName = bucketName,
+                    Key = objectKey,
+                    InputStream = stream,
+                    ContentType = file.ContentType ?? "image/png"
+                };
+
+                await client.PutObjectAsync(putRequest);
+
+                if (!string.IsNullOrWhiteSpace(publicBaseUrl))
+                {
+                    return $"{publicBaseUrl.TrimEnd('/')}/{objectKey}";
+                }
+
+                return $"{endpoint.TrimEnd('/')}/{bucketName}/{objectKey}";
+            }
+            else
+            {
+                var rootPath = GetRootPath();
+                var folderPath = Path.Combine(rootPath, "uploads", "designs");
+
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                var filePath = Path.Combine(folderPath, fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                return $"/uploads/designs/{fileName}";
+            }
         }
 
         public void DeleteProductImage(string imageUrl)
@@ -55,10 +187,21 @@ namespace Aura.API.Services
                 return;
 
             var fileName = Path.GetFileName(imageUrl);
-            var filePath = Path.Combine(_env.WebRootPath, "uploads", "products", fileName);
 
-            if (File.Exists(filePath))
-                File.Delete(filePath);
+            if (IsCloudStorageConfigured(out var endpoint, out var bucketName, out var accessKey, out var secretKey, out _))
+            {
+                var objectKey = $"uploads/products/{fileName}";
+                using var client = CreateS3Client(endpoint, accessKey, secretKey);
+                client.DeleteObjectAsync(bucketName, objectKey).GetAwaiter().GetResult();
+            }
+            else
+            {
+                var rootPath = GetRootPath();
+                var filePath = Path.Combine(rootPath, "uploads", "products", fileName);
+
+                if (File.Exists(filePath))
+                    File.Delete(filePath);
+            }
         }
     }
 }

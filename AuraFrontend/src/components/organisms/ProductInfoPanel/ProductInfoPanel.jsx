@@ -35,8 +35,15 @@ export default function ProductInfoPanel({ product }) {
   };
 
   const handleCustomizeDesign = () => {
-    navigate(`/studio?productId=${product.id}`, { state: { productId: product.id } });
+    const garmentType = product.name?.toLowerCase().includes('hoodie')
+      ? 'hoodie'
+      : product.name?.toLowerCase().includes('jacket')
+      ? 'sweatshirt'
+      : 'tshirt';
+    const color = product.color?.toLowerCase() || 'black';
+    navigate(`/ai-studio?mode=generator&garmentType=${garmentType}&color=${color}&productId=${product.id}`);
   };
+
 
   const ratingVal = product.averageRating || product.rating || 0;
   const reviewCnt = product.reviewCount ?? product.reviews ?? 0;
@@ -87,9 +94,10 @@ export default function ProductInfoPanel({ product }) {
 
       <div className="button-row">
         <Button onClick={handleAddToCart}>{isAdded ? 'Added to Cart' : 'Add to Cart'}</Button>
-        {product.isCustomizable && (
-          <Button onClick={handleCustomizeDesign} variant="light">Customize with AI</Button>
+        {product.isCustomizable !== false && (
+          <Button onClick={handleCustomizeDesign} variant="light">✨ DESIGN WITH AI</Button>
         )}
+
       </div>
     </div>
   );

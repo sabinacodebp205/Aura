@@ -33,3 +33,7 @@ C:\Users\Arda\Desktop\Aura\Aura.Backend\Aura.Database\obj\Debug\net8.0\refint\Au
 C:\Users\Arda\Desktop\Aura\Aura.Backend\Aura.Database\obj\Debug\net8.0\Aura.Database.pdb
 C:\Users\Arda\Desktop\Aura\Aura.Backend\Aura.Database\obj\Debug\net8.0\Aura.Database.genruntimeconfig.cache
 C:\Users\Arda\Desktop\Aura\Aura.Backend\Aura.Database\obj\Debug\net8.0\ref\Aura.Database.dll
+c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.Database.deps.json
+c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.Database.runtimeconfig.json
+c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.Database.dll
+c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.Database.pdb

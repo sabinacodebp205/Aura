@@ -36,7 +36,9 @@ namespace Aura.Application.Extensions
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IFavoriteService, FavoriteService>();
             services.AddScoped<IDesignService, DesignService>();
+            services.AddScoped<IAiStudioService, AiStudioService>();
             services.AddScoped<IProductImageService, ProductImageService>();
+
 
             return services;
         }

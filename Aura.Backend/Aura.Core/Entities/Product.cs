@@ -1,4 +1,5 @@
-﻿using Aura.Core.Entities.Common;
+using Aura.Core.Entities.Common;
+using Aura.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,12 @@ namespace Aura.Core.Entities
         public string Size { get; set; } = null!;
 
         public bool IsCustomizable { get; set; }
+
+        public ProductType ProductType { get; set; } = ProductType.Basic;
+
+        public decimal? CustomizationFee { get; set; }
+
+        public Guid? SourceDesignId { get; set; }
 
         public Guid CategoryId { get; set; }
 

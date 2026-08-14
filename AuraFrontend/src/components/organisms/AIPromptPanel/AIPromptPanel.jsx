@@ -16,9 +16,10 @@ export default function AIPromptPanel() {
           color, placement, and embroidery guidance.
         </p>
         <div className="prompt-card">
-          <span>"Minimal luxury embroidery for a black hoodie"</span>
-          <Button to="/studio">Generate</Button>
+          <span>"Minimal luxury graphic for a black hoodie"</span>
+          <Button to="/ai-studio">OPEN AI STUDIO</Button>
         </div>
+
       </div>
       <div className="before-after before-after-slider" style={{ '--reveal': `${reveal}%` }}>
         <img src="https://images.unsplash.com/photo-1578681994506-b8f463449011?auto=format&fit=crop&w=800&q=85" alt="Plain black hoodie" />
