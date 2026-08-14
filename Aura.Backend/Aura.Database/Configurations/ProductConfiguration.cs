@@ -1,4 +1,4 @@
-﻿using Aura.Core.Entities;
+using Aura.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -14,7 +14,11 @@ namespace Aura.Database.Configurations
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.Property(x => x.Price)
-        .HasPrecision(18, 2);
+                   .HasPrecision(18, 2);
+
+            builder.Property(x => x.CustomizationFee)
+                   .HasPrecision(18, 2);
+
 
             builder.Property(x => x.Name)
                    .HasMaxLength(150);
