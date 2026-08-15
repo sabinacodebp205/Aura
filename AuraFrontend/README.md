@@ -1,4 +1,15 @@
-# React + Vite
+# React + Vite - Aura Frontend
+
+## Development Backend Environments
+
+You can run the frontend in development mode connected to either the local or production backend:
+
+- **`npm run dev:local`**: Connects the local frontend to the **local backend** (`http://localhost:5083/api`) and local database (`(localdb)\MSSQLLocalDB`).
+- **`npm run dev:prod`**: Connects the local frontend directly to the **deployed production backend** (`https://aura-gfiv.onrender.com/api`) and its Azure SQL database.
+
+> ⚠️ **Warning**: The local and production databases are completely isolated. Data added through the production Swagger UI (`https://aura-gfiv.onrender.com/swagger`) will only appear when running `npm run dev:prod` (or when `.env.local` is pointing to production). Make sure you are running the corresponding script for the environment you intend to test against.
+
+---
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
