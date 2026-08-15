@@ -1,5 +1,7 @@
-﻿using Aura.Application.DTOs.ProductImage;
+using Aura.Application.DTOs.ProductImage;
 using Aura.Application.Sevices.Interfaces;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +13,14 @@ namespace Aura.API.Controllers
     public class ProductImageController : ControllerBase
     {
         private readonly IProductImageService _productImageService;
+        private readonly IValidator<ProductImageCreateDto> _createValidator;
 
-        public ProductImageController(IProductImageService productImageService)
+        public ProductImageController(
+            IProductImageService productImageService,
+            IValidator<ProductImageCreateDto> createValidator)
         {
             _productImageService = productImageService;
+            _createValidator = createValidator;
         }
 
         [HttpGet]
@@ -38,8 +44,27 @@ namespace Aura.API.Controllers
 
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> Create([FromForm] ProductImageCreateDto dto)
+        public async Task<IActionResult> Create([CustomizeValidator(Skip = true)] [FromForm] ProductImageCreateDto dto)
         {
+            var validationResult = await _createValidator.ValidateAsync(dto);
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors
+                    .GroupBy(e => e.PropertyName)
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                var firstError = validationResult.Errors.FirstOrDefault()?.ErrorMessage ?? "Validation failed.";
+
+                return BadRequest(new
+                {
+                    message = firstError,
+                    errors = errors
+                });
+            }
+
             try
             {
                 await _productImageService.CreateAsync(dto);

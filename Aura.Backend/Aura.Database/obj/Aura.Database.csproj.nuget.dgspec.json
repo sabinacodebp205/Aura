@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj": {}
+    "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj": {}
   },
   "projects": {
     "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj": {
@@ -76,14 +76,14 @@
         }
       }
     },
-    "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj": {
+    "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj",
+        "projectUniqueName": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj",
         "projectName": "Aura.Database",
-        "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj",
+        "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\Aura.Database.csproj",
         "packagesPath": "C:\\Users\\Arda\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\obj\\",
+        "outputPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Database\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
