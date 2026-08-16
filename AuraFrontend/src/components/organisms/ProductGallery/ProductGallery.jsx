@@ -4,21 +4,25 @@ import styles from './ProductGallery.module.css';
 
 export default function ProductGallery({ product }) {
   const rawImages = product?.images && product.images.length > 0 ? product.images : [];
-  const images = rawImages.map(getImageUrl);
+  const images = rawImages.map(getImageUrl).filter(Boolean);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const activeImage = getImageUrl(images[selectedIndex] || images[0]);
+  const activeImage = images[selectedIndex] || images[0] || null;
 
   return (
     <div className={`gallery ${styles.root}`}>
       <div className={styles['main-wrapper']}>
-        <img
-          className={styles['gallery-main']}
-          src={activeImage}
-          alt={product?.alt || product?.name || 'Product'}
-          onError={handleImageError}
-        />
+        {activeImage ? (
+          <img
+            className={styles['gallery-main']}
+            src={activeImage}
+            alt={product?.alt || product?.name || 'Product'}
+            onError={handleImageError}
+          />
+        ) : (
+          <div className={styles['gallery-placeholder']} aria-label="No image available" />
+        )}
       </div>
       {images.length > 1 && (
         <div className={styles['thumb-row']}>
@@ -31,7 +35,7 @@ export default function ProductGallery({ product }) {
               aria-label={`View image ${index + 1}`}
             >
               <img
-                src={getImageUrl(image)}
+                src={image}
                 alt={`${product?.name || 'Product'} thumbnail ${index + 1}`}
                 onError={handleImageError}
               />

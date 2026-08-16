@@ -20,6 +20,13 @@
   transition: opacity 300ms ease;
 }
 
+.gallery-placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--soft);
+}
+
 .thumb-row {
   display: flex;
   align-items: center;

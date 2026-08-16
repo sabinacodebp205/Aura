@@ -1,13 +1,11 @@
-export const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=85';
-
 /**
  * Returns a fully-qualified absolute URL for an image path or string.
- * Handles null/undefined/empty by returning a fallback placeholder.
- * Handles relative paths by prepending the backend base URL.
+ * Returns null when the URL is missing, empty, or invalid — the caller
+ * should handle null gracefully (e.g. render an empty placeholder box).
  */
 export function getImageUrl(url) {
   if (!url || typeof url !== 'string' || url.trim() === '') {
-    return PLACEHOLDER_IMAGE;
+    return null;
   }
 
   const cleanUrl = url.trim();
@@ -29,10 +27,9 @@ export function getImageUrl(url) {
 }
 
 /**
- * Event handler for img onError to fallback to PLACEHOLDER_IMAGE safely without infinite loops.
+ * Event handler for img onError — hides the broken image element
+ * so the container's background (e.g. gray box) shows through cleanly.
  */
 export function handleImageError(e) {
-  if (e.target.src !== PLACEHOLDER_IMAGE) {
-    e.target.src = PLACEHOLDER_IMAGE;
-  }
+  e.target.style.display = 'none';
 }

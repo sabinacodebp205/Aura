@@ -473,3 +473,17 @@
     grid-template-columns: 1fr;
   }
 }
+
+.fav-image-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--soft);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.design-image-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--soft);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}

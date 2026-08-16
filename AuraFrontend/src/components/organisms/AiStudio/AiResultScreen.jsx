@@ -155,12 +155,16 @@ export default function AiResultScreen() {
       <div className={styles.previewSection}>
         <div className={styles.mockupViewer}>
           <span className={styles.badgeTag}>AI Engineered Render</span>
-          <img
-            src={getImageUrl(spec.generatedImageUrl)}
-            alt="Custom AI Garment Mockup"
-            className={styles.mockupImage}
-            onError={handleImageError}
-          />
+          {getImageUrl(spec.generatedImageUrl) ? (
+            <img
+              src={getImageUrl(spec.generatedImageUrl)}
+              alt="Custom AI Garment Mockup"
+              className={styles.mockupImage}
+              onError={handleImageError}
+            />
+          ) : (
+            <div className={styles.mockupImage} aria-label="No image available" />
+          )}
 
         </div>
       </div>

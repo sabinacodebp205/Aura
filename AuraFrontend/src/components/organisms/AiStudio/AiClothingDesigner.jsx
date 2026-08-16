@@ -273,7 +273,7 @@ export default function AiClothingDesigner() {
                     </label>
 
                     <label className={styles.dropzone}>
-                      {spec.uploadedPatternUrl ? (
+                      {getImageUrl(spec.uploadedPatternUrl) ? (
                         <>
                           <img
                             src={getImageUrl(spec.uploadedPatternUrl)}

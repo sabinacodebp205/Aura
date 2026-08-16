@@ -9,7 +9,11 @@ export default function CartItem({ item, onRemove, onQtyChange, total }) {
 
   return (
     <article className={`cart-item ${styles.root}`}>
-      <img src={imageSrc} alt={item.alt || item.name || 'Cart item'} onError={handleImageError} />
+      {imageSrc ? (
+        <img src={imageSrc} alt={item.alt || item.name || 'Cart item'} onError={handleImageError} />
+      ) : (
+        <div className={styles['cart-image-placeholder']} aria-label="No image" />
+      )}
       <div>
         <h2>{item.name}</h2>
         <p>{item.detail}</p>

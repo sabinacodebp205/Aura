@@ -25,7 +25,7 @@ namespace Aura.Application.Sevices.Implementations
 
         private static readonly Dictionary<string, string> BaseGarmentImages = new(StringComparer.OrdinalIgnoreCase)
         {
-            { "tshirt", "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1000&q=85" },
+            { "tshirt", "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=1000&q=85" },
             { "oversized_tshirt", "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=1000&q=85" },
             { "fitted_tshirt", "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1000&q=85" },
             { "long_sleeve", "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1000&q=85" },

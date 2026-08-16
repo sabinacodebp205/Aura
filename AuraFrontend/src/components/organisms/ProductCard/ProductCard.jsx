@@ -14,11 +14,15 @@ export default function ProductCard({ product }) {
     <article className={styles['product-card']}>
       <FavoriteButton productId={product.id} />
       <Link to={`/product/${product.id}`}>
-        <img
-          src={imageSrc}
-          alt={product.alt || product.name || 'Product'}
-          onError={handleImageError}
-        />
+        {imageSrc ? (
+          <img
+            src={imageSrc}
+            alt={product.alt || product.name || 'Product'}
+            onError={handleImageError}
+          />
+        ) : (
+          <div className={styles['image-placeholder']} aria-label="No image available" />
+        )}
         <div className={styles['product-copy']}>
           <span>{product.category || product.categoryName || 'Garment'}</span>
           <h3>{product.name}</h3>

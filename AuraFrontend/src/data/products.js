@@ -6,10 +6,8 @@ export const products = [
     price: 58,
     rating: 4.9,
     reviews: 142,
-    images: [
-      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1000&q=85',
-    ],
-    alt: 'White minimal canvas t-shirt on model',
+    images: [],
+    alt: 'Signature Canvas Tee',
   },
   {
     id: 'studio-oversized-hoodie',

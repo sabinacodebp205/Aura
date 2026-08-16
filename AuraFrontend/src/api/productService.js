@@ -7,7 +7,7 @@ import { getImageUrl } from '../utils/imageUrl';
  */
 function mapProduct(dto) {
   const images = (dto.imageUrls && dto.imageUrls.length > 0)
-    ? dto.imageUrls.map(getImageUrl)
+    ? dto.imageUrls.map(getImageUrl).filter(Boolean)
     : [];
 
   return {

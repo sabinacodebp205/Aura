@@ -310,11 +310,15 @@ export default function ProfilePage() {
               <div className={styles['fav-grid']}>
                 {favorites.map((fav, index) => (
                   <article key={fav.id || fav.productId || `fav-${index}`} className={styles['fav-card']}>
-                    <img
-                      src={getImageUrl(fav.imageUrl)}
-                      alt={fav.productName || 'Favorite Product'}
-                      onError={handleImageError}
-                    />
+                    {getImageUrl(fav.imageUrl) ? (
+                      <img
+                        src={getImageUrl(fav.imageUrl)}
+                        alt={fav.productName || 'Favorite Product'}
+                        onError={handleImageError}
+                      />
+                    ) : (
+                      <div className={styles['fav-image-placeholder']} aria-label="No image" />
+                    )}
                     <div className={styles['fav-info']}>
                       <h3>{fav.productName || 'Custom Piece'}</h3>
                       <p className={styles['fav-price']}>${fav.price}</p>
@@ -342,11 +346,15 @@ export default function ProfilePage() {
               <div className={styles['designs-grid']}>
                 {designs.map((design, index) => (
                   <article key={design.id || `design-${index}`} className={styles['design-card']}>
-                    <img
-                      src={getImageUrl(design.generatedImageUrl || design.imageUrl)}
-                      alt={design.name || design.prompt || 'Saved AI Design'}
-                      onError={handleImageError}
-                    />
+                    {getImageUrl(design.generatedImageUrl || design.imageUrl) ? (
+                      <img
+                        src={getImageUrl(design.generatedImageUrl || design.imageUrl)}
+                        alt={design.name || design.prompt || 'Saved AI Design'}
+                        onError={handleImageError}
+                      />
+                    ) : (
+                      <div className={styles['design-image-placeholder']} aria-label="No image" />
+                    )}
 
                     <div className={styles['design-info']}>
                       <h3>{design.name || `Custom ${design.color || 'Piece'}`}</h3>
