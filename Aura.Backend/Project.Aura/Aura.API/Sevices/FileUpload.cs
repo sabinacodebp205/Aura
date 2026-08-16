@@ -52,12 +52,13 @@ namespace Aura.API.Services
             return string.Empty;
         }
 
-        private bool IsCloudStorageConfigured(out string endpoint, out string bucketName, out string accessKey, out string secretKey, out string publicBaseUrl)
+        private bool IsCloudStorageConfigured(out string endpoint, out string bucketName, out string accessKey, out string secretKey, out string region, out string publicBaseUrl)
         {
             endpoint = _config["Storage:Endpoint"] ?? string.Empty;
             bucketName = _config["Storage:BucketName"] ?? string.Empty;
             accessKey = _config["Storage:AccessKey"] ?? string.Empty;
             secretKey = _config["Storage:SecretKey"] ?? string.Empty;
+            region = _config["Storage:Region"] ?? string.Empty;
             publicBaseUrl = _config["Storage:PublicBaseUrl"] ?? string.Empty;
 
             return !string.IsNullOrWhiteSpace(accessKey) &&
@@ -65,7 +66,7 @@ namespace Aura.API.Services
                    !string.IsNullOrWhiteSpace(bucketName);
         }
 
-        private AmazonS3Client CreateS3Client(string endpoint, string accessKey, string secretKey)
+        private AmazonS3Client CreateS3Client(string endpoint, string accessKey, string secretKey, string region)
         {
             var config = new AmazonS3Config
             {
@@ -75,6 +76,11 @@ namespace Aura.API.Services
             if (!string.IsNullOrWhiteSpace(endpoint))
             {
                 config.ServiceURL = endpoint;
+            }
+
+            if (!string.IsNullOrWhiteSpace(region))
+            {
+                config.AuthenticationRegion = region;
             }
 
             return new AmazonS3Client(accessKey, secretKey, config);
@@ -95,10 +101,10 @@ namespace Aura.API.Services
 
             var fileName = $"{Guid.NewGuid()}{extension}";
 
-            if (IsCloudStorageConfigured(out var endpoint, out var bucketName, out var accessKey, out var secretKey, out var publicBaseUrl))
+            if (IsCloudStorageConfigured(out var endpoint, out var bucketName, out var accessKey, out var secretKey, out var region, out var publicBaseUrl))
             {
                 var objectKey = $"uploads/products/{fileName}";
-                using var client = CreateS3Client(endpoint, accessKey, secretKey);
+                using var client = CreateS3Client(endpoint, accessKey, secretKey, region);
                 using var stream = file.OpenReadStream();
 
                 var putRequest = new PutObjectRequest
@@ -155,10 +161,10 @@ namespace Aura.API.Services
 
             var fileName = $"{Guid.NewGuid()}{extension}";
 
-            if (IsCloudStorageConfigured(out var endpoint, out var bucketName, out var accessKey, out var secretKey, out var publicBaseUrl))
+            if (IsCloudStorageConfigured(out var endpoint, out var bucketName, out var accessKey, out var secretKey, out var region, out var publicBaseUrl))
             {
                 var objectKey = $"uploads/designs/{fileName}";
-                using var client = CreateS3Client(endpoint, accessKey, secretKey);
+                using var client = CreateS3Client(endpoint, accessKey, secretKey, region);
                 using var stream = file.OpenReadStream();
 
                 var putRequest = new PutObjectRequest
@@ -206,10 +212,10 @@ namespace Aura.API.Services
 
             var fileName = Path.GetFileName(imageUrl);
 
-            if (IsCloudStorageConfigured(out var endpoint, out var bucketName, out var accessKey, out var secretKey, out _))
+            if (IsCloudStorageConfigured(out var endpoint, out var bucketName, out var accessKey, out var secretKey, out var region, out _))
             {
                 var objectKey = $"uploads/products/{fileName}";
-                using var client = CreateS3Client(endpoint, accessKey, secretKey);
+                using var client = CreateS3Client(endpoint, accessKey, secretKey, region);
                 client.DeleteObjectAsync(bucketName, objectKey).GetAwaiter().GetResult();
             }
             else
