@@ -1,14 +1,17 @@
 using Aura.API.Services;
 using Aura.Application.Common;
 using Aura.Application.Extensions;
+using Aura.Application.Sevices.Implementations;
 using Aura.Application.Sevices.Interfaces;
 using Aura.Core.Entities;
 using Aura.Database.Contexts;
 using Aura.Database.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
 using System.Text;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
@@ -69,7 +72,21 @@ namespace Aura.API
                 });
             });
             builder.Services.AddHttpContextAccessor();
-            builder.Services.AddScoped<IFileUploadService, FileUploadService>();
+
+            // MongoDB & Image Storage
+            builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDb"));
+            builder.Services.AddSingleton<IMongoClient>(sp =>
+            {
+                var settings = sp.GetRequiredService<IOptions<MongoDbSettings>>().Value;
+                var conn = !string.IsNullOrWhiteSpace(settings.ConnectionString)
+                    ? settings.ConnectionString
+                    : "mongodb://localhost:27017";
+                return new MongoClient(conn);
+            });
+            builder.Services.AddScoped<IImageStorageService, MongoImageStorageService>();
+
+            // Legacy Supabase/S3 file upload service (superseded by MongoImageStorageService)
+            // builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
 
             // Database

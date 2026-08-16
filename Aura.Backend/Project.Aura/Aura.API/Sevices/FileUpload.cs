@@ -11,6 +11,12 @@ using System.Threading.Tasks;
 
 namespace Aura.API.Services
 {
+    /// <summary>
+    /// Legacy file upload service using local disk / Supabase S3 storage.
+    /// Superseded by MongoImageStorageService (MongoDB binary image storage).
+    /// Kept for backward compatibility and reference.
+    /// </summary>
+    [Obsolete("Superseded by MongoImageStorageService for MongoDB image storage.")]
     public class FileUploadService : IFileUploadService
     {
         private readonly IWebHostEnvironment _env;

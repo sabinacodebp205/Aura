@@ -320,3 +320,9 @@ c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.API.deps.json
 c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.API.runtimeconfig.json
 c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.API.dll
 c:\Users\Arda\Desktop\Aura\Aura.Backend\scratch_build\Aura.API.pdb
+C:\Users\Arda\Desktop\Aura\Aura.Backend\Project.Aura\Aura.API\bin\Debug\net8.0\DnsClient.dll
+C:\Users\Arda\Desktop\Aura\Aura.Backend\Project.Aura\Aura.API\bin\Debug\net8.0\MongoDB.Bson.dll
+C:\Users\Arda\Desktop\Aura\Aura.Backend\Project.Aura\Aura.API\bin\Debug\net8.0\MongoDB.Driver.dll
+C:\Users\Arda\Desktop\Aura\Aura.Backend\Project.Aura\Aura.API\bin\Debug\net8.0\SharpCompress.dll
+C:\Users\Arda\Desktop\Aura\Aura.Backend\Project.Aura\Aura.API\bin\Debug\net8.0\Snappier.dll
+C:\Users\Arda\Desktop\Aura\Aura.Backend\Project.Aura\Aura.API\bin\Debug\net8.0\ZstdSharp.dll

@@ -14,12 +14,12 @@ namespace Aura.API.Controllers
     public class AiStudioController : ControllerBase
     {
         private readonly IAiStudioService _aiStudioService;
-        private readonly IFileUploadService _fileUploadService;
+        private readonly IImageStorageService _imageStorageService;
 
-        public AiStudioController(IAiStudioService aiStudioService, IFileUploadService fileUploadService)
+        public AiStudioController(IAiStudioService aiStudioService, IImageStorageService imageStorageService)
         {
             _aiStudioService = aiStudioService;
-            _fileUploadService = fileUploadService;
+            _imageStorageService = imageStorageService;
         }
 
         [HttpPost("chat")]
@@ -44,7 +44,8 @@ namespace Aura.API.Controllers
         {
             try
             {
-                var url = await _fileUploadService.SaveDesignPatternAsync(file);
+                var imageId = await _imageStorageService.SaveImageAsync(file);
+                var url = $"/api/ProductImage/file/{imageId}";
                 return Ok(new { url });
             }
             catch (Exception ex)

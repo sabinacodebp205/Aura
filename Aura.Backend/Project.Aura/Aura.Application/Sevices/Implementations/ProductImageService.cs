@@ -14,16 +14,16 @@ namespace Aura.Application.Sevices.Implementations
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IFileUploadService _fileUploadService;
+        private readonly IImageStorageService _imageStorageService;
 
         public ProductImageService(
             IUnitOfWork unitOfWork,
             IMapper mapper,
-            IFileUploadService fileUploadService)
+            IImageStorageService imageStorageService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _fileUploadService = fileUploadService;
+            _imageStorageService = imageStorageService;
         }
 
         public async Task<ICollection<ProductImageGetDto>> GetAllAsync()
@@ -68,7 +68,8 @@ namespace Aura.Application.Sevices.Implementations
                 }
             }
 
-            var imageUrl = await _fileUploadService.SaveProductImageAsync(dto.ImageFile);
+            var imageId = await _imageStorageService.SaveImageAsync(dto.ImageFile);
+            var imageUrl = $"/api/ProductImage/file/{imageId}";
 
             var image = new ProductImage
             {
@@ -101,11 +102,11 @@ namespace Aura.Application.Sevices.Implementations
 
             if (dto.ImageFile != null)
             {
-                _fileUploadService.DeleteProductImage(image.ImageUrl);
+                await _imageStorageService.DeleteImageAsync(image.ImageUrl);
 
-                var newImageUrl = await _fileUploadService.SaveProductImageAsync(dto.ImageFile);
+                var newImageId = await _imageStorageService.SaveImageAsync(dto.ImageFile);
 
-                image.ImageUrl = newImageUrl;
+                image.ImageUrl = $"/api/ProductImage/file/{newImageId}";
             }
 
             image.IsMain = dto.IsMain;
@@ -125,7 +126,7 @@ namespace Aura.Application.Sevices.Implementations
             bool wasMain = image.IsMain;
             Guid productId = image.ProductId;
 
-            _fileUploadService.DeleteProductImage(image.ImageUrl);
+            await _imageStorageService.DeleteImageAsync(image.ImageUrl);
 
             _unitOfWork.ProductImageRepository.Delete(image);
 

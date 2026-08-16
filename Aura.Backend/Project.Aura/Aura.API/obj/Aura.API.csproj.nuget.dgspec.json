@@ -262,6 +262,10 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[3.11.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
@@ -368,6 +372,10 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[7.6.2, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[3.11.0, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",

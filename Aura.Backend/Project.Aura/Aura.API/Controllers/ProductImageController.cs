@@ -13,14 +13,28 @@ namespace Aura.API.Controllers
     public class ProductImageController : ControllerBase
     {
         private readonly IProductImageService _productImageService;
+        private readonly IImageStorageService _imageStorageService;
         private readonly IValidator<ProductImageCreateDto> _createValidator;
 
         public ProductImageController(
             IProductImageService productImageService,
+            IImageStorageService imageStorageService,
             IValidator<ProductImageCreateDto> createValidator)
         {
             _productImageService = productImageService;
+            _imageStorageService = imageStorageService;
             _createValidator = createValidator;
+        }
+
+        [HttpGet("file/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetImageFile(string id)
+        {
+            var image = await _imageStorageService.GetImageAsync(id);
+            if (image == null)
+                return NotFound();
+
+            return File(image.Data, image.ContentType);
         }
 
         [HttpGet]
