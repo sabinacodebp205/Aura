@@ -3,9 +3,24 @@ using System.Collections.Generic;
 
 namespace Aura.Application.DTOs.AiStudio
 {
+    public class CanvasActionsDto
+    {
+        public string? Placement { get; set; }
+        public double? Scale { get; set; }
+        public double? Rotation { get; set; }
+        public double? PositionX { get; set; }
+        public double? PositionY { get; set; }
+        public string? GarmentType { get; set; }
+        public string? Color { get; set; }
+        public string? AddedText { get; set; }
+        public string? Mode { get; set; }
+    }
+
     public class DesignSpecDto
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string? ProductId { get; set; }
+        public string? ProductName { get; set; }
         public string GarmentType { get; set; } = "hoodie";
         public string Color { get; set; } = "black";
         public string? Prompt { get; set; }
@@ -13,6 +28,10 @@ namespace Aura.Application.DTOs.AiStudio
         public string? Style { get; set; }
         public string? Placement { get; set; }
         public string? PrintSize { get; set; }
+        public double? Scale { get; set; } = 100;
+        public double? Rotation { get; set; } = 0;
+        public double? PositionX { get; set; } = 50;
+        public double? PositionY { get; set; } = 48;
         public string Status { get; set; } = "draft";
         public string? GeneratedImageUrl { get; set; }
         public int GenerationAttempts { get; set; } = 0;
@@ -31,6 +50,7 @@ namespace Aura.Application.DTOs.AiStudio
     public class ChatResponseDto
     {
         public string Reply { get; set; } = string.Empty;
+        public CanvasActionsDto? CanvasActions { get; set; }
         public DesignSpecDto UpdatedSpec { get; set; } = new DesignSpecDto();
         public bool NeedsClarification { get; set; } = false;
         public List<string>? SuggestedOptions { get; set; }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Aura.Database")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b462b86adfb04d8a5aef8d883e12857d25d49ad")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+61c369f0767dbe42007cf657c8e814ac3abe2981")]
 [assembly: System.Reflection.AssemblyProductAttribute("Aura.Database")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Aura.Database")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

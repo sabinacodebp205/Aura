@@ -4,10 +4,15 @@ using Aura.Core.Entities;
 using Aura.Core.Enums;
 using Aura.Core.Interfaces.Repositories;
 using AutoMapper;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -17,6 +22,9 @@ namespace Aura.Application.Sevices.Implementations
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
+        private readonly ILogger<AiStudioService> _logger;
+        private static readonly HttpClient _httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(35) };
 
         private static readonly string[] ProhibitedKeywords = new[]
         {
@@ -38,122 +46,273 @@ namespace Aura.Application.Sevices.Implementations
             { "zip_hoodie", "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1000&q=85" }
         };
 
-        public AiStudioService(IUnitOfWork unitOfWork, IMapper mapper)
+        public AiStudioService(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IConfiguration configuration,
+            ILogger<AiStudioService> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _configuration = configuration;
+            _logger = logger;
         }
 
-        public Task<ChatResponseDto> ProcessChatAsync(ChatRequestDto dto)
+        public async Task<ChatResponseDto> ProcessChatAsync(ChatRequestDto dto)
         {
-            var msg = dto.UserMessage?.Trim().ToLowerInvariant() ?? string.Empty;
-            var updatedSpec = dto.CurrentSpec ?? new DesignSpecDto();
-            updatedSpec.UpdatedAt = DateTime.UtcNow;
+            var userMessage = dto.UserMessage?.Trim() ?? string.Empty;
+            var currentSpec = dto.CurrentSpec ?? new DesignSpecDto();
+            currentSpec.UpdatedAt = DateTime.UtcNow;
 
-            if (string.IsNullOrWhiteSpace(msg))
+            var apiKey = _configuration["AiService:ApiKey"]
+                ?? Environment.GetEnvironmentVariable("GEMINI_API_KEY")
+                ?? string.Empty;
+            var modelName = _configuration["AiService:Model"] ?? "gemini-2.0-flash";
+
+            if (!string.IsNullOrWhiteSpace(apiKey))
             {
-                return Task.FromResult(new ChatResponseDto
+                try
                 {
-                    Reply = "Could you tell me a bit more about the piece you want to design? For instance, garment type, preferred color, or style theme.",
-                    UpdatedSpec = updatedSpec,
-                    NeedsClarification = true,
-                    SuggestedOptions = new List<string> { "Hoodie", "Oversized Tee", "Streetwear", "Minimalist" }
-                });
-            }
-
-            // 1. Extract Garment Type
-            if (msg.Contains("zip hoodie") || msg.Contains("zip-up")) updatedSpec.GarmentType = "zip_hoodie";
-            else if (msg.Contains("oversized t-shirt") || msg.Contains("oversized tee")) updatedSpec.GarmentType = "oversized_tshirt";
-            else if (msg.Contains("fitted t-shirt") || msg.Contains("fitted tee")) updatedSpec.GarmentType = "fitted_tshirt";
-            else if (msg.Contains("t-shirt") || msg.Contains("tshirt") || msg.Contains("tee")) updatedSpec.GarmentType = "tshirt";
-            else if (msg.Contains("long sleeve")) updatedSpec.GarmentType = "long_sleeve";
-            else if (msg.Contains("tank top") || msg.Contains("tank")) updatedSpec.GarmentType = "tank_top";
-            else if (msg.Contains("crop top")) updatedSpec.GarmentType = "crop_top";
-            else if (msg.Contains("quarter zip") || msg.Contains("1/4 zip")) updatedSpec.GarmentType = "quarter_zip";
-            else if (msg.Contains("sweatshirt") || msg.Contains("crewneck")) updatedSpec.GarmentType = "sweatshirt";
-            else if (msg.Contains("hoodie")) updatedSpec.GarmentType = "hoodie";
-
-            // 2. Extract Color
-            if (msg.Contains("black")) updatedSpec.Color = "black";
-            else if (msg.Contains("white")) updatedSpec.Color = "white";
-            else if (msg.Contains("grey") || msg.Contains("gray")) updatedSpec.Color = "grey";
-            else if (msg.Contains("beige") || msg.Contains("sand")) updatedSpec.Color = "beige";
-            else if (msg.Contains("charcoal")) updatedSpec.Color = "charcoal";
-            else if (msg.Contains("navy")) updatedSpec.Color = "navy";
-            else if (msg.Contains("olive") || msg.Contains("green")) updatedSpec.Color = "olive";
-            else if (msg.Contains("cream")) updatedSpec.Color = "cream";
-
-            // 3. Extract Style
-            if (msg.Contains("streetwear")) updatedSpec.Style = "streetwear";
-            else if (msg.Contains("minimal") || msg.Contains("minimalist")) updatedSpec.Style = "minimal";
-            else if (msg.Contains("grunge")) updatedSpec.Style = "grunge";
-            else if (msg.Contains("gothic")) updatedSpec.Style = "gothic";
-            else if (msg.Contains("vintage") || msg.Contains("retro")) updatedSpec.Style = "vintage";
-            else if (msg.Contains("luxury")) updatedSpec.Style = "luxury";
-            else if (msg.Contains("artistic")) updatedSpec.Style = "artistic";
-            else if (msg.Contains("motivational") || msg.Contains("quote")) updatedSpec.Style = "motivational";
-
-            // 4. Extract Placement
-            if (msg.Contains("left chest") || msg.Contains("small chest")) updatedSpec.Placement = "left_chest";
-            else if (msg.Contains("right chest")) updatedSpec.Placement = "right_chest";
-            else if (msg.Contains("back print") || msg.Contains("on the back")) updatedSpec.Placement = "back";
-            else if (msg.Contains("sleeve")) updatedSpec.Placement = "sleeve";
-            else if (msg.Contains("center") || msg.Contains("front")) updatedSpec.Placement = "center";
-
-            // 5. Extract Print Size
-            if (msg.Contains("small print") || msg.Contains("discreet")) updatedSpec.PrintSize = "small";
-            else if (msg.Contains("large print") || msg.Contains("oversized graphic")) updatedSpec.PrintSize = "large";
-            else if (msg.Contains("medium print")) updatedSpec.PrintSize = "medium";
-
-            // Update user's prompt text
-            if (string.IsNullOrWhiteSpace(updatedSpec.Prompt))
-            {
-                updatedSpec.Prompt = dto.UserMessage;
+                    var response = await CallGeminiApiAsync(apiKey, modelName, userMessage, currentSpec);
+                    if (response != null)
+                    {
+                        return response;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "[AiStudioService] Error calling Gemini API. Falling back to local assistant reasoning.");
+                }
             }
             else
             {
-                updatedSpec.Prompt += $"; {dto.UserMessage}";
+                _logger.LogWarning("[AiStudioService] Gemini API Key is not configured in 'AiService:ApiKey'. Operating in smart local fallback mode.");
             }
 
-            // Determine assistant response & clarification
+            return ProcessLocalChatFallback(userMessage, currentSpec);
+        }
+
+        private async Task<ChatResponseDto?> CallGeminiApiAsync(
+            string apiKey,
+            string modelName,
+            string userMessage,
+            DesignSpecDto spec)
+        {
+            var systemPrompt = @"You are the AURA AI Designer and Luxury Fashion Concierge.
+You assist customers inside the AURA AI Customization Studio.
+
+AURA KNOWLEDGE BASE:
+- Silhouettes: Studio Oversized Hoodie ($124 base), Signature Canvas Tee ($58 base), Crewneck Sweatshirt ($108 base), Sculpted Utility Jacket ($188 base), Neo Bomber ($172 base), Ribbed Tank Top ($44 base), Silk Blouse ($138 base).
+- Sizing: XS, S, M, L, XL (tailored architectural streetwear fit).
+- Fabrics: 420 GSM heavyweight brushed French terry cotton (hoodie), 240 GSM organic combed cotton (tees).
+- Curated Colors: deep black, pure white, heather grey, natural beige, charcoal, midnight navy, muted olive, vanilla cream.
+- Placement Zones: center (Center Front), left_chest (Discreet brand mark), right_chest, upper (Upper Chest), middle, lower (Lower Hem), back (Full Back Statement), custom.
+- Scales: 20% to 180% (standard 100%).
+- Rotations: -180 to 180 deg (standard 0).
+- Pricing & Fees: Base garment price + $15.00 flat AI Customization Fee.
+- Studio Workflow: Step 1 (Upload Design) -> Step 2 (Position) -> Step 3 (AI Customize) -> Step 4 (Render Mockup) -> Step 5 (Save/Buy).
+
+DUAL ROLE INSTRUCTIONS:
+1. DESIGN MUTATIONS: When the user asks to move, resize, rotate, restyle, change garment/color, or add text, mutate the canvasActions and updatedSpec accordingly, and confirm the change in plain, elegant language.
+2. APP Q&A: When the user asks general questions about sizing, fabrics, shipping, saving designs, pricing, or the studio process, answer thoroughly and conversationally in markdown.
+
+OUTPUT FORMAT REQUIREMENTS:
+You MUST respond with a single, valid JSON object with this exact shape:
+{
+  ""reply"": ""Conversational response acknowledging changes or answering user questions."",
+  ""canvasActions"": {
+    ""placement"": ""center"" | ""left_chest"" | ""right_chest"" | ""upper"" | ""middle"" | ""lower"" | ""back"" | ""custom"" | null,
+    ""scale"": 100,
+    ""rotation"": 0,
+    ""garmentType"": ""hoodie"" | ""tshirt"" | ""sweatshirt"" | ""jacket"" | null,
+    ""color"": ""black"" | ""white"" | ""grey"" | ""beige"" | ""charcoal"" | ""navy"" | ""olive"" | ""cream"" | null,
+    ""addedText"": ""string or null"",
+    ""mode"": ""print"" | ""embroidery"" | null
+  },
+  ""updatedSpec"": {
+    ""garmentType"": ""hoodie"",
+    ""color"": ""black"",
+    ""style"": ""minimal"",
+    ""placement"": ""center"",
+    ""printSize"": ""medium"",
+    ""prompt"": ""prompt text""
+  },
+  ""suggestedOptions"": [""Option 1"", ""Option 2"", ""Option 3""]
+}";
+
+            var currentContextSummary = $"CURRENT DESIGN CONTEXT: Garment={spec.GarmentType}, Color={spec.Color}, Placement={spec.Placement ?? "center"}, Scale={spec.PrintSize ?? "medium"}, Style={spec.Style ?? "custom"}, HasUploadedPattern={(string.IsNullOrWhiteSpace(spec.UploadedPatternUrl) ? "No" : "Yes (PNG uploaded)")}. User Prompt/History: {spec.Prompt ?? "None"}";
+
+            var model = string.IsNullOrWhiteSpace(modelName) ? "gemini-2.0-flash" : modelName;
+            var url = $"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={apiKey}";
+
+            var requestBody = new
+            {
+                system_instruction = new
+                {
+                    parts = new[] { new { text = systemPrompt } }
+                },
+                contents = new[]
+                {
+                    new
+                    {
+                        role = "user",
+                        parts = new[] { new { text = $"{currentContextSummary}\n\nUser Request: {userMessage}" } }
+                    }
+                },
+                generationConfig = new
+                {
+                    response_mime_type = "application/json",
+                    temperature = 0.4
+                }
+            };
+
+            var jsonPayload = JsonSerializer.Serialize(requestBody);
+            using var request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(request);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                var errContent = await httpResponse.Content.ReadAsStringAsync();
+                _logger.LogError("[AiStudioService] Gemini API returned {StatusCode}: {Error}", httpResponse.StatusCode, errContent);
+                return null;
+            }
+
+            var responseJson = await httpResponse.Content.ReadAsStringAsync();
+            using var doc = JsonDocument.Parse(responseJson);
+            var candidates = doc.RootElement.GetProperty("candidates");
+            if (candidates.GetArrayLength() == 0) return null;
+
+            var parts = candidates[0].GetProperty("content").GetProperty("parts");
+            if (parts.GetArrayLength() == 0) return null;
+
+            var rawText = parts[0].GetProperty("text").GetString() ?? string.Empty;
+
+            var cleanedJson = rawText.Trim();
+            if (cleanedJson.StartsWith("```json", StringComparison.OrdinalIgnoreCase))
+            {
+                cleanedJson = cleanedJson.Substring(7);
+            }
+            else if (cleanedJson.StartsWith("```"))
+            {
+                cleanedJson = cleanedJson.Substring(3);
+            }
+            if (cleanedJson.EndsWith("```"))
+            {
+                cleanedJson = cleanedJson.Substring(0, cleanedJson.Length - 3);
+            }
+            cleanedJson = cleanedJson.Trim();
+
+            try
+            {
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var parsed = JsonSerializer.Deserialize<ChatResponseDto>(cleanedJson, options);
+                if (parsed != null)
+                {
+                    if (parsed.UpdatedSpec == null) parsed.UpdatedSpec = spec;
+                    parsed.UpdatedSpec.UpdatedAt = DateTime.UtcNow;
+                    return parsed;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "[AiStudioService] Could not parse Gemini JSON response. Using raw text as reply.");
+                return new ChatResponseDto
+                {
+                    Reply = rawText,
+                    UpdatedSpec = spec,
+                    SuggestedOptions = new List<string> { "Center placement", "Left chest", "Make smaller", "Save design" }
+                };
+            }
+
+            return null;
+        }
+
+        private static ChatResponseDto ProcessLocalChatFallback(string userMessage, DesignSpecDto currentSpec)
+        {
+            var msg = userMessage.ToLowerInvariant();
+            var actions = new CanvasActionsDto();
+
+            if (msg.Contains("left chest"))
+            {
+                currentSpec.Placement = "left_chest";
+                actions.Placement = "left_chest";
+                actions.Scale = 48;
+            }
+            else if (msg.Contains("right chest"))
+            {
+                currentSpec.Placement = "right_chest";
+                actions.Placement = "right_chest";
+                actions.Scale = 48;
+            }
+            else if (msg.Contains("center") || msg.Contains("front"))
+            {
+                currentSpec.Placement = "center";
+                actions.Placement = "center";
+                actions.Scale = 100;
+            }
+            else if (msg.Contains("back"))
+            {
+                currentSpec.Placement = "back";
+                actions.Placement = "back";
+                actions.Scale = 110;
+            }
+
+            if (msg.Contains("smaller") || msg.Contains("small"))
+            {
+                actions.Scale = 50;
+                currentSpec.PrintSize = "small";
+            }
+            else if (msg.Contains("larger") || msg.Contains("bigger") || msg.Contains("oversized"))
+            {
+                actions.Scale = 135;
+                currentSpec.PrintSize = "large";
+            }
+
+            if (msg.Contains("black")) { currentSpec.Color = "black"; actions.Color = "black"; }
+            else if (msg.Contains("white")) { currentSpec.Color = "white"; actions.Color = "white"; }
+            else if (msg.Contains("grey") || msg.Contains("gray")) { currentSpec.Color = "grey"; actions.Color = "grey"; }
+
+            if (msg.Contains("hoodie")) { currentSpec.GarmentType = "hoodie"; actions.GarmentType = "hoodie"; }
+            else if (msg.Contains("tshirt") || msg.Contains("t-shirt") || msg.Contains("tee")) { currentSpec.GarmentType = "tshirt"; actions.GarmentType = "tshirt"; }
+
+            if (msg.Contains("embroidery")) { actions.Mode = "embroidery"; currentSpec.Style = "embroidery"; }
+            else if (msg.Contains("print")) { actions.Mode = "print"; currentSpec.Style = "print"; }
+
+            // General Q&A detection
             string reply;
-            bool needsClarification = false;
-            List<string>? suggestions = null;
-
-            var readableGarment = updatedSpec.GarmentType.Replace("_", " ");
-            var hasGraphic = !string.IsNullOrWhiteSpace(updatedSpec.Prompt) || !string.IsNullOrWhiteSpace(updatedSpec.UploadedPatternUrl);
-
-            if (string.IsNullOrWhiteSpace(updatedSpec.Style))
+            if (msg.Contains("size") || msg.Contains("sizing") || msg.Contains("fit"))
             {
-                reply = $"Got it — a custom {updatedSpec.Color} {readableGarment}. What vibe or style direction do you have in mind for this piece?";
-                needsClarification = true;
-                suggestions = new List<string> { "Minimalist", "Streetwear", "Gothic Architectural", "Vintage Editorial" };
+                reply = "AURA garments feature a relaxed, tailored streetwear silhouette available in sizes XS through XL. Each piece is engineered with drop-shoulder ergonomics for a clean architectural drape.";
             }
-            else if (string.IsNullOrWhiteSpace(updatedSpec.Placement))
+            else if (msg.Contains("fabric") || msg.Contains("material") || msg.Contains("gsm"))
             {
-                reply = $"Looking sleek! Where would you like the graphic positioned on your {updatedSpec.Color} {readableGarment}?";
-                needsClarification = true;
-                suggestions = new List<string> { "Center Front", "Left Chest", "Full Back", "Sleeve Print" };
+                reply = "Our hoodies are crafted from custom-milled 420 GSM brushed French terry cotton with double-layer ribbing. Our tees use 240 GSM organic combed cotton for substantial luxury weight.";
             }
-            else if (!hasGraphic)
+            else if (msg.Contains("placement") || msg.Contains("position"))
             {
-                reply = $"Great setup for your {updatedSpec.Color} {readableGarment} ({updatedSpec.Style} style). Describe the artwork concept or upload a PNG graphic pattern.";
-                needsClarification = true;
-                suggestions = new List<string> { "Abstract geometric lines", "Monochrome butterfly motif", "Minimalist typographic emblem" };
+                reply = "You can position your design across 8 zones: Center Front, Left Chest, Right Chest, Upper Collar, Mid Torso, Lower Hem, Full Back, or freeform dragging on the canvas.";
+            }
+            else if (msg.Contains("price") || msg.Contains("cost") || msg.Contains("fee"))
+            {
+                reply = "Customized pieces include the base garment price plus a flat $15.00 AI Customization Fee for high-resolution vector pre-press and textile formulation.";
+            }
+            else if (msg.Contains("save") || msg.Contains("profile"))
+            {
+                reply = "When you complete your design in Step 5, click 'Save Design to My Profile'. You can revisit, re-order, or edit your saved designs anytime under Profile → My AI Designs.";
             }
             else
             {
-                reply = $"Your spec is ready! I've locked in a {updatedSpec.Color} {readableGarment} with {updatedSpec.Style ?? "custom"} aesthetic and {updatedSpec.Placement ?? "center"} placement. Click 'Continue to Generator' below to render your high-resolution mockup!";
-                updatedSpec.Status = "draft";
+                reply = $"I've updated your design on the {currentSpec.Color} {currentSpec.GarmentType.Replace('_', ' ')}. You can adjust placement, scale, or ask about our fabrics and sizing.";
             }
 
-            return Task.FromResult(new ChatResponseDto
+            return new ChatResponseDto
             {
                 Reply = reply,
-                UpdatedSpec = updatedSpec,
-                NeedsClarification = needsClarification,
-                SuggestedOptions = suggestions
-            });
+                CanvasActions = actions,
+                UpdatedSpec = currentSpec,
+                SuggestedOptions = new List<string> { "Center placement", "Left chest", "Make smaller", "Tell me about fabrics" }
+            };
         }
 
         public Task<GenerateResponseDto> GenerateGarmentDesignAsync(GenerateRequestDto dto)
