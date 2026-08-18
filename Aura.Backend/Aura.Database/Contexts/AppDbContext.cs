@@ -1,4 +1,4 @@
-﻿using Aura.Core.Entities;
+using Aura.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +26,6 @@ namespace Aura.Database.Contexts
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
-        public DbSet<Design> Designs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

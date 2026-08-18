@@ -1,4 +1,4 @@
-﻿using Aura.Core.Entities.Common;
+using Aura.Core.Entities.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +18,5 @@ namespace Aura.Core.Entities
         public Product Product { get; set; } = null!;
 
         public int Quantity { get; set; }
-
-        public Guid? DesignId { get; set; }
-
-        public Design? Design { get; set; }
     }
 }

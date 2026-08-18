@@ -178,83 +178,6 @@ namespace Aura.Database.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Aura.Core.Entities.Design", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("ExtraPrice")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("GarmentType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GenerationAttempts")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFavorite")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Placement")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrintSize")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Prompt")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Style")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UploadedPatternUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Designs");
-                });
-
             modelBuilder.Entity("Aura.Core.Entities.Favorite", b =>
                 {
                     b.Property<Guid>("Id")
@@ -335,9 +258,6 @@ namespace Aura.Database.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("DesignId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -354,8 +274,6 @@ namespace Aura.Database.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DesignId");
 
                     b.HasIndex("OrderId");
 
@@ -381,17 +299,10 @@ namespace Aura.Database.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal?>("CustomizationFee")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
-
-                    b.Property<bool>("IsCustomizable")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -412,9 +323,6 @@ namespace Aura.Database.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
-
-                    b.Property<Guid?>("SourceDesignId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("StockCount")
                         .HasColumnType("int");
@@ -642,21 +550,6 @@ namespace Aura.Database.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Aura.Core.Entities.Design", b =>
-                {
-                    b.HasOne("Aura.Core.Entities.Product", "Product")
-                        .WithMany("Designs")
-                        .HasForeignKey("ProductId");
-
-                    b.HasOne("Aura.Core.Entities.AppUser", "User")
-                        .WithMany("Designs")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Aura.Core.Entities.Favorite", b =>
                 {
                     b.HasOne("Aura.Core.Entities.Product", "Product")
@@ -697,10 +590,6 @@ namespace Aura.Database.Migrations
 
             modelBuilder.Entity("Aura.Core.Entities.OrderItem", b =>
                 {
-                    b.HasOne("Aura.Core.Entities.Design", "Design")
-                        .WithMany()
-                        .HasForeignKey("DesignId");
-
                     b.HasOne("Aura.Core.Entities.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
@@ -712,8 +601,6 @@ namespace Aura.Database.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Design");
 
                     b.Navigation("Order");
 
@@ -816,8 +703,6 @@ namespace Aura.Database.Migrations
                 {
                     b.Navigation("Addresses");
 
-                    b.Navigation("Designs");
-
                     b.Navigation("Favorites");
 
                     b.Navigation("Orders");
@@ -837,8 +722,6 @@ namespace Aura.Database.Migrations
 
             modelBuilder.Entity("Aura.Core.Entities.Product", b =>
                 {
-                    b.Navigation("Designs");
-
                     b.Navigation("Favorites");
 
                     b.Navigation("Images");

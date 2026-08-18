@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.Order;
+using Aura.Application.DTOs.Order;
 using Aura.Application.Sevices.Interfaces;
 using Aura.Core.Entities;
 using Aura.Core.Enums;
@@ -67,8 +67,7 @@ namespace Aura.Application.Sevices.Implementations
                 order.OrderItems.Add(new OrderItem
                 {
                     ProductId = item.ProductId,
-                    Quantity = item.Quantity,
-                    DesignId = item.DesignId
+                    Quantity = item.Quantity
                 });
             }
 

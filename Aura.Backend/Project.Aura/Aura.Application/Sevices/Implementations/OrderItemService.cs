@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.OrderItem;
+using Aura.Application.DTOs.OrderItem;
 using Aura.Application.Sevices.Interfaces;
 using Aura.Core.Entities;
 using Aura.Core.Interfaces.Repositories;
@@ -48,14 +48,6 @@ namespace Aura.Application.Sevices.Implementations
             if (product == null)
                 throw new Exception("Product not found.");
 
-            if (dto.DesignId.HasValue)
-            {
-                var design = await _unitOfWork.DesignRepository.GetByIdAsync(dto.DesignId.Value);
-
-                if (design == null)
-                    throw new Exception("Design not found.");
-            }
-
             if (product.StockCount < dto.Quantity)
                 throw new Exception("Not enough stock.");
 
@@ -78,20 +70,11 @@ namespace Aura.Application.Sevices.Implementations
             if (product == null)
                 throw new Exception("Product not found.");
 
-            if (dto.DesignId.HasValue)
-            {
-                var design = await _unitOfWork.DesignRepository.GetByIdAsync(dto.DesignId.Value);
-
-                if (design == null)
-                    throw new Exception("Design not found.");
-            }
-
             if (product.StockCount < dto.Quantity)
                 throw new Exception("Not enough stock.");
 
             orderItem.ProductId = dto.ProductId;
             orderItem.Quantity = dto.Quantity;
-            orderItem.DesignId = dto.DesignId;
 
             _unitOfWork.OrderItemRepository.Update(orderItem);
 

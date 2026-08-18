@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import SectionHeading from '../../molecules/SectionHeading/SectionHeading';
 import { useAuth } from '../../../context/AuthContext';
 import { getAllReviews, createReview } from '../../../api/reviewService';
 import styles from './ReviewsGrid.module.css';
 
 export default function ReviewsGrid({ productId, onReviewAdded }) {
+  const { t } = useTranslation();
   const { user, isAuthenticated } = useAuth();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -37,7 +39,7 @@ export default function ReviewsGrid({ productId, onReviewAdded }) {
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     if (!comment.trim()) {
-      setErrorMsg('Please write a review comment.');
+      setErrorMsg(t('reviews.placeholder'));
       return;
     }
 
@@ -55,7 +57,7 @@ export default function ReviewsGrid({ productId, onReviewAdded }) {
       await fetchReviews();
       if (onReviewAdded) onReviewAdded();
     } catch (err) {
-      const msg = err?.response?.data?.message || 'Failed to post review. Please try again.';
+      const msg = err?.response?.data?.message || t('common.error');
       setErrorMsg(msg);
     } finally {
       setSubmitting(false);
@@ -69,8 +71,12 @@ export default function ReviewsGrid({ productId, onReviewAdded }) {
   return (
     <section className={`section-pad reviews-grid ${styles.root}`}>
       <SectionHeading
-        eyebrow="Customer Feedback"
-        title={reviews.length > 0 ? `Verified Reviews (${reviews.length})` : 'Customer Reviews'}
+        eyebrow={t('reviews.eyebrow')}
+        title={
+          reviews.length > 0
+            ? t('reviews.titleVerified', { count: reviews.length })
+            : t('reviews.titleGeneral')
+        }
       />
 
       {/* Summary Score Bar */}
@@ -79,7 +85,9 @@ export default function ReviewsGrid({ productId, onReviewAdded }) {
           <span className={styles['stars']}>★★★★★</span>
           <span className={styles['rating-num']}>{avgRating}</span>
           <span className={styles['reviews-total']}>
-            {reviews.length > 0 ? `based on ${reviews.length} reviews` : 'No reviews yet'}
+            {reviews.length > 0
+              ? t('reviews.basedOn', { count: reviews.length })
+              : t('reviews.noReviewsSummary')}
           </span>
         </div>
       </div>
@@ -87,10 +95,10 @@ export default function ReviewsGrid({ productId, onReviewAdded }) {
       {/* Review Submission Form */}
       {isAuthenticated ? (
         <form onSubmit={handleSubmitReview} className={styles['review-form']}>
-          <h3>Write a Product Review</h3>
+          <h3>{t('reviews.writeTitle')}</h3>
           
           <div className={styles['rating-selector']}>
-            <span className={styles['label']}>Your Rating:</span>
+            <span className={styles['label']}>{t('reviews.yourRating')}</span>
             <div className={styles['star-buttons']}>
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
@@ -100,7 +108,7 @@ export default function ReviewsGrid({ productId, onReviewAdded }) {
                   onClick={() => setRating(star)}
                   onMouseEnter={() => setHoverRating(star)}
                   onMouseLeave={() => setHoverRating(0)}
-                  aria-label={`${star} star`}
+                  aria-label={t('reviews.starAria', { star })}
                 >
                   <span className={(hoverRating || rating) >= star ? styles['star-filled'] : styles['star-empty']}>
                     ★
@@ -113,7 +121,7 @@ export default function ReviewsGrid({ productId, onReviewAdded }) {
 
           <div className={styles['form-group']}>
             <textarea
-              placeholder="Share details of your experience, fit, fabric quality, and AI customization..."
+              placeholder={t('reviews.placeholder')}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               rows={3}
@@ -124,21 +132,21 @@ export default function ReviewsGrid({ productId, onReviewAdded }) {
           {errorMsg && <div className={styles['error-banner']}>{errorMsg}</div>}
 
           <button type="submit" className={styles['submit-btn']} disabled={submitting}>
-            {submitting ? 'Submitting Review...' : 'Submit Review'}
+            {submitting ? t('reviews.submitting') : t('reviews.submit')}
           </button>
         </form>
       ) : (
         <div className={styles['login-prompt']}>
-          <p>Want to write a review? Please sign in to share your thoughts.</p>
+          <p>{t('reviews.loginPrompt')}</p>
         </div>
       )}
 
       {/* Reviews List */}
       <div className={styles['reviews-list']}>
         {loading ? (
-          <p className={styles['loading-text']}>Loading verified reviews...</p>
+          <p className={styles['loading-text']}>{t('reviews.loading')}</p>
         ) : reviews.length === 0 ? (
-          <p className={styles['empty-text']}>No reviews written yet. Be the first to review!</p>
+          <p className={styles['empty-text']}>{t('reviews.empty')}</p>
         ) : (
           reviews.map((rev, idx) => (
             <article key={rev.id || idx} className={styles['review-card']}>
@@ -147,7 +155,7 @@ export default function ReviewsGrid({ productId, onReviewAdded }) {
                   {(rev.userName || 'A')[0].toUpperCase()}
                 </div>
                 <div className={styles['user-meta']}>
-                  <strong className={styles['username']}>{rev.userName || 'Verified Buyer'}</strong>
+                  <strong className={styles['username']}>{rev.userName || t('reviews.verifiedBuyer')}</strong>
                   <div className={styles['stars-row']}>
                     {'★'.repeat(rev.rating)}{'☆'.repeat(5 - rev.rating)}
                   </div>

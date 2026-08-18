@@ -16,10 +16,6 @@ namespace Aura.Database.Configurations
             builder.Property(x => x.Price)
                    .HasPrecision(18, 2);
 
-            builder.Property(x => x.CustomizationFee)
-                   .HasPrecision(18, 2);
-
-
             builder.Property(x => x.Name)
                    .HasMaxLength(150);
 

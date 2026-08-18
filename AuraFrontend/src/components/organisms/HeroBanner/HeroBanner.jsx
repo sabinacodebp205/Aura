@@ -1,8 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import Button from '../../atoms/Button/Button';
 import Eyebrow from '../../atoms/Eyebrow/Eyebrow';
 import styles from './HeroBanner.module.css';
 
 export default function HeroBanner() {
+  const { t } = useTranslation();
+
   return (
     <section className={`hero home-slider ${styles.root}`}>
       <div className="hero-media">
@@ -12,15 +15,12 @@ export default function HeroBanner() {
         />
       </div>
       <div className="hero-content">
-        <Eyebrow>AURA AI FASHION CUSTOMIZATION</Eyebrow>
-        <h1>Design it. Make it yours.</h1>
-        <p>
-          Shop premium apparel, or customize any piece with live AI graphics, 
-          embroidery, and personal fashion styling.
-        </p>
+        <Eyebrow>{t('hero.eyebrow')}</Eyebrow>
+        <h1>{t('hero.title')}</h1>
+        <p>{t('hero.subtitle')}</p>
         <div className="hero-actions">
-          <Button to="/studio">Customize with AI</Button>
-          <Button to="/inspiration" variant="light">Fashion Inspiration</Button>
+          <Button to="/product/studio-oversized-hoodie">{t('hero.exploreCollection')}</Button>
+          <Button to="/inspiration" variant="light">{t('hero.fashionInspiration')}</Button>
         </div>
       </div>
     </section>

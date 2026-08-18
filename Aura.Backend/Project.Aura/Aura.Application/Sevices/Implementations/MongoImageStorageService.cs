@@ -27,6 +27,24 @@ namespace Aura.Application.Sevices.Implementations
             _collection = database.GetCollection<ImageDocument>("ProductImages");
         }
 
+        public async Task<string> SaveImageAsync(byte[] data, string contentType)
+        {
+            if (data == null || data.Length == 0)
+                throw new Exception("Data is empty.");
+
+            var document = new ImageDocument
+            {
+                Id = ObjectId.GenerateNewId(),
+                ContentType = !string.IsNullOrWhiteSpace(contentType) ? contentType : "image/png",
+                Data = data,
+                UploadedAt = DateTime.UtcNow
+            };
+
+            await _collection.InsertOneAsync(document);
+
+            return document.Id.ToString();
+        }
+
         public async Task<string> SaveImageAsync(IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -40,17 +58,7 @@ namespace Aura.Application.Sevices.Implementations
                 ? file.ContentType
                 : "image/jpeg";
 
-            var document = new ImageDocument
-            {
-                Id = ObjectId.GenerateNewId(),
-                ContentType = contentType,
-                Data = bytes,
-                UploadedAt = DateTime.UtcNow
-            };
-
-            await _collection.InsertOneAsync(document);
-
-            return document.Id.ToString();
+            return await SaveImageAsync(bytes, contentType);
         }
 
         public async Task<ImageResult?> GetImageAsync(string id)

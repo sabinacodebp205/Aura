@@ -1,4 +1,4 @@
-﻿using Aura.Core.Enums;
+using Aura.Core.Enums;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,6 @@ namespace Aura.Core.Entities
 
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
 
-        public ICollection<Design> Designs { get; set; } = new List<Design>();
         public ICollection<Address> Addresses { get; set; } = new List<Address>();
         public UserRole Role { get; set; } = UserRole.User;
     }

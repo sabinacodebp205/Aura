@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.OrderItem;
+using Aura.Application.DTOs.OrderItem;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -17,11 +17,6 @@ namespace Aura.Application.Validators.OrderItem
 
             RuleFor(x => x.Quantity)
                 .GreaterThan(0).WithMessage("Quantity must be greater than 0.");
-
-            RuleFor(x => x.DesignId)
-                .NotEqual(Guid.Empty)
-                .When(x => x.DesignId.HasValue)
-                .WithMessage("Invalid Design ID.");
         }
     }
 }

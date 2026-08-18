@@ -1,8 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import styles from './CategoryFilterBar.module.css';
 
 export default function CategoryFilterBar({ categories = [], activeCategory = 'all', onSelectCategory, className = '' }) {
-  const allOption = { id: 'all', name: 'All' };
-  const items = [allOption, ...categories];
+  const { t } = useTranslation();
+  const allOption = { id: 'all', name: 'all', label: t('common.all') };
+  const items = [allOption, ...categories.map((c) => ({ ...c, label: c.name }))];
 
   return (
     <div className={`${styles['filter-bar']} ${className}`.trim()} role="tablist" aria-label="Product categories">
@@ -17,7 +19,7 @@ export default function CategoryFilterBar({ categories = [], activeCategory = 'a
             className={`${styles['filter-btn']} ${isActive ? styles.active : ''}`}
             onClick={() => onSelectCategory && onSelectCategory(cat.name)}
           >
-            {cat.name}
+            {cat.id === 'all' ? t('common.all') : cat.label}
           </button>
         );
       })}

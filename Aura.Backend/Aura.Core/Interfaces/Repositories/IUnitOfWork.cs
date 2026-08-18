@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +10,6 @@ namespace Aura.Core.Interfaces.Repositories
     {
         IAddressRepository AddressRepository { get; }
         ICategoryRepository CategoryRepository { get; }
-        IDesignRepository DesignRepository { get; }
         IFavoriteRepository FavoriteRepository { get; }
         IOrderItemRepository OrderItemRepository { get; }
         IOrderRepository OrderRepository { get; }

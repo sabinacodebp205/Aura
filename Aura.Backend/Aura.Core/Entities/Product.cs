@@ -22,14 +22,7 @@ namespace Aura.Core.Entities
 
         public string Size { get; set; } = null!;
 
-        public bool IsCustomizable { get; set; }
-
         public ProductType ProductType { get; set; } = ProductType.Basic;
-
-        public decimal? CustomizationFee { get; set; }
-
-        public Guid? SourceDesignId { get; set; }
-
         public Guid CategoryId { get; set; }
 
         public Category Category { get; set; } = null!;
@@ -40,7 +33,5 @@ namespace Aura.Core.Entities
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
         public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
-
-        public ICollection<Design> Designs { get; set; } = new List<Design>();
     }
 }

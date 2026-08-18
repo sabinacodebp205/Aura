@@ -2,7 +2,6 @@ using Aura.Application.DTOs.Address;
 using Aura.Application.DTOs.AppUser;
 using Aura.Application.DTOs.Auth;
 using Aura.Application.DTOs.Category;
-using Aura.Application.DTOs.Design;
 using Aura.Application.DTOs.Favorite;
 using Aura.Application.DTOs.Order;
 using Aura.Application.DTOs.OrderItem;
@@ -87,14 +86,6 @@ namespace Aura.Application.Mapping
             CreateMap<Address, AddressGetDto>().ReverseMap();
             CreateMap<Address, AddressCreateDto>().ReverseMap();
             CreateMap<Address, AddressUpdateDto>().ReverseMap();
-
-            // Design
-            CreateMap<Design, DesignGetDto>()
-                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => ToAbsoluteUrl(src.ImageUrl)))
-                .ReverseMap();
-            CreateMap<Design, DesignCreateDto>().ReverseMap();
-            CreateMap<Design, DesignUpdateDto>().ReverseMap();
-
 
             // Favorite
             CreateMap<Favorite, FavoriteCreateDto>().ReverseMap();

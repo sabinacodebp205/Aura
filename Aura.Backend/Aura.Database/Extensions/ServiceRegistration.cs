@@ -1,4 +1,4 @@
-﻿using Aura.Core.Entities;
+using Aura.Core.Entities;
 using Aura.Core.Interfaces.Repositories;
 using Aura.Database.Contexts;
 using Aura.Database.Repositories.Implementations;
@@ -41,7 +41,6 @@ namespace Aura.Database.Extensions
             // Repositories
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IDesignRepository, DesignRepository>();
             services.AddScoped<IFavoriteRepository, FavoriteRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();

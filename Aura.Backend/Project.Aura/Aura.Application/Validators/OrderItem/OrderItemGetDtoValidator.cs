@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.OrderItem;
+using Aura.Application.DTOs.OrderItem;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -29,11 +29,6 @@ namespace Aura.Application.Validators.OrderItem
                 .MaximumLength(500)
                 .When(x => !string.IsNullOrWhiteSpace(x.ImageUrl))
                 .WithMessage("Image URL cannot exceed 500 characters.");
-
-            RuleFor(x => x.DesignId)
-                .NotEqual(Guid.Empty)
-                .When(x => x.DesignId.HasValue)
-                .WithMessage("Invalid Design ID.");
         }
     }
 }

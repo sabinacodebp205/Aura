@@ -8,8 +8,6 @@ namespace Aura.Application.Sevices.Interfaces
     {
         Task<string> SaveProductImageAsync(IFormFile file);
 
-        Task<string> SaveDesignPatternAsync(IFormFile file);
-
         void DeleteProductImage(string imageUrl);
 
     }

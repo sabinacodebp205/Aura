@@ -104,10 +104,10 @@
     display: none;
   }
   .header-search {
-    min-width: 120px;
-    max-width: 150px;
+    min-width: 100px;
+    max-width: 130px;
   }
-  .header-actions > *:not(:last-child) {
-    display: none; /* Hides icon buttons, leaves ProfileChip */
+  .action-icon-btn {
+    display: none;
   }
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import SectionHeading from '../../components/molecules/SectionHeading/SectionHeading';
 import ProductGallery from '../../components/organisms/ProductGallery/ProductGallery';
 import ProductGrid from '../../components/organisms/ProductGrid/ProductGrid';
@@ -9,6 +10,7 @@ import { getProductById, getAllProducts } from '../../api/productService';
 import styles from './ProductPage.module.css';
 
 export default function ProductPage() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState([]);
@@ -34,9 +36,9 @@ export default function ProductPage() {
     return () => { cancelled = true; };
   }, [id]);
 
-  if (loading) return <main className={`page-shell product-page ${styles.root}`}><p className="loading-text">Loading product…</p></main>;
-  if (error) return <main className={`page-shell product-page ${styles.root}`}><p className="error-text">Failed to load product.</p></main>;
-  if (!product) return <main className={`page-shell product-page ${styles.root}`}><p>Product not found.</p></main>;
+  if (loading) return <main className={`page-shell product-page ${styles.root}`}><p className="loading-text">{t('product.loading')}</p></main>;
+  if (error) return <main className={`page-shell product-page ${styles.root}`}><p className="error-text">{t('product.error')}</p></main>;
+  if (!product) return <main className={`page-shell product-page ${styles.root}`}><p>{t('product.notFound')}</p></main>;
 
   return (
     <main className={`page-shell product-page ${styles.root}`}>
@@ -46,19 +48,19 @@ export default function ProductPage() {
       </section>
       <section className="section-pad product-richness">
         <article>
-          <p className="eyebrow">Model view</p>
-          <h2>Styled with cargo pants and matte sneakers</h2>
-          <p>Switch between flat product, model view, and front/back previews in the studio.</p>
+          <p className="eyebrow">{t('product.modelViewEyebrow')}</p>
+          <h2>{t('product.modelViewTitle')}</h2>
+          <p>{t('product.modelViewDesc')}</p>
         </article>
         <article>
-          <p className="eyebrow">Fabric close-up</p>
-          <h2>Soft brushed fleece, 420 GSM</h2>
-          <p>Dense enough for embroidery and crisp print edges without distortion.</p>
+          <p className="eyebrow">{t('product.fabricEyebrow')}</p>
+          <h2>{t('product.fabricTitle')}</h2>
+          <p>{t('product.fabricDesc')}</p>
         </article>
         <article>
-          <p className="eyebrow">Frequently bought together</p>
-          <h2>Canvas tote + metallic thread pack</h2>
-          <p>Add matching accessories before checkout for a complete custom set.</p>
+          <p className="eyebrow">{t('product.fbtEyebrow')}</p>
+          <h2>{t('product.fbtTitle')}</h2>
+          <p>{t('product.fbtDesc')}</p>
         </article>
       </section>
       <ReviewsGrid
@@ -68,10 +70,9 @@ export default function ProductPage() {
         }}
       />
       <section className="section-pad">
-        <SectionHeading eyebrow="Related products" title="More design-ready pieces" />
+        <SectionHeading eyebrow={t('product.relatedEyebrow')} title={t('product.relatedTitle')} />
         <ProductGrid products={related} />
       </section>
     </main>
   );
 }
-

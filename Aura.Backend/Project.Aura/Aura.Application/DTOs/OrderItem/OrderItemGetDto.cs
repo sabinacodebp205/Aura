@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +17,5 @@ namespace Aura.Application.DTOs.OrderItem
         public int Quantity { get; set; }
 
         public string? ImageUrl { get; set; }
-
-        public Guid? DesignId { get; set; }
     }
-
 }

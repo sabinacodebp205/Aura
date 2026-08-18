@@ -1,25 +1,21 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import { useFavorites } from '../../context/FavoritesContext';
-import { useCart } from '../../context/CartContext';
 import { updateProfile } from '../../api/authService';
 import { getAllOrders } from '../../api/orderService';
-import { getAllDesigns } from '../../api/designService';
-import { getSavedDesigns, duplicateDesign, deleteSavedDesign, createCustomProduct } from '../../api/aiStudioService';
 import { getAllAddresses } from '../../api/addressService';
 import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 import styles from './ProfilePage.module.css';
 
-
-
 export default function ProfilePage() {
+  const { t } = useTranslation();
   const { user, logout, refetchUser } = useAuth();
   const { favorites } = useFavorites();
 
   const [activeTab, setActiveTab] = useState('orders');
   const [orders, setOrders] = useState([]);
-  const [designs, setDesigns] = useState([]);
   const [addresses, setAddresses] = useState([]);
   const [loadingData, setLoadingData] = useState(false);
 
@@ -49,35 +45,18 @@ export default function ProfilePage() {
     }
   }, [user]);
 
-  const { addItem } = useCart();
-
   // Load backend user collections
   const loadUserData = useCallback(async () => {
     setLoadingData(true);
     try {
-      const [ordersRes, designsRes, aiDesignsRes, addressesRes] = await Promise.allSettled([
+      const [ordersRes, addressesRes] = await Promise.allSettled([
         getAllOrders(),
-        getAllDesigns(),
-        getSavedDesigns(),
         getAllAddresses(),
       ]);
 
       if (ordersRes.status === 'fulfilled' && Array.isArray(ordersRes.value)) {
         setOrders(ordersRes.value);
       }
-      
-      let combinedDesigns = [];
-      if (aiDesignsRes.status === 'fulfilled' && Array.isArray(aiDesignsRes.value)) {
-        combinedDesigns = aiDesignsRes.value;
-      }
-      if (designsRes.status === 'fulfilled' && Array.isArray(designsRes.value)) {
-        // Merge legacy designs if needed
-        const existingIds = new Set(combinedDesigns.map((d) => d.id));
-        designsRes.value.forEach((d) => {
-          if (!existingIds.has(d.id)) combinedDesigns.push(d);
-        });
-      }
-      setDesigns(combinedDesigns);
 
       if (addressesRes.status === 'fulfilled' && Array.isArray(addressesRes.value)) {
         setAddresses(addressesRes.value);
@@ -89,69 +68,13 @@ export default function ProfilePage() {
     }
   }, []);
 
-  const handleDuplicateDesign = async (id) => {
-    try {
-      await duplicateDesign(id);
-      loadUserData();
-    } catch (err) {
-      console.warn('Failed to duplicate design:', err);
-    }
-  };
-
-  const handleDeleteDesign = async (id) => {
-    if (window.confirm('Are you sure you want to delete this custom design?')) {
-      try {
-        await deleteSavedDesign(id);
-        setDesigns((prev) => prev.filter((d) => d.id !== id));
-      } catch (err) {
-        console.warn('Failed to delete design:', err);
-        setDesigns((prev) => prev.filter((d) => d.id !== id));
-      }
-    }
-  };
-
-  const handleAddDesignToBag = async (design) => {
-    try {
-      const garmentType = design.garmentType || 'hoodie';
-      const color = design.color || 'black';
-      const basePrice = garmentType === 'tshirt' ? 58 : 124;
-      const customizationFee = 15;
-      const finalPrice = basePrice + customizationFee;
-
-      const customProd = await createCustomProduct({
-        sourceDesignId: design.id,
-        garmentType,
-        color,
-        generatedImageUrl: design.generatedImageUrl || design.imageUrl,
-        basePrice,
-        customizationFee,
-      });
-
-      addItem({
-        id: customProd?.id || `custom-${Date.now()}`,
-        productId: customProd?.id || `custom-${Date.now()}`,
-        name: customProd?.name || design.name || `Custom ${color} ${garmentType}`,
-        productType: 'custom',
-        detail: `Saved AI Design (${design.placement || 'center'})`,
-        quantity: 1,
-        unitPrice: finalPrice,
-        fees: [{ label: 'AI Customization Fee', amount: customizationFee }],
-        image: design.generatedImageUrl || design.imageUrl || '/placeholder.jpg',
-        alt: design.name || 'Custom AI Design',
-      });
-    } catch (err) {
-      console.warn('Failed to add design to bag:', err);
-    }
-  };
-
-
   useEffect(() => {
     loadUserData();
   }, [loadUserData]);
 
   if (!user) return null;
 
-  const fullName = [user.name, user.surname].filter(Boolean).join(' ') || 'AURA Member';
+  const fullName = [user.name, user.surname].filter(Boolean).join(' ') || t('profile.headerTitle');
   const initial = (fullName || user.email || 'A')[0].toUpperCase();
 
   const handleEditSubmit = async (e) => {
@@ -163,10 +86,10 @@ export default function ProfilePage() {
     try {
       await updateProfile(editForm);
       await refetchUser();
-      setUpdateMessage('Profile updated successfully.');
+      setUpdateMessage(t('auth.profileUpdated'));
       setIsEditing(false);
     } catch (err) {
-      const msg = err?.response?.data?.message || 'Failed to update profile. Please check inputs.';
+      const msg = err?.response?.data?.message || t('common.error');
       setUpdateError(msg);
     } finally {
       setUpdateLoading(false);
@@ -196,7 +119,7 @@ export default function ProfilePage() {
               className={styles['edit-btn']}
               onClick={() => setIsEditing(true)}
             >
-              Edit Profile
+              {t('profile.editProfile')}
             </button>
           </div>
         </div>
@@ -205,15 +128,15 @@ export default function ProfilePage() {
         <div className={styles['stats-grid']}>
           <div className={styles['stat-card']} onClick={() => setActiveTab('favorites')}>
             <span className={styles['stat-number']}>{favorites.length}</span>
-            <span className={styles['stat-label']}>Favorites</span>
+            <span className={styles['stat-label']}>{t('profile.favoritesStat')}</span>
           </div>
           <div className={styles['stat-card']} onClick={() => setActiveTab('orders')}>
             <span className={styles['stat-number']}>{orders.length}</span>
-            <span className={styles['stat-label']}>Orders</span>
+            <span className={styles['stat-label']}>{t('profile.ordersStat')}</span>
           </div>
-          <div className={styles['stat-card']} onClick={() => setActiveTab('designs')}>
-            <span className={styles['stat-number']}>{designs.length}</span>
-            <span className={styles['stat-label']}>My AI Designs</span>
+          <div className={styles['stat-card']} onClick={() => setActiveTab('addresses')}>
+            <span className={styles['stat-number']}>{addresses.length}</span>
+            <span className={styles['stat-label']}>{t('profile.addressesStat')}</span>
           </div>
         </div>
       </section>
@@ -225,35 +148,28 @@ export default function ProfilePage() {
           className={`${styles['tab-btn']} ${activeTab === 'orders' ? styles.active : ''}`}
           onClick={() => setActiveTab('orders')}
         >
-          Orders ({orders.length})
+          {t('profile.ordersTab', { count: orders.length })}
         </button>
         <button
           type="button"
           className={`${styles['tab-btn']} ${activeTab === 'favorites' ? styles.active : ''}`}
           onClick={() => setActiveTab('favorites')}
         >
-          Favorites ({favorites.length})
-        </button>
-        <button
-          type="button"
-          className={`${styles['tab-btn']} ${activeTab === 'designs' ? styles.active : ''}`}
-          onClick={() => setActiveTab('designs')}
-        >
-          My AI Designs ({designs.length})
+          {t('profile.favoritesTab', { count: favorites.length })}
         </button>
         <button
           type="button"
           className={`${styles['tab-btn']} ${activeTab === 'addresses' ? styles.active : ''}`}
           onClick={() => setActiveTab('addresses')}
         >
-          Addresses ({addresses.length})
+          {t('profile.addressesTab', { count: addresses.length })}
         </button>
         <button
           type="button"
           className={`${styles['tab-btn']} ${activeTab === 'settings' ? styles.active : ''}`}
           onClick={() => setActiveTab('settings')}
         >
-          Account Settings
+          {t('profile.settingsTab')}
         </button>
       </nav>
 
@@ -264,13 +180,13 @@ export default function ProfilePage() {
         {/* Orders Tab */}
         {activeTab === 'orders' && (
           <div className={styles['panel']}>
-            <h2>Order History</h2>
+            <h2>{t('profile.orderHistory')}</h2>
             {loadingData ? (
-              <p className={styles['empty-state']}>Loading orders...</p>
+              <p className={styles['empty-state']}>{t('profile.loadingOrders')}</p>
             ) : orders.length === 0 ? (
               <div className={styles['empty-box']}>
-                <p>You haven't placed any orders yet.</p>
-                <Link to="/" className={styles['action-link']}>Browse Catalog</Link>
+                <p>{t('profile.noOrders')}</p>
+                <Link to="/" className={styles['action-link']}>{t('profile.browseCatalog')}</Link>
               </div>
             ) : (
               <div className={styles['orders-list']}>
@@ -278,16 +194,18 @@ export default function ProfilePage() {
                   <article key={order.id} className={styles['order-card']}>
                     <div className={styles['order-header']}>
                       <div>
-                        <span className={styles['order-id']}>Order #{order.id.slice(0, 8)}</span>
+                        <span className={styles['order-id']}>
+                          {t('profile.orderId', { id: order.id.slice(0, 8) })}
+                        </span>
                         <span className={styles['order-items-count']}>
-                          {order.orderItems?.length || 0} item(s)
+                          {t('profile.orderItemsCount', { count: order.orderItems?.length || 0 })}
                         </span>
                       </div>
-                      <span className={styles['order-status']}>{order.status || 'Pending'}</span>
+                      <span className={styles['order-status']}>{order.status || t('profile.statusPending')}</span>
                     </div>
                     <div className={styles['order-body']}>
                       <p className={styles['order-total']}>
-                        Total: <strong>${order.totalPrice?.toFixed(2)}</strong>
+                        {t('profile.orderTotal')}<strong>${order.totalPrice?.toFixed(2)}</strong>
                       </p>
                     </div>
                   </article>
@@ -300,11 +218,11 @@ export default function ProfilePage() {
         {/* Favorites Tab */}
         {activeTab === 'favorites' && (
           <div className={styles['panel']}>
-            <h2>Favorite Products</h2>
+            <h2>{t('favorites.title')}</h2>
             {favorites.length === 0 ? (
               <div className={styles['empty-box']}>
-                <p>No favorites saved yet.</p>
-                <Link to="/" className={styles['action-link']}>Explore Clothing</Link>
+                <p>{t('favorites.empty')}</p>
+                <Link to="/" className={styles['action-link']}>{t('favorites.exploreClothing')}</Link>
               </div>
             ) : (
               <div className={styles['fav-grid']}>
@@ -313,17 +231,17 @@ export default function ProfilePage() {
                     {getImageUrl(fav.imageUrl) ? (
                       <img
                         src={getImageUrl(fav.imageUrl)}
-                        alt={fav.productName || 'Favorite Product'}
+                        alt={fav.productName || 'Aura Piece'}
                         onError={handleImageError}
                       />
                     ) : (
                       <div className={styles['fav-image-placeholder']} aria-label="No image" />
                     )}
                     <div className={styles['fav-info']}>
-                      <h3>{fav.productName || 'Custom Piece'}</h3>
+                      <h3>{fav.productName || 'Aura Piece'}</h3>
                       <p className={styles['fav-price']}>${fav.price}</p>
                       <Link to={`/product/${fav.productId}`} className={styles['fav-view-btn']}>
-                        View Details
+                        {t('favorites.viewDetails')}
                       </Link>
                     </div>
                   </article>
@@ -333,80 +251,13 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* My AI Designs Tab */}
-        {activeTab === 'designs' && (
-          <div className={styles['panel']}>
-            <h2>My AI Customizations</h2>
-            {designs.length === 0 ? (
-              <div className={styles['empty-box']}>
-                <p>No custom AI designs created yet.</p>
-                <Link to="/ai-studio" className={styles['action-link']}>OPEN AI STUDIO</Link>
-              </div>
-            ) : (
-              <div className={styles['designs-grid']}>
-                {designs.map((design, index) => (
-                  <article key={design.id || `design-${index}`} className={styles['design-card']}>
-                    {getImageUrl(design.generatedImageUrl || design.imageUrl) ? (
-                      <img
-                        src={getImageUrl(design.generatedImageUrl || design.imageUrl)}
-                        alt={design.name || design.prompt || 'Saved AI Design'}
-                        onError={handleImageError}
-                      />
-                    ) : (
-                      <div className={styles['design-image-placeholder']} aria-label="No image" />
-                    )}
-
-                    <div className={styles['design-info']}>
-                      <h3>{design.name || `Custom ${design.color || 'Piece'}`}</h3>
-                      <p className={styles['design-prompt']}>
-                        {design.garmentType ? `${design.garmentType.replace(/_/g, ' ')} • ${design.color}` : `"${design.prompt}"`}
-                      </p>
-                      <div style={{ display: 'flex', gap: 6, marginTop: 12, flexWrap: 'wrap' }}>
-                        <Link
-                          to={`/ai-studio?mode=generator&garmentType=${design.garmentType || 'hoodie'}&color=${design.color || 'black'}`}
-                          className={styles['fav-view-btn']}
-                        >
-                          Edit
-                        </Link>
-                        <button
-                          type="button"
-                          className={styles['fav-view-btn']}
-                          onClick={() => handleDuplicateDesign(design.id)}
-                        >
-                          Duplicate
-                        </button>
-                        <button
-                          type="button"
-                          className={styles['fav-view-btn']}
-                          onClick={() => handleAddDesignToBag(design)}
-                        >
-                          Add to Bag
-                        </button>
-                        <button
-                          type="button"
-                          className={styles['fav-view-btn']}
-                          style={{ borderColor: '#ff4d4f', color: '#ff4d4f' }}
-                          onClick={() => handleDeleteDesign(design.id)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-
         {/* Addresses Tab */}
         {activeTab === 'addresses' && (
           <div className={styles['panel']}>
-            <h2>Saved Addresses</h2>
+            <h2>{t('profile.savedAddresses')}</h2>
             {addresses.length === 0 ? (
               <div className={styles['empty-box']}>
-                <p>No addresses saved to your profile yet.</p>
+                <p>{t('profile.noAddresses')}</p>
               </div>
             ) : (
               <div className={styles['address-grid']}>
@@ -424,11 +275,11 @@ export default function ProfilePage() {
         {/* Settings / Edit Tab */}
         {activeTab === 'settings' && (
           <div className={styles['panel']}>
-            <h2>Account Settings</h2>
+            <h2>{t('profile.accountSettings')}</h2>
             <form onSubmit={handleEditSubmit} className={styles['settings-form']}>
               <div className={styles['form-row']}>
                 <div className={styles['form-group']}>
-                  <label>First Name</label>
+                  <label>{t('auth.firstName')}</label>
                   <input
                     type="text"
                     value={editForm.name}
@@ -437,7 +288,7 @@ export default function ProfilePage() {
                   />
                 </div>
                 <div className={styles['form-group']}>
-                  <label>Last Name</label>
+                  <label>{t('auth.lastName')}</label>
                   <input
                     type="text"
                     value={editForm.surname}
@@ -447,7 +298,7 @@ export default function ProfilePage() {
                 </div>
               </div>
               <div className={styles['form-group']}>
-                <label>Username</label>
+                <label>{t('auth.username')}</label>
                 <input
                   type="text"
                   value={editForm.userName}
@@ -456,7 +307,7 @@ export default function ProfilePage() {
                 />
               </div>
               <div className={styles['form-group']}>
-                <label>Email Address</label>
+                <label>{t('auth.email')}</label>
                 <input
                   type="email"
                   value={editForm.email}
@@ -465,7 +316,7 @@ export default function ProfilePage() {
                 />
               </div>
               <div className={styles['form-group']}>
-                <label>Profile Image URL</label>
+                <label>{t('profile.profileImageUrl')}</label>
                 <input
                   type="url"
                   placeholder="https://example.com/avatar.jpg"
@@ -477,14 +328,14 @@ export default function ProfilePage() {
               {updateError && <div className={styles['error-banner']}>{updateError}</div>}
 
               <button type="submit" className={styles['save-btn']} disabled={updateLoading}>
-                {updateLoading ? 'Saving...' : 'Save Profile Changes'}
+                {updateLoading ? t('profile.saving') : t('profile.saveChanges')}
               </button>
             </form>
 
             <div className={styles['danger-zone']}>
-              <h3>Session</h3>
+              <h3>{t('profile.session')}</h3>
               <button type="button" className={styles['logout-btn']} onClick={logout}>
-                Sign Out
+                {t('profile.signOut')}
               </button>
             </div>
           </div>
@@ -496,12 +347,12 @@ export default function ProfilePage() {
         <div className={styles['modal-overlay']} onClick={() => setIsEditing(false)}>
           <div className={styles['modal-card']} onClick={(e) => e.stopPropagation()}>
             <div className={styles['modal-header']}>
-              <h2>Edit Profile</h2>
+              <h2>{t('profile.editModalTitle')}</h2>
               <button type="button" className={styles['close-btn']} onClick={() => setIsEditing(false)}>✕</button>
             </div>
             <form onSubmit={handleEditSubmit} className={styles['settings-form']}>
               <div className={styles['form-group']}>
-                <label>First Name</label>
+                <label>{t('auth.firstName')}</label>
                 <input
                   type="text"
                   value={editForm.name}
@@ -510,7 +361,7 @@ export default function ProfilePage() {
                 />
               </div>
               <div className={styles['form-group']}>
-                <label>Last Name</label>
+                <label>{t('auth.lastName')}</label>
                 <input
                   type="text"
                   value={editForm.surname}
@@ -519,7 +370,7 @@ export default function ProfilePage() {
                 />
               </div>
               <div className={styles['form-group']}>
-                <label>Username</label>
+                <label>{t('auth.username')}</label>
                 <input
                   type="text"
                   value={editForm.userName}
@@ -528,7 +379,7 @@ export default function ProfilePage() {
                 />
               </div>
               <div className={styles['form-group']}>
-                <label>Email</label>
+                <label>{t('auth.email')}</label>
                 <input
                   type="email"
                   value={editForm.email}
@@ -537,7 +388,7 @@ export default function ProfilePage() {
                 />
               </div>
               <div className={styles['form-group']}>
-                <label>Profile Image URL</label>
+                <label>{t('profile.profileImageUrl')}</label>
                 <input
                   type="url"
                   placeholder="https://example.com/avatar.jpg"
@@ -550,10 +401,10 @@ export default function ProfilePage() {
 
               <div className={styles['modal-actions']}>
                 <button type="button" className={styles['cancel-btn']} onClick={() => setIsEditing(false)}>
-                  Cancel
+                  {t('profile.cancel')}
                 </button>
                 <button type="submit" className={styles['save-btn']} disabled={updateLoading}>
-                  {updateLoading ? 'Saving...' : 'Save Changes'}
+                  {updateLoading ? t('profile.saving') : t('profile.saveChanges')}
                 </button>
               </div>
             </form>

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { inspoCategories, inspoItems } from '../../data/inspoItems';
 import styles from './InspirationPage.module.css';
 
 export default function InspirationPage() {
+  const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState('All Ideas');
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
@@ -18,24 +20,29 @@ export default function InspirationPage() {
     return matchesCategory && matchesSearch;
   });
 
-  const handleApplyDesign = (promptText) => {
-    navigate(`/studio?prompt=${encodeURIComponent(promptText)}`);
+  const handleExploreProduct = (item) => {
+    navigate(`/?search=${encodeURIComponent(item.title)}`);
+  };
+
+  const getCategoryLabel = (cat) => {
+    if (cat === 'All Ideas') return t('inspiration.allIdeas');
+    return cat;
   };
 
   return (
     <main className={`page-shell ${styles.root}`}>
       {/* Hero Section */}
       <section className={styles.hero}>
-        <div className={styles['hero-badge']}>AURA AI FASHION LAB</div>
-        <h1>AI Fashion & Design Inspiration</h1>
-        <p>Explore custom clothing ideas, streetwear graphics, and embroidery prompts created with AURA AI Studio.</p>
+        <div className={styles['hero-badge']}>{t('inspiration.badge')}</div>
+        <h1>{t('inspiration.title')}</h1>
+        <p>{t('inspiration.subtitle')}</p>
 
         {/* Search Bar */}
         <div className={styles['search-wrapper']}>
           <span className={styles['search-icon']}>⌕</span>
           <input
             type="search"
-            placeholder="Search hoodies, jackets, streetwear, embroidery, Y2K..."
+            placeholder={t('inspiration.searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -51,7 +58,7 @@ export default function InspirationPage() {
             className={`${styles['category-pill']} ${activeCategory === cat ? styles.active : ''}`}
             onClick={() => setActiveCategory(cat)}
           >
-            {cat}
+            {getCategoryLabel(cat)}
           </button>
         ))}
       </nav>
@@ -60,9 +67,9 @@ export default function InspirationPage() {
       <section className={styles.grid}>
         {filteredItems.length === 0 ? (
           <div className={styles['empty-state']}>
-            <p>No fashion inspiration found matching "{searchQuery}".</p>
+            <p>{t('inspiration.emptyState')} "{searchQuery}".</p>
             <button type="button" onClick={() => { setActiveCategory('All Ideas'); setSearchQuery(''); }}>
-              Clear Search Filters
+              {t('inspiration.clearFilters')}
             </button>
           </div>
         ) : (
@@ -78,9 +85,9 @@ export default function InspirationPage() {
                 <button
                   type="button"
                   className={styles['action-btn']}
-                  onClick={() => handleApplyDesign(item.prompt)}
+                  onClick={() => handleExploreProduct(item)}
                 >
-                  Create in AI Studio →
+                  {t('inspiration.shopThisStyle')}
                 </button>
               </div>
             </article>

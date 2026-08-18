@@ -1,4 +1,4 @@
-﻿using Aura.Core.Interfaces.Repositories;
+using Aura.Core.Interfaces.Repositories;
 using Aura.Database.Contexts;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,6 @@ namespace Aura.Database.Repositories.Implementations
 
         public IAddressRepository AddressRepository { get; }
         public ICategoryRepository CategoryRepository { get; }
-        public IDesignRepository DesignRepository { get; }
         public IFavoriteRepository FavoriteRepository { get; }
         public IOrderItemRepository OrderItemRepository { get; }
         public IOrderRepository OrderRepository { get; }
@@ -26,7 +25,6 @@ namespace Aura.Database.Repositories.Implementations
             AppDbContext context,
             IAddressRepository addressRepository,
             ICategoryRepository categoryRepository,
-            IDesignRepository designRepository,
             IFavoriteRepository favoriteRepository,
             IOrderItemRepository orderItemRepository,
             IOrderRepository orderRepository,
@@ -38,7 +36,6 @@ namespace Aura.Database.Repositories.Implementations
 
             AddressRepository = addressRepository;
             CategoryRepository = categoryRepository;
-            DesignRepository = designRepository;
             FavoriteRepository = favoriteRepository;
             OrderItemRepository = orderItemRepository;
             OrderRepository = orderRepository;

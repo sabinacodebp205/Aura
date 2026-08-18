@@ -152,65 +152,6 @@ namespace Aura.API.Services
             }
         }
 
-        public async Task<string> SaveDesignPatternAsync(IFormFile file)
-        {
-            if (file == null || file.Length == 0)
-                throw new Exception("File is empty.");
-
-            const long maxPatternSize = 10 * 1024 * 1024; // 10 MB limit as per prompt spec
-            if (file.Length > maxPatternSize)
-                throw new Exception("File size exceeds the 10 MB limit.");
-
-            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
-            if (extension != ".png" && extension != ".jpg" && extension != ".jpeg" && extension != ".webp")
-                throw new Exception("Invalid pattern file type. Only PNG, JPG, JPEG, and WebP are allowed.");
-
-            var fileName = $"{Guid.NewGuid()}{extension}";
-
-            if (IsCloudStorageConfigured(out var endpoint, out var bucketName, out var accessKey, out var secretKey, out var region, out var publicBaseUrl))
-            {
-                var objectKey = $"uploads/designs/{fileName}";
-                using var client = CreateS3Client(endpoint, accessKey, secretKey, region);
-                using var stream = file.OpenReadStream();
-
-                var putRequest = new PutObjectRequest
-                {
-                    BucketName = bucketName,
-                    Key = objectKey,
-                    InputStream = stream,
-                    ContentType = file.ContentType ?? "image/png"
-                };
-
-                await client.PutObjectAsync(putRequest);
-
-                if (!string.IsNullOrWhiteSpace(publicBaseUrl))
-                {
-                    return $"{publicBaseUrl.TrimEnd('/')}/{objectKey}";
-                }
-
-                return $"{endpoint.TrimEnd('/')}/{bucketName}/{objectKey}";
-            }
-            else
-            {
-                var rootPath = GetRootPath();
-                var folderPath = Path.Combine(rootPath, "uploads", "designs");
-
-                if (!Directory.Exists(folderPath))
-                    Directory.CreateDirectory(folderPath);
-
-                var filePath = Path.Combine(folderPath, fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-
-                var baseUrl = GetBaseUrl();
-                var relativePath = $"/uploads/designs/{fileName}";
-
-                return string.IsNullOrEmpty(baseUrl) ? relativePath : $"{baseUrl}{relativePath}";
-            }
-        }
-
         public void DeleteProductImage(string imageUrl)
         {
             if (string.IsNullOrEmpty(imageUrl))

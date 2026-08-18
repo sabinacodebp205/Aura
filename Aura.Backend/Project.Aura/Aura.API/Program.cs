@@ -167,6 +167,10 @@ namespace Aura.API
             if (!Directory.Exists(designsUploadPath))
                 Directory.CreateDirectory(designsUploadPath);
 
+            var baseGarmentsPath = Path.Combine(app.Environment.ContentRootPath, "wwwroot", "base-garments");
+            if (!Directory.Exists(baseGarmentsPath))
+                Directory.CreateDirectory(baseGarmentsPath);
+
             // One-time data fix: Convert any legacy relative image URLs to full production URLs
             try
             {

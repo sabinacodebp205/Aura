@@ -1,8 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import QuantityControl from '../../molecules/QuantityControl/QuantityControl';
 import { getImageUrl, handleImageError } from '../../../utils/imageUrl';
 import styles from './CartItem.module.css';
 
 export default function CartItem({ item, onRemove, onQtyChange, total }) {
+  const { t } = useTranslation();
   if (!item) return null;
 
   const imageSrc = getImageUrl(item.image || item.imageUrl);
@@ -28,7 +30,7 @@ export default function CartItem({ item, onRemove, onQtyChange, total }) {
       <QuantityControl value={item.quantity} onChange={(quantity) => onQtyChange(item.id, quantity)} />
       <strong>${(total || 0).toFixed(2)}</strong>
       <button className="remove-button" type="button" onClick={() => onRemove(item.id)}>
-        Remove
+        {t('cart.remove')}
       </button>
     </article>
   );
