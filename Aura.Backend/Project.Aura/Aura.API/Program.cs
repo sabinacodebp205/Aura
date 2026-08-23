@@ -176,6 +176,10 @@ namespace Aura.API
             {
                 using var scope = app.Services.CreateScope();
                 var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                
+                // Apply pending database migrations automatically
+                dbContext.Database.Migrate();
+
                 var relativeImages = dbContext.ProductImages.Where(pi => pi.ImageUrl.StartsWith("/uploads/")).ToList();
                 if (relativeImages.Any())
                 {

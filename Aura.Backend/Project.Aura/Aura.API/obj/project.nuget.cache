@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tD3xsni00xk=",
+  "dgSpecHash": "FHshO5fUdQw=",
   "success": true,
-  "projectFilePath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
+  "projectFilePath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Arda\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Arda\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
@@ -113,9 +113,9 @@
       "code": "NU1608",
       "level": "Warning",
       "message": "Detected package version outside of dependency constraint: AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1 requires AutoMapper (= 12.0.1) but version AutoMapper 13.0.1 was resolved.",
-      "projectPath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
+      "projectPath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
       "warningLevel": 1,
-      "filePath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
+      "filePath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Project.Aura\\Aura.API\\Aura.API.csproj",
       "libraryId": "AutoMapper",
       "targetGraphs": [
         "net8.0"
