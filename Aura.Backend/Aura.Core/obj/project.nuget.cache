@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "i0SjFg6P7W4=",
+  "dgSpecHash": "681YUYxk1OM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj",
+  "projectFilePath": "c:\\Users\\Arda\\Desktop\\Aura\\Aura.Backend\\Aura.Core\\Aura.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Arda\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.0\\microsoft.aspnetcore.cryptography.internal.8.0.0.nupkg.sha512",
     "C:\\Users\\Arda\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.0\\microsoft.aspnetcore.cryptography.keyderivation.8.0.0.nupkg.sha512",

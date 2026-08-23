@@ -9,6 +9,7 @@ using Aura.Application.DTOs.Product;
 using Aura.Application.DTOs.ProductImage;
 using Aura.Application.DTOs.Review;
 using Aura.Core.Entities;
+using Aura.Core.Enums;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
