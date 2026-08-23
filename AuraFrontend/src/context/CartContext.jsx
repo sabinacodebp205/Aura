@@ -222,6 +222,10 @@ export function CartProvider({ children }) {
       );
     };
 
+    const clearCart = () => {
+      setItems([]);
+    };
+
     /* ---- totals calculation with coupon discount ---- */
     const subtotal = items.reduce(
       (sum, item) => sum + item.unitPrice * item.quantity,
@@ -248,6 +252,7 @@ export function CartProvider({ children }) {
       updateQty,
       incrementQty,
       decrementQty,
+      clearCart,
       applyCoupon,
       removeCoupon,
       itemTotal,

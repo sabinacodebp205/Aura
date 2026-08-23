@@ -42,67 +42,67 @@ export default function OrderSummaryCard({ totals }) {
 
   return (
     <aside className={`summary-card ${styles.root}`}>
-      <Eyebrow>{t('summary.title')}</Eyebrow>
-      
-      <SummaryRow label={t('summary.products')} value={money(totals.products)} />
-      
-      {totals.discountAmount > 0 && (
-        <div className={styles.discountRow}>
-          <span>
-            {t('coupon.discount', { percent: totals.discountPercent })}
-            {totals.couponCode && <strong> ({totals.couponCode})</strong>}
-          </span>
-          <span className={styles.discountValue}>-${totals.discountAmount.toFixed(2)}</span>
-        </div>
-      )}
-
-      <SummaryRow label={t('summary.shipping')} value={money(totals.shipping)} />
-      <SummaryRow label={t('summary.total')} value={money(totals.total)} total />
-
-      {/* Coupon Application Form */}
-      <div className={styles.couponSection}>
-        {appliedCoupon ? (
-          <div className={styles.appliedBadge}>
-            <div>
-              <span className={styles.appliedCode}>🏷️ {appliedCoupon.code}</span>
-              <span className={styles.appliedPercent}>(-{appliedCoupon.discountPercent}%)</span>
-            </div>
-            <button
-              type="button"
-              className={styles.removeCouponBtn}
-              onClick={handleRemove}
-              title={t('coupon.remove')}
-            >
-              ✕
-            </button>
+        <Eyebrow>{t('summary.title')}</Eyebrow>
+        
+        <SummaryRow label={t('summary.products')} value={money(totals.products)} />
+        
+        {totals.discountAmount > 0 && (
+          <div className={styles.discountRow}>
+            <span>
+              {t('coupon.discount', { percent: totals.discountPercent })}
+              {totals.couponCode && <strong> ({totals.couponCode})</strong>}
+            </span>
+            <span className={styles.discountValue}>-${totals.discountAmount.toFixed(2)}</span>
           </div>
-        ) : (
-          <form onSubmit={handleApplyCoupon} className={styles.couponForm}>
-            <input
-              type="text"
-              placeholder={t('coupon.placeholder')}
-              value={couponInput}
-              onChange={(e) => {
-                setCouponInput(e.target.value);
-                if (couponError) setCouponError(null);
-              }}
-              className={styles.couponInput}
-            />
-            <button
-              type="submit"
-              className={styles.applyBtn}
-              disabled={!couponInput.trim() || isApplying}
-            >
-              {isApplying ? '...' : t('coupon.apply')}
-            </button>
-          </form>
         )}
-        {couponError && <p className={styles.couponErrorMsg}>{couponError}</p>}
-        {couponSuccess && <p className={styles.couponSuccessMsg}>{couponSuccess}</p>}
-      </div>
 
-      <Button fullWidth>{t('summary.secureCheckout')}</Button>
-      <p className="microcopy">{t('summary.microcopy')}</p>
-    </aside>
+        <SummaryRow label={t('summary.shipping')} value={money(totals.shipping)} />
+        <SummaryRow label={t('summary.total')} value={money(totals.total)} total />
+
+        {/* Coupon Application Form */}
+        <div className={styles.couponSection}>
+          {appliedCoupon ? (
+            <div className={styles.appliedBadge}>
+              <div>
+                <span className={styles.appliedCode}>🏷️ {appliedCoupon.code}</span>
+                <span className={styles.appliedPercent}>(-{appliedCoupon.discountPercent}%)</span>
+              </div>
+              <button
+                type="button"
+                className={styles.removeCouponBtn}
+                onClick={handleRemove}
+                title={t('coupon.remove')}
+              >
+                ✕
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleApplyCoupon} className={styles.couponForm}>
+              <input
+                type="text"
+                placeholder={t('coupon.placeholder')}
+                value={couponInput}
+                onChange={(e) => {
+                  setCouponInput(e.target.value);
+                  if (couponError) setCouponError(null);
+                }}
+                className={styles.couponInput}
+              />
+              <button
+                type="submit"
+                className={styles.applyBtn}
+                disabled={!couponInput.trim() || isApplying}
+              >
+                {isApplying ? '...' : t('coupon.apply')}
+              </button>
+            </form>
+          )}
+          {couponError && <p className={styles.couponErrorMsg}>{couponError}</p>}
+          {couponSuccess && <p className={styles.couponSuccessMsg}>{couponSuccess}</p>}
+        </div>
+
+        <Button fullWidth to="/checkout">{t('summary.secureCheckout')}</Button>
+        <p className="microcopy">{t('summary.microcopy')}</p>
+      </aside>
   );
 }

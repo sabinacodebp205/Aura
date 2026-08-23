@@ -4,11 +4,10 @@ import Button from '../../atoms/Button/Button';
 import Eyebrow from '../../atoms/Eyebrow/Eyebrow';
 import FavoriteButton from '../../molecules/FavoriteButton/FavoriteButton';
 import SegmentedControl from '../../molecules/SegmentedControl/SegmentedControl';
-import ColorSwatchGroup from '../../molecules/ColorSwatchGroup/ColorSwatchGroup';
 import { useCart } from '../../../context/CartContext';
 import styles from './ProductInfoPanel.module.css';
 
-export default function ProductInfoPanel({ product, discountPercent = 15 }) {
+export default function ProductInfoPanel({ product }) {
   const { t } = useTranslation();
   const { addItem } = useCart();
   const [isAdded, setIsAdded] = useState(false);
@@ -64,9 +63,9 @@ export default function ProductInfoPanel({ product, discountPercent = 15 }) {
 
     const finalSize = selectedSize || product.size || 'Standard';
     const finalColor = product.color || 'Standard';
-    const unitPrice = discountPercent > 0
-      ? product.price * (1 - discountPercent / 100)
-      : product.price;
+    
+    // Product price is already discounted globally
+    const unitPrice = product.price || 0;
 
     addItem({
       productId: product.id,
@@ -76,7 +75,7 @@ export default function ProductInfoPanel({ product, discountPercent = 15 }) {
       detail: `${finalColor} • Size: ${finalSize}`,
       quantity: 1,
       unitPrice: unitPrice,
-      originalPrice: product.price,
+      originalPrice: product.originalPrice || product.price,
       image: product.imageUrls?.[0] || product.image,
       alt: product.name,
     });
@@ -86,11 +85,10 @@ export default function ProductInfoPanel({ product, discountPercent = 15 }) {
   const ratingVal = product.averageRating || product.rating || 0;
   const reviewCnt = product.reviewCount ?? product.reviews ?? 0;
 
-  const originalPrice = product.price || 0;
-  const hasDiscount = discountPercent > 0;
-  const discountedPrice = hasDiscount
-    ? originalPrice * (1 - discountPercent / 100)
-    : originalPrice;
+  const originalPrice = product.originalPrice || product.price || 0;
+  const hasDiscount = product.hasDiscount || false;
+  const discountPercent = product.discountPercent || 0;
+  const discountedPrice = product.price || 0;
 
   return (
     <div className={`product-info ${styles.root}`}>
@@ -143,7 +141,6 @@ export default function ProductInfoPanel({ product, discountPercent = 15 }) {
       {product.color && (
         <div className="option-group">
           <div className="option-title">{t('product.color')} <strong>{product.color}</strong></div>
-          <ColorSwatchGroup colors={[product.color.toLowerCase(), 'black', 'white', 'grey']} />
         </div>
       )}
 

@@ -5,24 +5,23 @@ import Rating from '../../atoms/Rating/Rating';
 import { getImageUrl, handleImageError } from '../../../utils/imageUrl';
 import styles from './ProductCard.module.css';
 
-export default function ProductCard({ product, discountPercent = 15 }) {
+export default function ProductCard({ product }) {
   const { t } = useTranslation();
   if (!product) return null;
 
   const rawSrc = product.images?.[0] || product.imageUrl || product.image;
   const imageSrc = getImageUrl(rawSrc);
 
-  const originalPrice = product.price || 0;
-  const hasDiscount = discountPercent > 0;
-  const discountedPrice = hasDiscount
-    ? originalPrice * (1 - discountPercent / 100)
-    : originalPrice;
+  const finalDiscount = product.discountPercent || 0;
+  const hasDiscount = product.hasDiscount || false;
+  const originalPrice = product.originalPrice || product.price || 0;
+  const discountedPrice = product.price || 0;
 
   return (
     <article className={styles['product-card']}>
       {hasDiscount && (
         <span className={styles.discountBadge}>
-          {t('coupon.badge', { percent: discountPercent })}
+          {t('coupon.badge', { percent: finalDiscount })}
         </span>
       )}
       <FavoriteButton productId={product.id} />

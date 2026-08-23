@@ -23,7 +23,7 @@ export default function ReviewsGrid({ productId, onReviewAdded }) {
     try {
       const data = await getAllReviews();
       if (Array.isArray(data)) {
-        setReviews(data);
+        setReviews(data.filter(r => r.productId === productId));
       }
     } catch (err) {
       console.warn('ReviewsGrid: Failed to load reviews from backend', err);

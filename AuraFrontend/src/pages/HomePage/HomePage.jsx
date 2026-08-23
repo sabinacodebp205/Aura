@@ -111,46 +111,7 @@ export default function HomePage() {
           </div>
         )}
       </section>
-      <section className="section-pad">
-        <SectionHeading
-          eyebrow={t('home.signatureEyebrow')}
-          title={t('home.newArrivalsTitle')}
-          linkText={t('home.viewAllPieces')}
-          linkTo="/inspiration"
-        />
-        <div className="collection-grid">
-          <article className="collection-card tall">
-            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=85" alt="Woman wearing a jacket" />
-            <div>
-              <h3>{t('home.collectionCardTitle')}</h3>
-              <p>{t('home.collectionCardDesc')}</p>
-            </div>
-          </article>
-          {newArrivals.map((item) => (
-            <article className="mini-product" key={item.id}>
-              <img src={item.image} alt={item.alt} />
-              <h3>{item.name}</h3>
-              <p>${item.price.toFixed(2)}</p>
-              <Link
-                to={`/product/${item.id}`}
-                style={{
-                  display: 'inline-block',
-                  marginTop: 8,
-                  padding: '6px 14px',
-                  background: '#111111',
-                  color: '#ffffff',
-                  borderRadius: 6,
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  textDecoration: 'none',
-                }}
-              >
-                {t('home.viewProduct')}
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
+
       <RecentlyViewedSection />
     </>
   );
