@@ -1,9 +1,5 @@
 using Aura.Core.Interfaces.Repositories;
 using Aura.Database.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Aura.Database.Repositories.Implementations
@@ -20,6 +16,7 @@ namespace Aura.Database.Repositories.Implementations
         public IProductImageRepository ProductImageRepository { get; }
         public IProductRepository ProductRepository { get; }
         public IReviewRepository ReviewRepository { get; }
+        public ICouponRepository CouponRepository { get; }
 
         public UnitOfWork(
             AppDbContext context,
@@ -30,7 +27,8 @@ namespace Aura.Database.Repositories.Implementations
             IOrderRepository orderRepository,
             IProductImageRepository productImageRepository,
             IProductRepository productRepository,
-            IReviewRepository reviewRepository)
+            IReviewRepository reviewRepository,
+            ICouponRepository couponRepository)
         {
             _context = context;
 
@@ -42,6 +40,7 @@ namespace Aura.Database.Repositories.Implementations
             ProductImageRepository = productImageRepository;
             ProductRepository = productRepository;
             ReviewRepository = reviewRepository;
+            CouponRepository = couponRepository;
         }
 
         public async Task<int> SaveChangesAsync()

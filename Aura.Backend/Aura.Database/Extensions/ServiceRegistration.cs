@@ -47,6 +47,7 @@ namespace Aura.Database.Extensions
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductImageRepository, ProductImageRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
+            services.AddScoped<ICouponRepository, CouponRepository>();
 
             // Unit Of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();

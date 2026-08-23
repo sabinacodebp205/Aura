@@ -8,6 +8,7 @@ import CategoryFilterBar from '../../components/molecules/CategoryFilterBar/Cate
 import SectionHeading from '../../components/molecules/SectionHeading/SectionHeading';
 import HeroBanner from '../../components/organisms/HeroBanner/HeroBanner';
 import ProductGrid from '../../components/organisms/ProductGrid/ProductGrid';
+import RecentlyViewedSection from '../../components/organisms/RecentlyViewedSection/RecentlyViewedSection';
 import { getAllProducts } from '../../api/productService';
 import { getAllCategories } from '../../api/categoryService';
 import { newArrivals } from '../../data/products';
@@ -150,6 +151,7 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      <RecentlyViewedSection />
     </>
   );
 }

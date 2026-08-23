@@ -3,6 +3,7 @@ using Aura.Application.Sevices.Interfaces;
 using Aura.Core.Entities;
 using Aura.Core.Interfaces.Repositories;
 using AutoMapper;
+using Aura.Core.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,9 +50,14 @@ namespace Aura.Application.Sevices.Implementations
             var existProduct = await _unitOfWork.ProductRepository.AnyAsync(x => x.Name == dto.Name);
 
             if (existProduct)
-                throw new Exception("Product already exists.");
+                throw new ConflictException("Product already exists.");
+
+            var categoryExists = await _unitOfWork.CategoryRepository.AnyAsync(x => x.Id == dto.CategoryId);
+            if (!categoryExists)
+                throw new NotFoundException("Category not found.");
 
             var product = _mapper.Map<Product>(dto);
+            product.CreatedDate = DateTime.UtcNow;
 
             await _unitOfWork.ProductRepository.AddAsync(product);
 

@@ -16,6 +16,7 @@ namespace Aura.Core.Interfaces.Repositories
         IProductImageRepository ProductImageRepository { get; }
         IProductRepository ProductRepository { get; }
         IReviewRepository ReviewRepository { get; }
+        ICouponRepository CouponRepository { get; }
 
         Task<int> SaveChangesAsync();
     }

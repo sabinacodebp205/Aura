@@ -68,6 +68,8 @@
     "verifiedReviews": "verified review",
     "noReviewsYet": "No reviews yet",
     "size": "Size",
+    "selectSizePrompt": "Select size",
+    "selectSizeWarning": "Please select a size before adding to cart.",
     "color": "Color:",
     "addToCart": "Add to Cart",
     "addedToCart": "Added to Cart",
@@ -199,5 +201,21 @@
     "inputPlaceholder": "Ask about sizing, fabrics, shipping...",
     "send": "Send message",
     "errorMsg": "I apologize, but I'm currently having trouble connecting. Please feel free to ask about sizing, shipping policies, or materials in the meantime!"
+  },
+  "recentlyViewed": {
+    "eyebrow": "Browsing History",
+    "title": "Recently Viewed",
+    "clear": "Clear",
+    "empty": "You haven't viewed any products yet."
+  },
+  "coupon": {
+    "badge": "SAVE -{{percent}}%",
+    "promoCode": "Promo Code",
+    "placeholder": "Enter coupon code (e.g. AURA10)",
+    "apply": "Apply",
+    "applied": "Coupon applied!",
+    "discount": "Coupon Discount (-{{percent}}%)",
+    "invalid": "Invalid coupon code or expired.",
+    "remove": "Remove coupon"
   }
 }

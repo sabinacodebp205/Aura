@@ -68,6 +68,8 @@
     "verifiedReviews": "təsdiqlənmiş rəy",
     "noReviewsYet": "Hələ rəy yoxdur",
     "size": "Ölçü",
+    "selectSizePrompt": "Ölçü seçin",
+    "selectSizeWarning": "Zəhmət olmasa davam etmək üçün ölçü seçin.",
     "color": "Rəng:",
     "addToCart": "Səbətə əlavə et",
     "addedToCart": "Səbətə əlavə olundu",
@@ -199,5 +201,21 @@
     "inputPlaceholder": "Ölçü, parça, çatdırılma haqqında soruşun...",
     "send": "Mesaj göndər",
     "errorMsg": "Üzr istəyirəm, hal-hazırda əlaqə qurmaqda çətinlik çəkirəm. Ölçü, çatdırılma və ya parça qaydaları haqqında soruşa bilərsiniz!"
+  },
+  "recentlyViewed": {
+    "eyebrow": "Tarixçəniz",
+    "title": "Son Baxılan Məhsullar",
+    "clear": "Təmizlə",
+    "empty": "Hələ heç bir məhsula baxmamısınız."
+  },
+  "coupon": {
+    "badge": "XÜSUSİ -{{percent}}%",
+    "promoCode": "Kupon Kodu",
+    "placeholder": "Kupon daxil edin (məs: AURA10)",
+    "apply": "Tətbiq et",
+    "applied": "Kupon tətbiq olundu!",
+    "discount": "Kupon Endirimi (-{{percent}}%)",
+    "invalid": "Kupon kodu yanlışdır və ya müddəti bitib.",
+    "remove": "Kuponu sil"
   }
 }

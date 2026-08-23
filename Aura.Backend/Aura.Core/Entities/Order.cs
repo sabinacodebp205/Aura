@@ -1,4 +1,4 @@
-﻿using Aura.Core.Entities.Common;
+using Aura.Core.Entities.Common;
 using Aura.Core.Enums;
 using System;
 using System.Collections.Generic;
@@ -19,6 +19,10 @@ namespace Aura.Core.Entities
         public Address Address { get; set; } = null!;
 
         public decimal TotalPrice { get; set; }
+
+        public string? CouponCode { get; set; }
+
+        public decimal DiscountAmount { get; set; }
 
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
         public OrderStatus Status { get; set; }

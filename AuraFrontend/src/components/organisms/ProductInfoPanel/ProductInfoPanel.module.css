@@ -6,3 +6,55 @@
   position: static;
   float: right;
 }
+
+.priceGroup {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.originalPrice {
+  color: var(--muted);
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.discountTag {
+  background: #111111;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.unselectedText {
+  color: #ff4d4f;
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin-left: 6px;
+}
+
+.sizeGroupError {
+  border: 1px solid rgba(255, 77, 79, 0.3);
+  background: rgba(255, 77, 79, 0.03);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.sizeErrorText {
+  color: #ff4d4f;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 8px;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}

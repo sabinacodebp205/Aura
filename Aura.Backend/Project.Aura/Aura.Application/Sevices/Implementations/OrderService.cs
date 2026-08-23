@@ -7,7 +7,6 @@ using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Aura.Application.Sevices.Implementations
@@ -16,13 +15,16 @@ namespace Aura.Application.Sevices.Implementations
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ICouponService _couponService;
 
         public OrderService(
             IUnitOfWork unitOfWork,
-            IMapper mapper)
+            IMapper mapper,
+            ICouponService couponService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _couponService = couponService;
         }
 
         public async Task<ICollection<OrderGetDto>> GetAllAsync()
@@ -44,7 +46,7 @@ namespace Aura.Application.Sevices.Implementations
 
         public async Task CreateAsync(OrderCreateDto dto, Guid userId)
         {
-            decimal totalPrice = 0;
+            decimal totalProductPrice = 0;
 
             Order order = new Order
             {
@@ -62,7 +64,7 @@ namespace Aura.Application.Sevices.Implementations
                 if (product == null)
                     throw new Exception("Product not found.");
 
-                totalPrice += product.Price * item.Quantity;
+                totalProductPrice += product.Price * item.Quantity;
 
                 order.OrderItems.Add(new OrderItem
                 {
@@ -71,10 +73,28 @@ namespace Aura.Application.Sevices.Implementations
                 });
             }
 
-            order.TotalPrice = totalPrice;
+            decimal discountAmount = 0;
+            string? appliedCouponCode = null;
+
+            if (!string.IsNullOrWhiteSpace(dto.CouponCode))
+            {
+                var validation = await _couponService.ValidateCouponAsync(dto.CouponCode);
+                if (validation.IsValid)
+                {
+                    appliedCouponCode = validation.Code;
+                    discountAmount = Math.Round(totalProductPrice * (validation.DiscountPercent / 100m), 2);
+                    if (validation.MaxDiscountAmount.HasValue && discountAmount > validation.MaxDiscountAmount.Value)
+                    {
+                        discountAmount = validation.MaxDiscountAmount.Value;
+                    }
+                }
+            }
+
+            order.TotalPrice = Math.Max(0, totalProductPrice - discountAmount);
+            order.CouponCode = appliedCouponCode;
+            order.DiscountAmount = discountAmount;
 
             await _unitOfWork.OrderRepository.AddAsync(order);
-
             await _unitOfWork.SaveChangesAsync();
         }
 

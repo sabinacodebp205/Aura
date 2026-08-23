@@ -40,7 +40,11 @@ namespace Aura.Application.Mapping
         public MappingProfile()
         {
             // Product
-            CreateMap<Product, ProductCreateDto>().ReverseMap();
+            CreateMap<ProductCreateDto, Product>()
+                .ForMember(dest => dest.ProductType, opt => opt.MapFrom(src => src.IsCustomizable ? ProductType.Custom : ProductType.Basic));
+            
+            CreateMap<Product, ProductCreateDto>()
+                .ForMember(dest => dest.IsCustomizable, opt => opt.MapFrom(src => src.ProductType == ProductType.Custom));
 
             CreateMap<Product, ProductUpdateDto>().ReverseMap();
 
@@ -133,6 +137,9 @@ namespace Aura.Application.Mapping
 
             // Auth
             CreateMap<RegisterDto, AppUser>().ReverseMap();
+
+            // Coupon
+            CreateMap<Coupon, Aura.Application.DTOs.Coupon.CouponDto>().ReverseMap();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Aura.Application.Extensions
             services.AddScoped<IFavoriteService, FavoriteService>();
             services.AddScoped<IChatService, ChatService>();
             services.AddScoped<IProductImageService, ProductImageService>();
-
+            services.AddScoped<ICouponService, CouponService>();
 
             return services;
         }

@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.OrderItem;
+using Aura.Application.DTOs.OrderItem;
 using Aura.Core.Enums;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,10 @@ namespace Aura.Application.DTOs.Order
         public Guid Id { get; set; }
 
         public decimal TotalPrice { get; set; }
+
+        public string? CouponCode { get; set; }
+
+        public decimal DiscountAmount { get; set; }
 
         public OrderStatus Status { get; set; }
 

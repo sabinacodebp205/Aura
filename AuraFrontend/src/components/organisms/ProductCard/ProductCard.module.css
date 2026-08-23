@@ -12,6 +12,23 @@
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
 }
 
+.discountBadge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 5;
+  background: #111111;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+
 .product-card img {
   display: block;
   width: 100%;
@@ -50,9 +67,22 @@
   color: var(--ink);
 }
 
-.product-copy p {
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.currentPrice {
   margin: 0;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 15px;
   color: var(--ink);
+}
+
+.originalPrice {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: line-through;
 }

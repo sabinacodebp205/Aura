@@ -6,7 +6,9 @@ import ProductGallery from '../../components/organisms/ProductGallery/ProductGal
 import ProductGrid from '../../components/organisms/ProductGrid/ProductGrid';
 import ProductInfoPanel from '../../components/organisms/ProductInfoPanel/ProductInfoPanel';
 import ReviewsGrid from '../../components/organisms/ReviewsGrid/ReviewsGrid';
+import RecentlyViewedSection from '../../components/organisms/RecentlyViewedSection/RecentlyViewedSection';
 import { getProductById, getAllProducts } from '../../api/productService';
+import { addRecentlyViewed } from '../../utils/recentlyViewed';
 import styles from './ProductPage.module.css';
 
 export default function ProductPage() {
@@ -23,7 +25,14 @@ export default function ProductPage() {
     setError(null);
 
     getProductById(id)
-      .then((data) => { if (!cancelled) setProduct(data); })
+      .then((data) => {
+        if (!cancelled) {
+          setProduct(data);
+          if (data) {
+            addRecentlyViewed(data);
+          }
+        }
+      })
       .catch((err) => { if (!cancelled) setError(err); })
       .finally(() => { if (!cancelled) setLoading(false); });
 
@@ -73,6 +82,7 @@ export default function ProductPage() {
         <SectionHeading eyebrow={t('product.relatedEyebrow')} title={t('product.relatedTitle')} />
         <ProductGrid products={related} />
       </section>
+      <RecentlyViewedSection currentProductId={product.id} />
     </main>
   );
 }
