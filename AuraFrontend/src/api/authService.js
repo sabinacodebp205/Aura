@@ -63,6 +63,7 @@ export function logout() {
   localStorage.removeItem('user');
   localStorage.removeItem('aura_cart');
   localStorage.removeItem('aura_favorites');
+  localStorage.removeItem('aura_checkout_form');
   window.dispatchEvent(new Event('aura_logout'));
 }
 

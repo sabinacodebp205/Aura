@@ -487,3 +487,7 @@
   background: var(--soft);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
+
+.cancel-order-btn { background: none; border: 1px solid #ff4d4f; color: #ff4d4f; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; }
+.cancel-order-btn:hover { background: #ff4d4f; color: white; }
+.cancelled { color: #888 !important; background: #eee !important; text-decoration: line-through; }

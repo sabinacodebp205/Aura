@@ -1,20 +1,21 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import { useFavorites } from '../../context/FavoritesContext';
 import { updateProfile } from '../../api/authService';
-import { getAllOrders } from '../../api/orderService';
+import { getAllOrders, deleteOrder } from '../../api/orderService';
 import { getAllAddresses } from '../../api/addressService';
 import { getImageUrl, handleImageError } from '../../utils/imageUrl';
 import styles from './ProfilePage.module.css';
 
 export default function ProfilePage() {
   const { t } = useTranslation();
+  const location = useLocation();
   const { user, logout, refetchUser } = useAuth();
   const { favorites } = useFavorites();
 
-  const [activeTab, setActiveTab] = useState('orders');
+  const [activeTab, setActiveTab] = useState(location.state?.tab || 'orders');
   const [orders, setOrders] = useState([]);
   const [addresses, setAddresses] = useState([]);
   const [loadingData, setLoadingData] = useState(false);
@@ -70,9 +71,40 @@ export default function ProfilePage() {
 
   useEffect(() => {
     loadUserData();
-  }, [loadUserData]);
+  }, [loadUserData, location.key]);
 
   if (!user) return null;
+
+  const getStatusTranslation = (status) => {
+    const statusMap = {
+      0: 'Pending',
+      1: 'Confirmed',
+      2: 'Preparing',
+      3: 'Shipped',
+      4: 'Delivered',
+      5: 'Cancelled',
+      'Pending': 'Pending',
+      'Confirmed': 'Confirmed',
+      'Preparing': 'Preparing',
+      'Shipped': 'Shipped',
+      'Delivered': 'Delivered',
+      'Cancelled': 'Cancelled'
+    };
+    const key = statusMap[status] || 'Pending';
+    return t(`orderStatus.${key}`, key);
+  };
+
+  const handleCancelOrder = async (orderId) => {
+    if (window.confirm(t('profile.cancelConfirm'))) {
+      try {
+        await deleteOrder(orderId);
+        await loadUserData();
+      } catch (err) {
+        console.error("Failed to cancel order", err);
+        alert(t('common.error'));
+      }
+    }
+  };
 
   const fullName = [user.name, user.surname].filter(Boolean).join(' ') || t('profile.headerTitle');
   const initial = (fullName || user.email || 'A')[0].toUpperCase();
@@ -201,14 +233,21 @@ export default function ProfilePage() {
                           {order.createdDate ? new Date(order.createdDate).toLocaleDateString() : ''}
                         </span>
                       </div>
-                      <span className={styles['order-status']}>{order.status === 0 ? 'Pending' : order.status}</span>
+                      <span className={`${styles['order-status']} ${styles[getStatusTranslation(order.status).toLowerCase()] || ''}`}>
+                        {getStatusTranslation(order.status)}
+                      </span>
                     </div>
                     
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px', marginTop: '1rem' }}>
                       {order.orderItems && order.orderItems.length > 0 ? (
                         order.orderItems.map((item, idx) => (
-                          <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', color: '#555', fontSize: '0.95rem' }}>
-                            <span>{item.quantity}x {item.productName || 'Məhsul'}</span>
+                          <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#555', fontSize: '0.95rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                              {item.imageUrl && (
+                                <img src={getImageUrl(item.imageUrl)} alt={item.productName || 'Məhsul'} style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '4px' }} onError={handleImageError} />
+                              )}
+                              <span>{item.quantity}x {item.productName || 'Məhsul'}</span>
+                            </div>
                             <span>${(item.price * item.quantity).toFixed(2)}</span>
                           </div>
                         ))
@@ -218,9 +257,16 @@ export default function ProfilePage() {
                     </div>
                     
                     <div className={styles['order-body']} style={{ marginTop: '1rem' }}>
-                      <p className={styles['order-total']} style={{ borderTop: '1px solid #eee', paddingTop: '0.5rem', display: 'flex', justifyContent: 'space-between' }}>
-                        <span>{t('profile.orderTotal')}</span>
-                        <strong>${order.totalPrice?.toFixed(2)}</strong>
+                      <p className={styles['order-total']} style={{ borderTop: '1px solid #eee', paddingTop: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span>{t('profile.orderTotal')}: <strong>${order.totalPrice?.toFixed(2)}</strong></span>
+                        {(order.status === 0 || order.status === 1 || order.status === 'Pending' || order.status === 'Confirmed') && (
+                          <button 
+                            className={styles['cancel-order-btn']}
+                            onClick={() => handleCancelOrder(order.id)}
+                          >
+                            {t('profile.cancelOrder')}
+                          </button>
+                        )}
                       </p>
                     </div>
                   </article>
@@ -330,15 +376,6 @@ export default function ProfilePage() {
                   required
                 />
               </div>
-              <div className={styles['form-group']}>
-                <label>{t('profile.profileImageUrl')}</label>
-                <input
-                  type="url"
-                  placeholder="https://example.com/avatar.jpg"
-                  value={editForm.profileImageUrl}
-                  onChange={(e) => setEditForm({ ...editForm, profileImageUrl: e.target.value })}
-                />
-              </div>
 
               {updateError && <div className={styles['error-banner']}>{updateError}</div>}
 
@@ -400,15 +437,6 @@ export default function ProfilePage() {
                   value={editForm.email}
                   onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
                   required
-                />
-              </div>
-              <div className={styles['form-group']}>
-                <label>{t('profile.profileImageUrl')}</label>
-                <input
-                  type="url"
-                  placeholder="https://example.com/avatar.jpg"
-                  value={editForm.profileImageUrl}
-                  onChange={(e) => setEditForm({ ...editForm, profileImageUrl: e.target.value })}
                 />
               </div>
 

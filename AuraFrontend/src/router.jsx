@@ -10,11 +10,14 @@ import RegisterPage from './pages/RegisterPage/RegisterPage';
 import ProductPage from './pages/ProductPage/ProductPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import ScrollToTop from './components/ScrollToTop';
 
 export default function AppRoutes() {
   return (
-    <Routes>
-      <Route element={<MainLayout />}>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/inspiration" element={<InspirationPage />} />
         <Route path="/ai-studio" element={<Navigate to="/" replace />} />
@@ -43,7 +46,8 @@ export default function AppRoutes() {
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/product" element={<Navigate to="/product/studio-oversized-hoodie" replace />} />
       </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 }
 

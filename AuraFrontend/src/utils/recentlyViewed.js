@@ -1,5 +1,5 @@
 const STORAGE_KEY = 'aura_recently_viewed';
-const MAX_ITEMS = 20;
+const MAX_ITEMS = 10;
 
 export function getRecentlyViewed() {
   try {

@@ -187,7 +187,9 @@
     "session": "Session",
     "signOut": "Sign Out",
     "editModalTitle": "Edit Profile",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "cancelOrder": "Cancel order",
+    "cancelConfirm": "Are you sure you want to remove this order?"
   },
   "chat": {
     "launcher": "AI Assistant",
@@ -264,5 +266,13 @@
       "title": "20% off oversized essentials",
       "desc": "Design-ready tees, hoodies, jackets, and canvas totes."
     }
+  },
+  "orderStatus": {
+    "Pending": "Pending",
+    "Confirmed": "Confirmed",
+    "Preparing": "Preparing",
+    "Shipped": "Shipped",
+    "Delivered": "Delivered",
+    "Cancelled": "Cancelled"
   }
 }

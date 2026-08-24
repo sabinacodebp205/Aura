@@ -187,7 +187,9 @@
     "session": "Sessiya",
     "signOut": "Çıxış Et",
     "editModalTitle": "Profili Redaktə Et",
-    "cancel": "Ləğv et"
+    "cancel": "Ləğv et",
+    "cancelOrder": "Sifarişi ləğv et",
+    "cancelConfirm": "Sifarişi silmək istədiyinizə əminsiniz?"
   },
   "chat": {
     "launcher": "AI Köməkçi",
@@ -264,5 +266,13 @@
       "title": "Böyük ölçülü əsas geyimlərə 20% endirim",
       "desc": "Dizayna hazır köynəklər, hudilər, gödəkcələr və kətan çantalar."
     }
+  },
+  "orderStatus": {
+    "Pending": "Gözləyir",
+    "Confirmed": "Təsdiqləndi",
+    "Preparing": "Hazırlanır",
+    "Shipped": "Kargoda",
+    "Delivered": "Çatdırıldı",
+    "Cancelled": "Ləğv edildi"
   }
 }

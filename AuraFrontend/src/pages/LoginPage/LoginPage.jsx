@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import styles from './LoginPage.module.css';
@@ -11,6 +11,9 @@ export default function LoginPage() {
   const { t } = useTranslation();
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/profile';
 
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
@@ -71,7 +74,7 @@ export default function LoginPage() {
 
     try {
       await login(emailTrimmed, formData.password);
-      navigate('/profile');
+      navigate(from, { replace: true });
     } catch (err) {
       setError(parseErrorMessage(err));
     } finally {

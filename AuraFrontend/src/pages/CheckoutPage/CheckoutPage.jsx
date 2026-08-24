@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 import { getAllAddresses, createAddress } from '../../api/addressService';
 import { createOrder } from '../../api/orderService';
 import Button from '../../components/atoms/Button/Button';
@@ -11,6 +12,7 @@ export default function CheckoutPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { items, totals, clearCart, itemTotal } = useCart();
+  const { user } = useAuth();
   
   const [addresses, setAddresses] = useState([]);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
@@ -29,12 +31,24 @@ export default function CheckoutPage() {
   }, [formData]);
 
   useEffect(() => {
+    if (user && !formData.name && !formData.email) {
+      setFormData((prev) => ({
+        ...prev,
+        name: [user.name, user.surname].filter(Boolean).join(' '),
+        email: user.email || '',
+      }));
+    }
+  }, [user]);
+
+  useEffect(() => {
     // Load addresses from profile backend
     getAllAddresses()
       .then(res => {
         if (Array.isArray(res) && res.length > 0) {
           setAddresses(res);
-          setSelectedAddressId(res[0].id);
+          // Prefer default/last added address if available. Currently we just pick the first one which is standard if sorting puts newest first
+          const defaultAddress = res.find(a => a.isDefault) || res[0];
+          setSelectedAddressId(defaultAddress.id);
         }
       })
       .catch(err => console.warn('Could not load addresses', err));
@@ -55,35 +69,23 @@ export default function CheckoutPage() {
     e.preventDefault();
     try {
       let finalAddressId = selectedAddressId;
-      if (!finalAddressId && formData.newAddress) {
-        // Create new address
-        await createAddress({
-          street: formData.newAddress,
-          city: 'Baku',
-          country: 'Azerbaijan',
-          zipCode: 'AZ1000'
-        });
-        // Fetch addresses again to get the new ID
-        const updatedAddresses = await getAllAddresses();
-        if (updatedAddresses && updatedAddresses.length > 0) {
-          // Assuming the last one added is at the end or we just pick the first
-          finalAddressId = updatedAddresses[updatedAddresses.length - 1].id;
-        }
-      }
-
       if (!finalAddressId) {
         alert("Please provide a valid address.");
         return;
       }
 
-      // Create order
-      await createOrder({
+      const payload = {
         addressId: finalAddressId,
         orderItems: items.map(item => ({
-          productId: item.id,
+          productId: item.productId || item.id,
           quantity: item.quantity
         }))
-      });
+      };
+      
+      console.log("SENDING PAYLOAD TO API:", payload);
+
+      // Create order
+      await createOrder(payload);
 
       setIsSuccess(true);
       setTimeout(() => {
@@ -103,7 +105,10 @@ export default function CheckoutPage() {
           <div className={styles.checkIcon}>✓</div>
           <h2>Təşəkkürlər! 🎉</h2>
           <p>Sifarişiniz uğurla qeydə alındı. Təsdiq üçün sizinlə əlaqə saxlayacağıq.</p>
-          <Button onClick={() => navigate('/')}>Ana Səhifəyə Qayıt</Button>
+          <div className={styles.buttonGroup} style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '24px' }}>
+            <Button onClick={() => navigate('/profile', { state: { tab: 'orders' } })}>Sifarişlərimə bax</Button>
+            <Button variant="outline" onClick={() => navigate('/')}>Ana Səhifəyə Qayıt</Button>
+          </div>
         </div>
       </main>
     );
@@ -139,7 +144,7 @@ export default function CheckoutPage() {
               </div>
 
               <h3>Ünvan seçin</h3>
-              {addresses.length > 0 && (
+              {addresses.length > 0 ? (
                 <div className={styles.addressList}>
                   {addresses.map(addr => (
                     <div 
@@ -152,21 +157,9 @@ export default function CheckoutPage() {
                     </div>
                   ))}
                 </div>
+              ) : (
+                <p>Profilinizdə heç bir ünvan yoxdur. Zəhmət olmasa profil bölməsindən yeni ünvan əlavə edin.</p>
               )}
-              
-              <div className={styles.formGroup}>
-                <label>{addresses.length > 0 ? 'Və ya yeni ünvan daxil edin' : 'Çatdırılma ünvanı'}</label>
-                <input
-                  type="text"
-                  required={addresses.length === 0 || !selectedAddressId}
-                  placeholder="Şəhər, Küçə, Bina, Mənzil"
-                  value={formData.newAddress}
-                  onChange={e => {
-                    setFormData({ ...formData, newAddress: e.target.value });
-                    if (e.target.value) setSelectedAddressId(null);
-                  }}
-                />
-              </div>
             </form>
           </div>
 

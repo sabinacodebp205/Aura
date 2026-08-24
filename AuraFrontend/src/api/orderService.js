@@ -49,6 +49,16 @@ export async function updateOrder(dto) {
   return data;
 }
 
+/**
+ * Update the status of an existing order.
+ * @param {string} id
+ * @param {number|string} status
+ */
+export async function updateOrderStatus(id, status) {
+  const { data } = await client.patch('/Order/status', { id, status });
+  return data;
+}
+
 /** Delete an order by its GUID. */
 export async function deleteOrder(id) {
   const { data } = await client.delete(`/Order/${id}`);
