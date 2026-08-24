@@ -1,7 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { getAllOrders, createOrder } from '../api/orderService';
-import { deleteOrderItem } from '../api/orderItemService';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { validateCoupon } from '../api/couponService';
 
 const CartContext = createContext(null);
@@ -34,25 +32,6 @@ function itemTotal(item) {
   return item.unitPrice * item.quantity + feeTotal;
 }
 
-function isLoggedIn() {
-  return !!localStorage.getItem('jwt');
-}
-
-function mapBackendItem(backendItem) {
-  return {
-    id: backendItem.productId,
-    productId: backendItem.productId,
-    name: backendItem.productName,
-    detail: '',
-    quantity: backendItem.quantity,
-    unitPrice: backendItem.price,
-    fees: [],
-    image: backendItem.imageUrl || '',
-    alt: backendItem.productName,
-    _fromBackend: true,
-  };
-}
-
 export function CartProvider({ children }) {
   const [items, setItems] = useState(loadLocal);
   const [appliedCoupon, setAppliedCoupon] = useState(loadCoupon);
@@ -73,54 +52,6 @@ export function CartProvider({ children }) {
   /* ---- persist to localStorage on change ---- */
   useEffect(() => { saveLocal(items); }, [items]);
   useEffect(() => { saveCoupon(appliedCoupon); }, [appliedCoupon]);
-
-  /* ---- on mount: fetch user pending order if logged in ---- */
-  useEffect(() => {
-    if (!isLoggedIn()) return;
-    let cancelled = false;
-
-    (async () => {
-      try {
-        setSyncing(true);
-        const orders = await getAllOrders();
-        const pending = orders
-          .filter((o) => o.status === 0 || o.status === 'Pending')
-          .sort((a, b) => (b.id > a.id ? 1 : -1))[0];
-
-        if (pending && !cancelled) {
-          setActiveOrderId(pending.id);
-          const mapped = (pending.orderItems || []).map(mapBackendItem);
-          setItems(mapped);
-        }
-      } catch (err) {
-        console.warn('CartContext: could not fetch orders from backend, using local cart.', err);
-      } finally {
-        if (!cancelled) setSyncing(false);
-      }
-    })();
-
-    return () => { cancelled = true; };
-  }, []);
-
-  /* ---- re-fetch active order from backend ---- */
-  const refetchCart = useCallback(async () => {
-    if (!isLoggedIn()) return;
-    try {
-      const orders = await getAllOrders();
-      const pending = orders
-        .filter((o) => o.status === 0 || o.status === 'Pending')
-        .sort((a, b) => (b.id > a.id ? 1 : -1))[0];
-      if (pending) {
-        setActiveOrderId(pending.id);
-        setItems((pending.orderItems || []).map(mapBackendItem));
-      } else {
-        setActiveOrderId(null);
-        setItems([]);
-      }
-    } catch (err) {
-      console.warn('CartContext: refetch failed', err);
-    }
-  }, []);
 
   const applyCoupon = async (code) => {
     const res = await validateCoupon(code);
@@ -159,43 +90,10 @@ export function CartProvider({ children }) {
           { ...item, id: item.id || `${item.productId}-${Date.now()}` },
         ];
       });
-
-      if (isLoggedIn()) {
-        const orderItem = {
-          productId: item.productId,
-          quantity: item.quantity || 1,
-        };
-
-        (async () => {
-          try {
-            await createOrder({
-              addressId: '00000000-0000-0000-0000-000000000000',
-              couponCode: appliedCoupon?.code || null,
-              orderItems: [orderItem],
-            });
-            await refetchCart();
-          } catch (err) {
-            console.warn('CartContext: failed to sync addItem to backend', err);
-          }
-        })();
-      }
     };
 
     const removeItem = (itemId) => {
-      const toRemove = items.find((i) => i.id === itemId);
       setItems((current) => current.filter((i) => i.id !== itemId));
-
-      if (isLoggedIn() && toRemove?._fromBackend) {
-        (async () => {
-          try {
-            await deleteOrderItem(toRemove.productId);
-            await refetchCart();
-          } catch (err) {
-            console.warn('CartContext: failed to sync removeItem to backend', err);
-            await refetchCart();
-          }
-        })();
-      }
     };
 
     const updateQty = (itemId, quantity) => {
@@ -224,6 +122,7 @@ export function CartProvider({ children }) {
 
     const clearCart = () => {
       setItems([]);
+      setAppliedCoupon(null);
     };
 
     /* ---- totals calculation with coupon discount ---- */
@@ -256,7 +155,7 @@ export function CartProvider({ children }) {
       applyCoupon,
       removeCoupon,
       itemTotal,
-      refetchCart,
+      refetchCart: async () => {},
       totals: {
         products: subtotal,
         discountAmount,
@@ -266,7 +165,7 @@ export function CartProvider({ children }) {
         total: finalTotal,
       },
     };
-  }, [items, appliedCoupon, syncing, activeOrderId, refetchCart]);
+  }, [items, appliedCoupon, syncing, activeOrderId]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

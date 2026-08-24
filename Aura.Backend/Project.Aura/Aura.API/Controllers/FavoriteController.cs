@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.Favorite;
+using Aura.Application.DTOs.Favorite;
 using Aura.Application.Sevices.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,8 @@ namespace Aura.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var favorites = await _favoriteService.GetAllAsync();
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var favorites = await _favoriteService.GetAllAsync(userId);
 
             return Ok(favorites);
         }

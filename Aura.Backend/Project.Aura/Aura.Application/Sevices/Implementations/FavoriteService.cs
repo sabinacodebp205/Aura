@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.Favorite;
+using Aura.Application.DTOs.Favorite;
 using Aura.Application.Sevices.Interfaces;
 using Aura.Core.Entities;
 using Aura.Core.Interfaces.Repositories;
@@ -24,9 +24,9 @@ namespace Aura.Application.Sevices.Implementations
             _mapper = mapper;
         }
 
-        public async Task<ICollection<FavoriteGetDto>> GetAllAsync()
+        public async Task<ICollection<FavoriteGetDto>> GetAllAsync(Guid userId)
         {
-            var favorites = await _unitOfWork.FavoriteRepository.GetAllAsync();
+            var favorites = await _unitOfWork.FavoriteRepository.FindAllAsync(f => f.UserId == userId);
 
             return _mapper.Map<ICollection<FavoriteGetDto>>(favorites);
         }

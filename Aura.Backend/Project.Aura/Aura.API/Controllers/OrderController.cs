@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.Order;
+using Aura.Application.DTOs.Order;
 using Aura.Application.Sevices.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,8 @@ namespace Aura.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var orders = await _orderService.GetAllAsync();
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var orders = await _orderService.GetAllByUserIdAsync(userId);
 
             return Ok(orders);
         }

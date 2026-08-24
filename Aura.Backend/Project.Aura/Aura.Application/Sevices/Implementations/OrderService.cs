@@ -34,6 +34,15 @@ namespace Aura.Application.Sevices.Implementations
             return _mapper.Map<ICollection<OrderGetDto>>(orders);
         }
 
+        public async Task<ICollection<OrderGetDto>> GetAllByUserIdAsync(Guid userId)
+        {
+            var orders = await _unitOfWork.OrderRepository.FindAllAsync(o => o.UserId == userId);
+            
+            return _mapper.Map<ICollection<OrderGetDto>>(orders);
+        }
+
+
+
         public async Task<OrderGetDto?> GetByIdAsync(Guid id)
         {
             var order = await _unitOfWork.OrderRepository.GetByIdAsync(id);

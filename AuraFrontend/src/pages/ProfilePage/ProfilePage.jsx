@@ -190,22 +190,37 @@ export default function ProfilePage() {
               </div>
             ) : (
               <div className={styles['orders-list']}>
-                {orders.map((order) => (
+                {orders.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate)).map((order) => (
                   <article key={order.id} className={styles['order-card']}>
                     <div className={styles['order-header']}>
                       <div>
                         <span className={styles['order-id']}>
                           {t('profile.orderId', { id: order.id.slice(0, 8) })}
                         </span>
-                        <span className={styles['order-items-count']}>
-                          {t('profile.orderItemsCount', { count: order.orderItems?.length || 0 })}
+                        <span style={{marginLeft: '12px', color: '#888', fontSize: '0.9rem'}}>
+                          {order.createdDate ? new Date(order.createdDate).toLocaleDateString() : ''}
                         </span>
                       </div>
-                      <span className={styles['order-status']}>{order.status || t('profile.statusPending')}</span>
+                      <span className={styles['order-status']}>{order.status === 0 ? 'Pending' : order.status}</span>
                     </div>
-                    <div className={styles['order-body']}>
-                      <p className={styles['order-total']}>
-                        {t('profile.orderTotal')}<strong>${order.totalPrice?.toFixed(2)}</strong>
+                    
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px', marginTop: '1rem' }}>
+                      {order.orderItems && order.orderItems.length > 0 ? (
+                        order.orderItems.map((item, idx) => (
+                          <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', color: '#555', fontSize: '0.95rem' }}>
+                            <span>{item.quantity}x {item.productName || 'Məhsul'}</span>
+                            <span>${(item.price * item.quantity).toFixed(2)}</span>
+                          </div>
+                        ))
+                      ) : (
+                        <span style={{color: '#666'}}>Məhsul tapılmadı</span>
+                      )}
+                    </div>
+                    
+                    <div className={styles['order-body']} style={{ marginTop: '1rem' }}>
+                      <p className={styles['order-total']} style={{ borderTop: '1px solid #eee', paddingTop: '0.5rem', display: 'flex', justifyContent: 'space-between' }}>
+                        <span>{t('profile.orderTotal')}</span>
+                        <strong>${order.totalPrice?.toFixed(2)}</strong>
                       </p>
                     </div>
                   </article>

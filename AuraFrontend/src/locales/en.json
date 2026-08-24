@@ -58,7 +58,10 @@
     "allIdeas": "All Ideas",
     "emptyState": "No fashion inspiration found matching:",
     "clearFilters": "Clear Search Filters",
-    "shopThisStyle": "Shop This Style →"
+    "shopThisStyle": "Shop This Style →",
+    "discountBadge": "SPECIAL OFFERS",
+    "discountTitle": "Discounted Products",
+    "discountSubtitle": "Take advantage of special discounts on selected Aura models."
   },
   "product": {
     "loading": "Loading product…",
@@ -217,5 +220,49 @@
     "discount": "Coupon Discount (-{{percent}}%)",
     "invalid": "Invalid coupon code or expired.",
     "remove": "Remove coupon"
+  },
+  "checkout": {
+    "emptyCartTitle": "Your Cart is empty",
+    "backToShop": "Return to Shop",
+    "successTitle": "Thank you! 🎉",
+    "successDesc": "Your order has been successfully placed. We will contact you for confirmation.",
+    "backToHome": "Return to Home",
+    "shippingInfo": "Shipping Information",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Your First and Last Name",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "example@email.com",
+    "chooseAddress": "Choose an Address",
+    "newAddressLabel": "Or enter a new address",
+    "deliveryAddress": "Delivery Address",
+    "newAddressPlaceholder": "City, Street, Building, Apartment",
+    "paymentMethod": "Payment Method",
+    "cardPayment": "Card (Credit or Debit card)",
+    "orderSummary": "Order Summary",
+    "itemCount": "Qty: {{count}}",
+    "noImage": "Product",
+    "confirmOrder": "Confirm Order"
+  },
+  "community": {
+    "eyebrow": "Community marketplace",
+    "title": "Publish, remix, and shop custom fashion."
+  },
+  "editorial": {
+    "card1": {
+      "eyebrow": "New collection",
+      "title": "The Architectural Edit",
+      "desc": "Clean lines, sharp tailoring, and AI-generated garment artwork.",
+      "link": "Shop the drop"
+    },
+    "card2": {
+      "eyebrow": "Custom lab",
+      "title": "Gold thread studio",
+      "desc": "Embroidery concepts with realistic stitch previews."
+    },
+    "card3": {
+      "eyebrow": "Limited offer",
+      "title": "20% off oversized essentials",
+      "desc": "Design-ready tees, hoodies, jackets, and canvas totes."
+    }
   }
 }

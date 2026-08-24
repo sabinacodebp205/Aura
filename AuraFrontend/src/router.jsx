@@ -20,7 +20,14 @@ export default function AppRoutes() {
         <Route path="/ai-studio" element={<Navigate to="/" replace />} />
         <Route path="/studio" element={<Navigate to="/" replace />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route 
+          path="/checkout" 
+          element={
+            <ProtectedRoute>
+              <CheckoutPage />
+            </ProtectedRoute>
+          } 
+        />
 
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/login" element={<LoginPage />} />

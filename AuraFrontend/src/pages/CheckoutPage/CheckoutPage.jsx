@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useCart } from '../../context/CartContext';
-import { getAllAddresses } from '../../api/addressService';
+import { getAllAddresses, createAddress } from '../../api/addressService';
+import { createOrder } from '../../api/orderService';
 import Button from '../../components/atoms/Button/Button';
 import styles from './CheckoutPage.module.css';
 
@@ -50,13 +51,49 @@ export default function CheckoutPage() {
     );
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSuccess(true);
-    setTimeout(() => {
-      clearCart();
-      localStorage.removeItem('aura_checkout_form');
-    }, 500);
+    try {
+      let finalAddressId = selectedAddressId;
+      if (!finalAddressId && formData.newAddress) {
+        // Create new address
+        await createAddress({
+          street: formData.newAddress,
+          city: 'Baku',
+          country: 'Azerbaijan',
+          zipCode: 'AZ1000'
+        });
+        // Fetch addresses again to get the new ID
+        const updatedAddresses = await getAllAddresses();
+        if (updatedAddresses && updatedAddresses.length > 0) {
+          // Assuming the last one added is at the end or we just pick the first
+          finalAddressId = updatedAddresses[updatedAddresses.length - 1].id;
+        }
+      }
+
+      if (!finalAddressId) {
+        alert("Please provide a valid address.");
+        return;
+      }
+
+      // Create order
+      await createOrder({
+        addressId: finalAddressId,
+        orderItems: items.map(item => ({
+          productId: item.id,
+          quantity: item.quantity
+        }))
+      });
+
+      setIsSuccess(true);
+      setTimeout(() => {
+        clearCart();
+        localStorage.removeItem('aura_checkout_form');
+      }, 500);
+    } catch (err) {
+      console.error("Error creating order:", err);
+      alert("Xəta baş verdi. Sifarişi tamamlamaq mümkün olmadı.");
+    }
   };
 
   if (isSuccess) {

@@ -58,7 +58,10 @@
     "allIdeas": "Bütün İdeyalar",
     "emptyState": "Axtarışa uyğun dəb ilhamı tapılmadı:",
     "clearFilters": "Filtrləri Təmizlə",
-    "shopThisStyle": "Bu Stili Al →"
+    "shopThisStyle": "Bu Stili Al →",
+    "discountBadge": "XÜSUSİ TƏKLİFLƏR",
+    "discountTitle": "Endirimli Məhsullar",
+    "discountSubtitle": "Seçilmiş Aura modellərində xüsusi endirimlərdən yararlanın."
   },
   "product": {
     "loading": "Məhsul yüklənir…",
@@ -217,5 +220,49 @@
     "discount": "Kupon Endirimi (-{{percent}}%)",
     "invalid": "Kupon kodu yanlışdır və ya müddəti bitib.",
     "remove": "Kuponu sil"
+  },
+  "checkout": {
+    "emptyCartTitle": "Səbətiniz boşdur",
+    "backToShop": "Alış-verişə qayıt",
+    "successTitle": "Təşəkkürlər! 🎉",
+    "successDesc": "Sifarişiniz uğurla qeydə alındı. Təsdiq üçün sizinlə əlaqə saxlayacağıq.",
+    "backToHome": "Ana Səhifəyə Qayıt",
+    "shippingInfo": "Çatdırılma Məlumatları",
+    "fullName": "Ad və Soyad",
+    "fullNamePlaceholder": "Adınız və Soyadınız",
+    "emailLabel": "Email adresi",
+    "emailPlaceholder": "nümunə@email.com",
+    "chooseAddress": "Ünvan seçin",
+    "newAddressLabel": "Və ya yeni ünvan daxil edin",
+    "deliveryAddress": "Çatdırılma ünvanı",
+    "newAddressPlaceholder": "Şəhər, Küçə, Bina, Mənzil",
+    "paymentMethod": "Ödəniş Üsulu",
+    "cardPayment": "Kart (Kredit və ya Debet kartı)",
+    "orderSummary": "Sifariş Özəti",
+    "itemCount": "Say: {{count}}",
+    "noImage": "Məhsul",
+    "confirmOrder": "Sifarişi Təsdiqlə"
+  },
+  "community": {
+    "eyebrow": "İcma bazarı",
+    "title": "Xüsusi geyimləri yayımlayın, dəyişdirin və alın."
+  },
+  "editorial": {
+    "card1": {
+      "eyebrow": "Yeni kolleksiya",
+      "title": "Memarlıq Tərtibatı",
+      "desc": "Təmiz xətlər, kəskin tikişlər və süni intellektlə yaradılmış geyim rəsmləri.",
+      "link": "Kolleksiyanı al"
+    },
+    "card2": {
+      "eyebrow": "Xüsusi laboratoriya",
+      "title": "Qızıl sap studiyası",
+      "desc": "Realistik tikiş önizləmələri ilə naxış konsepsiyaları."
+    },
+    "card3": {
+      "eyebrow": "Məhdud təklif",
+      "title": "Böyük ölçülü əsas geyimlərə 20% endirim",
+      "desc": "Dizayna hazır köynəklər, hudilər, gödəkcələr və kətan çantalar."
+    }
   }
 }

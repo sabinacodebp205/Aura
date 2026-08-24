@@ -12,6 +12,8 @@ namespace Aura.Application.DTOs.Order
     {
         public Guid Id { get; set; }
 
+        public DateTime CreatedDate { get; set; }
+
         public decimal TotalPrice { get; set; }
 
         public string? CouponCode { get; set; }

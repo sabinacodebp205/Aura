@@ -55,23 +55,7 @@ export default function ProductPage() {
         <ProductGallery product={product} />
         <ProductInfoPanel product={product} />
       </section>
-      <section className="section-pad product-richness">
-        <article>
-          <p className="eyebrow">{t('product.modelViewEyebrow')}</p>
-          <h2>{t('product.modelViewTitle')}</h2>
-          <p>{t('product.modelViewDesc')}</p>
-        </article>
-        <article>
-          <p className="eyebrow">{t('product.fabricEyebrow')}</p>
-          <h2>{t('product.fabricTitle')}</h2>
-          <p>{t('product.fabricDesc')}</p>
-        </article>
-        <article>
-          <p className="eyebrow">{t('product.fbtEyebrow')}</p>
-          <h2>{t('product.fbtTitle')}</h2>
-          <p>{t('product.fbtDesc')}</p>
-        </article>
-      </section>
+
       <ReviewsGrid
         productId={product.id}
         onReviewAdded={() => {

@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.Order;
+using Aura.Application.DTOs.Order;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace Aura.Application.Sevices.Interfaces
     public interface IOrderService
     {
         Task<ICollection<OrderGetDto>> GetAllAsync();
-
+        Task<ICollection<OrderGetDto>> GetAllByUserIdAsync(Guid userId);
         Task<OrderGetDto?> GetByIdAsync(Guid id);
 
         Task CreateAsync(OrderCreateDto dto, Guid userId);

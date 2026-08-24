@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.Favorite;
+using Aura.Application.DTOs.Favorite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace Aura.Application.Sevices.Interfaces
 {
     public interface IFavoriteService
     {
-        Task<ICollection<FavoriteGetDto>> GetAllAsync();
+        Task<ICollection<FavoriteGetDto>> GetAllAsync(Guid userId);
 
         Task<FavoriteGetDto?> GetByIdAsync(Guid id);
 
