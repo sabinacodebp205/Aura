@@ -216,3 +216,19 @@
   color: var(--muted);
   padding: 24px;
 }
+
+@media (max-width: 640px) {
+  .rating-selector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .star-btn {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+  }
+  .star-buttons {
+    flex-wrap: wrap;
+  }
+}
