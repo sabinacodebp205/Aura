@@ -64,3 +64,17 @@
   object-fit: cover;
   background: var(--soft);
 }
+
+@media (max-width: 768px) {
+  .thumb-row {
+    gap: 8px;
+    justify-content: space-between;
+  }
+  .thumb-btn {
+    flex: 1;
+  }
+  .thumb-btn img {
+    width: 100%;
+    height: auto;
+  }
+}

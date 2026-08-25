@@ -1,3 +1,64 @@
 .root {
-  min-height: 70vh;
+  display: block;
 }
+
+.productLayout {
+  display: grid;
+  gap: 24px;
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 42px 0 24px;
+}
+
+/* 
+  Desktop Grid
+  Gallery takes left column. Info, Size, Details, Cart take right column sequentially. 
+*/
+@media (min-width: 769px) {
+  .productLayout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    grid-template-areas: 
+      "gallery info"
+      "gallery size"
+      "gallery details"
+      "gallery cart";
+    align-items: start;
+    gap: 24px clamp(22px, 5vw, 58px);
+  }
+
+  .galleryArea { 
+    grid-area: gallery;
+    position: sticky;
+    top: 96px; 
+  }
+}
+
+/* 
+  Mobile Grid
+  Gallery and Info are side-by-side. Size, Details, Cart are full width below.
+*/
+@media (max-width: 768px) {
+  .productLayout {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.5fr);
+    grid-template-areas: 
+      "gallery info"
+      "size size"
+      "details details"
+      "cart cart";
+    gap: 16px;
+    padding: 24px 16px 84px;
+    width: 100%;
+  }
+
+  .galleryArea { grid-area: gallery; }
+  
+  /* Make gallery fill the 1.2fr space better */
+  .galleryArea :global(.gallery-main) {
+    border-radius: 12px;
+  }
+}
+
+.infoArea { grid-area: info; }
+.sizeArea { grid-area: size; }
+.detailsArea { grid-area: details; }
+.cartArea { grid-area: cart; }

@@ -1,154 +1,123 @@
-import { useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../atoms/Button/Button';
 import Eyebrow from '../../atoms/Eyebrow/Eyebrow';
 import FavoriteButton from '../../molecules/FavoriteButton/FavoriteButton';
 import SegmentedControl from '../../molecules/SegmentedControl/SegmentedControl';
-import { useCart } from '../../../context/CartContext';
 import styles from './ProductInfoPanel.module.css';
 
-export default function ProductInfoPanel({ product }) {
+export function ProductBasicInfo({ product }) {
   const { t } = useTranslation();
-  const { addItem } = useCart();
-  const [isAdded, setIsAdded] = useState(false);
-  const [sizeError, setSizeError] = useState(false);
-
-  // Extract only real, valid size options from the product data
-  const availableSizes = useMemo(() => {
-    if (!product) return [];
-    const raw = product.availableSizes || product.sizes || product.size;
-    if (Array.isArray(raw)) {
-      return raw.filter(Boolean).map(String);
-    }
-    if (typeof raw === 'string' && raw.trim()) {
-      return raw
-        .split(/[,/]/)
-        .map((s) => s.trim())
-        .filter(Boolean);
-    }
-    return [];
-  }, [product]);
-
-  // Initial selected size: empty so user is required to choose unless there's only 1 option
-  const [selectedSize, setSelectedSize] = useState(() => (
-    availableSizes.length === 1 ? availableSizes[0] : ''
-  ));
-
-  useEffect(() => {
-    if (availableSizes.length === 1) {
-      setSelectedSize(availableSizes[0]);
-    } else {
-      setSelectedSize('');
-    }
-    setSizeError(false);
-  }, [availableSizes]);
-
-  useEffect(() => {
-    if (!isAdded) return undefined;
-    const timer = window.setTimeout(() => setIsAdded(false), 1400);
-    return () => window.clearTimeout(timer);
-  }, [isAdded]);
-
-  const handleSizeSelect = (size) => {
-    setSelectedSize(size);
-    if (sizeError) setSizeError(false);
-  };
-
-  const handleAddToCart = () => {
-    // Enforce size selection if sizes are present
-    if (availableSizes.length > 0 && !selectedSize) {
-      setSizeError(true);
-      return;
-    }
-
-    const finalSize = selectedSize || product.size || 'Standard';
-    const finalColor = product.color || 'Standard';
-    
-    // Product price is already discounted globally
-    const unitPrice = product.price || 0;
-
-    addItem({
-      productId: product.id,
-      name: product.name,
-      size: finalSize,
-      color: finalColor,
-      detail: `${finalColor} • Size: ${finalSize}`,
-      quantity: 1,
-      unitPrice: unitPrice,
-      originalPrice: product.originalPrice || product.price,
-      image: product.imageUrls?.[0] || product.image,
-      alt: product.name,
-    });
-    setIsAdded(true);
-  };
-
+  
   const ratingVal = product.averageRating || product.rating || 0;
   const reviewCnt = product.reviewCount ?? product.reviews ?? 0;
-
   const originalPrice = product.originalPrice || product.price || 0;
   const hasDiscount = product.hasDiscount || false;
   const discountPercent = product.discountPercent || 0;
   const discountedPrice = product.price || 0;
 
   return (
-    <div className={`product-info ${styles.root}`}>
-      <FavoriteButton productId={product.id} className={styles.favorite} />
+    <div className={styles.basicInfo}>
       <Eyebrow>{product.categoryName || t('product.collection')}</Eyebrow>
-      <h1>{product.name}</h1>
+      <h1 className={styles.title}>{product.name}</h1>
       
-      <div className="price-line">
-        <div className={styles.priceGroup}>
-          <strong>${discountedPrice.toFixed(2)}</strong>
-          {hasDiscount && (
-            <del className={styles.originalPrice}>${originalPrice.toFixed(2)}</del>
-          )}
-          {hasDiscount && (
-            <span className={styles.discountTag}>
-              {t('coupon.badge', { percent: discountPercent })}
-            </span>
-          )}
-        </div>
-        <span style={{ color: 'var(--star, #f59e0b)' }}>
-          {reviewCnt > 0 ? (
-            <>★★★★★ {ratingVal.toFixed(1)} ({reviewCnt} {t('product.verifiedReviews')})</>
-          ) : (
-            <span style={{ color: 'var(--muted)' }}>{t('product.noReviewsYet')}</span>
-          )}
-        </span>
+      <div className={styles.priceRow}>
+        <strong>${discountedPrice.toFixed(2)}</strong>
+        {hasDiscount && <del className={styles.originalPrice}>${originalPrice.toFixed(2)}</del>}
       </div>
-      
-      <p>{product.description}</p>
 
-      {/* Real product size options */}
-      {availableSizes.length > 0 && (
-        <div className={`option-group ${sizeError ? styles.sizeGroupError : ''}`}>
-          <div className="option-title">
-            {t('product.size')}: {selectedSize ? <strong>{selectedSize}</strong> : <span className={styles.unselectedText}>({t('product.selectSizePrompt')})</span>}
-          </div>
-          <SegmentedControl
-            options={availableSizes.map((size) => ({ label: size, value: size }))}
-            selected={selectedSize}
-            onChange={handleSizeSelect}
-          />
-          {sizeError && (
-            <p className={styles.sizeErrorText}>
-              ⚠️ {t('product.selectSizeWarning')}
-            </p>
-          )}
+      <div className={styles.ratingRow}>
+        <span className={styles.stars}>★★★★★</span>
+        <span className={styles.ratingVal}>{ratingVal.toFixed(1)}</span>
+        <span className={styles.reviewCnt}>({reviewCnt} {t('product.verifiedReviews')})</span>
+      </div>
+
+      <div className={styles.stockStatus}>
+        <span className={styles.stockDot}></span> Stokda var
+      </div>
+
+      <p className={styles.shortDesc}>{product.description}</p>
+
+      <div className={styles.specsList}>
+        <div className={styles.specItem}>
+          <span className={styles.specIcon}>🎨</span>
+          <span className={styles.specLabel}>Rəng:</span>
+          <span className={styles.specValue}>{product.color || 'Standart'}</span>
         </div>
-      )}
-
-      {product.color && (
-        <div className="option-group">
-          <div className="option-title">{t('product.color')} <strong>{product.color}</strong></div>
+        <div className={styles.specItem}>
+          <span className={styles.specIcon}>📏</span>
+          <span className={styles.specLabel}>Ölçü:</span>
+          <span className={styles.specValue}>Seçin</span>
         </div>
-      )}
-
-      <div className="button-row">
-        <Button onClick={handleAddToCart}>
-          {isAdded ? t('product.addedToCart') : t('product.addToCart')}
-        </Button>
+        <div className={styles.specItem}>
+          <span className={styles.specIcon}>🏷️</span>
+          <span className={styles.specLabel}>Kateqoriya:</span>
+          <span className={styles.specValue}>{product.categoryName || 'T-shirt'}</span>
+        </div>
       </div>
     </div>
   );
+}
+
+export function ProductSizeSelector({ availableSizes, selectedSize, onSelectSize, sizeError }) {
+  const { t } = useTranslation();
+  
+  if (availableSizes.length === 0) return null;
+
+  return (
+    <div className={`${styles.sizeCard} ${sizeError ? styles.sizeError : ''}`}>
+      <div className={styles.sizeHeader}>
+        <h3>Ölçü seçin</h3>
+        <button className={styles.sizeGuideBtn}>Ölçü cədvəli 📏</button>
+      </div>
+      <SegmentedControl
+        options={availableSizes.map((size) => ({ label: size, value: size }))}
+        selected={selectedSize}
+        onChange={onSelectSize}
+      />
+      {sizeError && (
+        <p className={styles.sizeErrorText}>
+          ⚠️ {t('product.selectSizeWarning')}
+        </p>
+      )}
+    </div>
+  );
+}
+
+export function ProductDetailsGrid({ product }) {
+  return (
+    <div className={styles.detailsGrid}>
+      <div className={styles.aboutCol}>
+        <h3>MƏHSUL HAQQINDA</h3>
+        <p>{product.description}</p>
+      </div>
+      <div className={styles.featuresCol}>
+        <h3>XÜSUSİYYƏTLƏR</h3>
+        <ul className={styles.featuresList}>
+          <li><span className={styles.check}>✔</span> Yumşaq və rahat parça</li>
+          <li><span className={styles.check}>✔</span> Gündəlik istifadə üçün ideal</li>
+          <li><span className={styles.check}>✔</span> Minimal və modern dizayn</li>
+          <li><span className={styles.check}>✔</span> Başqa rənglərdə mövcuddur</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export function ProductCartBar({ product, isAdded, onAddToCart }) {
+  const { t } = useTranslation();
+  const discountedPrice = product.price || 0;
+
+  return (
+    <div className={styles.fixedCartBar}>
+      <div className={styles.cartPrice}>${discountedPrice.toFixed(2)}</div>
+      <Button onClick={onAddToCart} className={styles.cartBtn}>
+        {isAdded ? t('product.addedToCart') : 'Səbətə əlavə et'}
+      </Button>
+    </div>
+  );
+}
+
+// Keep the default export so other parts of the app don't break until we update ProductPage.jsx
+export default function ProductInfoPanel({ product }) {
+  return null;
 }
