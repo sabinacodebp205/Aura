@@ -462,12 +462,25 @@
   .header-main {
     flex-direction: column;
     text-align: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .profile-header {
+    padding: 24px 16px;
   }
   .edit-btn {
     align-self: center;
   }
   .stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding-top: 16px;
+  }
+  .stat-card {
+    padding: 12px 8px;
+  }
+  .stat-number {
+    font-size: 18px;
   }
   .form-row {
     grid-template-columns: 1fr;
