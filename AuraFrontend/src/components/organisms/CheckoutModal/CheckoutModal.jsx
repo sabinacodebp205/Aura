@@ -42,11 +42,11 @@ export default function CheckoutModal({ isOpen, onClose, total }) {
             <h2>Sifarişi Tamamla</h2>
             <form onSubmit={handleSubmit}>
               <div className={styles.formGroup}>
-                <label>Ad və Soyad</label>
+                <label>{t('checkout.fullName')}</label>
                 <input
                   type="text"
                   required
-                  placeholder="Adınız və Soyadınız"
+                  placeholder={t('checkout.fullNamePlaceholder')}
                   value={formData.name}
                   onChange={e => setFormData({ ...formData, name: e.target.value })}
                 />
@@ -77,14 +77,14 @@ export default function CheckoutModal({ isOpen, onClose, total }) {
                 <span>${total.toFixed(2)}</span>
               </div>
 
-              <Button type="submit" fullWidth>Sifarişi Təsdiqlə</Button>
+              <Button type="submit" fullWidth>{t('checkout.confirmOrder')}</Button>
             </form>
           </>
         ) : (
           <div className={styles.successMessage}>
-            <h2>Təşəkkürlər! 🎉</h2>
+            <h2>{t('checkout.successTitle')}</h2>
             <p>Sifarişiniz qeydə alındı. Tezliklə sizinlə əlaqə saxlayacağıq.</p>
-            <Button onClick={handleClose} fullWidth>Ana Səhifəyə Qayıt</Button>
+            <Button onClick={handleClose} fullWidth>{t('checkout.returnHome')}</Button>
           </div>
         )}
       </div>

@@ -244,9 +244,9 @@ export default function ProfilePage() {
                           <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#555', fontSize: '0.95rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                               {item.imageUrl && (
-                                <img src={getImageUrl(item.imageUrl)} alt={item.productName || 'Məhsul'} style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '4px' }} onError={handleImageError} />
+                                <img src={getImageUrl(item.imageUrl)} alt={item.productName || t('checkout.product')} style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '4px' }} onError={handleImageError} />
                               )}
-                              <span>{item.quantity}x {item.productName || 'Məhsul'}</span>
+                              <span>{item.quantity}x {item.productName || t('checkout.product')}</span>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                               <span>${(item.price * item.quantity).toFixed(2)}</span>

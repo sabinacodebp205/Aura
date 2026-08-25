@@ -58,8 +58,8 @@ export default function CheckoutPage() {
     return (
       <main className={`page-shell ${styles.root}`}>
         <div className={styles.emptyState}>
-          <h2>Səbətiniz boşdur</h2>
-          <Button onClick={() => navigate('/')}>Alış-verişə qayıt</Button>
+          <h2>{t('checkout.cartEmpty')}</h2>
+          <Button onClick={() => navigate('/')}>{t('checkout.returnToShopping')}</Button>
         </div>
       </main>
     );
@@ -108,7 +108,7 @@ export default function CheckoutPage() {
       if (backendMsg) {
         alert(backendMsg);
       } else {
-        alert("Xəta baş verdi. Sifarişi tamamlamaq mümkün olmadı.");
+        alert(t("checkout.errorCreatingOrder"));
       }
     }
   };
@@ -118,11 +118,11 @@ export default function CheckoutPage() {
       <main className={`page-shell ${styles.root}`}>
         <div className={styles.successState}>
           <div className={styles.checkIcon}>✓</div>
-          <h2>Təşəkkürlər! 🎉</h2>
-          <p>Sifarişiniz uğurla qeydə alındı. Təsdiq üçün sizinlə əlaqə saxlayacağıq.</p>
+          <h2>{t('checkout.successTitle')}</h2>
+          <p>{t('checkout.successMessage')}</p>
           <div className={styles.buttonGroup} style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '24px' }}>
-            <Button onClick={() => navigate('/profile', { state: { tab: 'orders' } })}>Sifarişlərimə bax</Button>
-            <Button variant="outline" onClick={() => navigate('/')}>Ana Səhifəyə Qayıt</Button>
+            <Button onClick={() => navigate('/profile', { state: { tab: 'orders' } })}>{t('checkout.viewOrders')}</Button>
+            <Button variant="outline" onClick={() => navigate('/')}>{t('checkout.returnHome')}</Button>
           </div>
         </div>
       </main>
@@ -135,32 +135,32 @@ export default function CheckoutPage() {
         <div className={styles.mainContent}>
           
           <div className={styles.section}>
-            <h2>Çatdırılma Məlumatları</h2>
+            <h2>{t('checkout.deliveryInfo')}</h2>
             <form id="checkout-form" onSubmit={handleSubmit}>
               <div className={styles.formGroup}>
-                <label>Ad və Soyad</label>
+                <label>{t('checkout.fullName')}</label>
                 <input
                   type="text"
                   required
-                  placeholder="Adınız və Soyadınız"
+                  placeholder={t('checkout.fullNamePlaceholder')}
                   value={formData.name}
                   readOnly
                   className={styles.readOnlyInput}
                 />
               </div>
               <div className={styles.formGroup}>
-                <label>Email adresi</label>
+                <label>{t('checkout.email')}</label>
                 <input
                   type="email"
                   required
-                  placeholder="nümunə@email.com"
+                  placeholder={t('checkout.emailPlaceholder')}
                   value={formData.email}
                   readOnly
                   className={styles.readOnlyInput}
                 />
               </div>
 
-              <h3>Ünvan seçin</h3>
+              <h3>{t('checkout.chooseAddress')}</h3>
               {addresses.length > 0 ? (
                 <div className={styles.addressList}>
                   {addresses.map(addr => (
@@ -175,16 +175,16 @@ export default function CheckoutPage() {
                   ))}
                 </div>
               ) : (
-                <p>Profilinizdə heç bir ünvan yoxdur. Zəhmət olmasa profil bölməsindən yeni ünvan əlavə edin.</p>
+                <p>{t('checkout.noAddress')}</p>
               )}
             </form>
           </div>
 
           <div className={styles.section}>
-            <h2>Ödəniş Üsulu</h2>
+            <h2>{t('checkout.paymentMethod')}</h2>
             <div className={styles.paymentMethod}>
               <input type="radio" checked readOnly />
-              <label>Kart (Kredit və ya Debet kartı)</label>
+              <label>{t('checkout.cardPayment')}</label>
             </div>
           </div>
 
@@ -203,13 +203,13 @@ export default function CheckoutPage() {
 
         <div className={styles.sidebar}>
           <div className={styles.section}>
-            <h2>Sifariş Özəti</h2>
+            <h2>{t('checkout.orderSummary')}</h2>
             <div className={styles.itemsList}>
               {items.map((item) => (
                 <div key={item.id} className={styles.itemRow}>
                   <div className={styles.itemInfo}>
                     <div className={styles.imagePlaceholder}>
-                      {item.images?.[0] ? <img src={item.images[0]} alt={item.name} /> : <div className={styles.noImage}>Məhsul</div>}
+                      {item.images?.[0] ? <img src={item.images[0]} alt={item.name} /> : <div className={styles.noImage}>{t('checkout.product')}</div>}
                     </div>
                     <div>
                       <h4>{item.name}</h4>
@@ -225,21 +225,21 @@ export default function CheckoutPage() {
 
             <div className={styles.totalsBox}>
               <div className={styles.totalRow}>
-                <span>Məhsullar:</span>
+                <span>{t('checkout.productsTotal')}</span>
                 <span>${totals.products.toFixed(2)}</span>
               </div>
               <div className={styles.totalRow}>
-                <span>Çatdırılma:</span>
-                <span>{totals.shipping === 0 ? 'Pulsuz' : `$${totals.shipping.toFixed(2)}`}</span>
+                <span>{t('checkout.shipping')}</span>
+                <span>{totals.shipping === 0 ? t('checkout.free') : `$${totals.shipping.toFixed(2)}`}</span>
               </div>
               {totals.discountAmount > 0 && (
                 <div className={`${styles.totalRow} ${styles.discount}`}>
-                  <span>Endirim:</span>
+                  <span>{t('checkout.discount')}</span>
                   <span>-${totals.discountAmount.toFixed(2)}</span>
                 </div>
               )}
               <div className={`${styles.totalRow} ${styles.finalTotal}`}>
-                <span>Yekun Məbləğ:</span>
+                <span>{t('checkout.finalTotal')}</span>
                 <span>${totals.total.toFixed(2)}</span>
               </div>
             </div>
@@ -253,7 +253,7 @@ export default function CheckoutPage() {
               !addresses.find(a => a.id === selectedAddressId)?.country
             ) && (
               <div className={styles.validationWarning}>
-                <p>Profil və sifariş məlumatları uyğun deyil.</p>
+                <p>{t('checkout.profileMismatch')}</p>
               </div>
             )}
 
