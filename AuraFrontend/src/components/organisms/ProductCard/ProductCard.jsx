@@ -46,7 +46,7 @@ export default function ProductCard({ product }) {
           </div>
         </div>
       </Link>
-      <Rating score={product.rating} />
+      <Rating score={product.rating} reviews={product.reviews || product.reviewCount} />
     </article>
   );
 }

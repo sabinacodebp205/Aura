@@ -28,7 +28,8 @@ export function addRecentlyViewed(product) {
       price: product.price,
       image: product.imageUrls?.[0] || product.image || product.imageUrl || '',
       categoryName: product.categoryName || product.category || '',
-      rating: product.averageRating || product.rating || 5,
+      rating: product.averageRating ?? product.rating ?? null,
+      reviews: product.reviewCount ?? product.reviews ?? 0,
       viewedAt: Date.now(),
     };
 
