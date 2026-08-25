@@ -206,7 +206,8 @@
     "status": "Status:",
     "total": "Cəmi:",
     "itemCount": "Məhsul sayı:",
-    "save": "Yadda saxla"
+    "save": "Yadda saxla",
+    "noProduct": "Məhsul tapılmadı"
   },
   "recentlyViewed": {
     "eyebrow": "Tarixçəniz",
@@ -292,5 +293,29 @@
     "Shipped": "Kargoda",
     "Delivered": "Çatdırıldı",
     "Cancelled": "Ləğv edildi"
+  },
+  "productInfo": {
+    "color": "Rəng:",
+    "size": "Ölçü:",
+    "select": "Seçin",
+    "category": "Kateqoriya:",
+    "chooseSize": "Ölçü seçin",
+    "sizeGuide": "Ölçü cədvəli 📏",
+    "about": "MƏHSUL HAQQINDA",
+    "features": "XÜSUSİYYƏTLƏR",
+    "feat1": "Yumşaq və rahat parça",
+    "feat2": "Gündəlik istifadə üçün ideal",
+    "feat3": "Minimal və modern dizayn",
+    "feat4": "Başqa rənglərdə mövcuddur"
+  },
+  "social": {
+    "buyDesign": "Dizaynı al",
+    "save": "☆ Yadda saxla"
+  },
+  "checkoutModal": {
+    "title": "Sifarişi Tamamla",
+    "phone": "Əlaqə nömrəsi",
+    "address": "Çatdırılma ünvanı",
+    "success": "Sifarişiniz qeydə alındı. Tezliklə sizinlə əlaqə saxlayacağıq."
   }
 }

@@ -206,7 +206,8 @@
     "status": "Status:",
     "total": "Total:",
     "itemCount": "Item count:",
-    "save": "Save"
+    "save": "Save",
+    "noProduct": "No product found"
   },
   "recentlyViewed": {
     "eyebrow": "Browsing History",
@@ -292,5 +293,29 @@
     "Shipped": "Shipped",
     "Delivered": "Delivered",
     "Cancelled": "Cancelled"
+  },
+  "productInfo": {
+    "color": "Color:",
+    "size": "Size:",
+    "select": "Select",
+    "category": "Category:",
+    "chooseSize": "Choose size",
+    "sizeGuide": "Size guide 📏",
+    "about": "ABOUT PRODUCT",
+    "features": "FEATURES",
+    "feat1": "Soft and comfortable fabric",
+    "feat2": "Ideal for daily use",
+    "feat3": "Minimal and modern design",
+    "feat4": "Available in other colors"
+  },
+  "social": {
+    "buyDesign": "Buy design",
+    "save": "☆ Save"
+  },
+  "checkoutModal": {
+    "title": "Complete Order",
+    "phone": "Contact number",
+    "address": "Delivery address",
+    "success": "Your order has been recorded. We will contact you soon."
   }
 }

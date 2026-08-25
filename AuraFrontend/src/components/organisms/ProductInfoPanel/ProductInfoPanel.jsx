@@ -40,17 +40,17 @@ export function ProductBasicInfo({ product }) {
       <div className={styles.specsList}>
         <div className={styles.specItem}>
           <span className={styles.specIcon}>🎨</span>
-          <span className={styles.specLabel}>Rəng:</span>
+          <span className={styles.specLabel}>{t('productInfo.color')}</span>
           <span className={styles.specValue}>{product.color || 'Standart'}</span>
         </div>
         <div className={styles.specItem}>
           <span className={styles.specIcon}>📏</span>
-          <span className={styles.specLabel}>Ölçü:</span>
-          <span className={styles.specValue}>Seçin</span>
+          <span className={styles.specLabel}>{t('productInfo.size')}</span>
+          <span className={styles.specValue}>{t('productInfo.select')}</span>
         </div>
         <div className={styles.specItem}>
           <span className={styles.specIcon}>🏷️</span>
-          <span className={styles.specLabel}>Kateqoriya:</span>
+          <span className={styles.specLabel}>{t('productInfo.category')}</span>
           <span className={styles.specValue}>{product.categoryName || 'T-shirt'}</span>
         </div>
       </div>
@@ -66,8 +66,8 @@ export function ProductSizeSelector({ availableSizes, selectedSize, onSelectSize
   return (
     <div className={`${styles.sizeCard} ${sizeError ? styles.sizeError : ''}`}>
       <div className={styles.sizeHeader}>
-        <h3>Ölçü seçin</h3>
-        <button className={styles.sizeGuideBtn}>Ölçü cədvəli 📏</button>
+        <h3>{t('productInfo.chooseSize')}</h3>
+        <button className={styles.sizeGuideBtn}>{t('productInfo.sizeGuide')}</button>
       </div>
       <SegmentedControl
         options={availableSizes.map((size) => ({ label: size, value: size }))}
@@ -87,11 +87,11 @@ export function ProductDetailsGrid({ product }) {
   return (
     <div className={styles.detailsGrid}>
       <div className={styles.aboutCol}>
-        <h3>MƏHSUL HAQQINDA</h3>
+        <h3>{t('productInfo.about')}</h3>
         <p>{product.description}</p>
       </div>
       <div className={styles.featuresCol}>
-        <h3>XÜSUSİYYƏTLƏR</h3>
+        <h3>{t('productInfo.features')}</h3>
         <ul className={styles.featuresList}>
           <li><span className={styles.check}>✔</span> Yumşaq və rahat parça</li>
           <li><span className={styles.check}>✔</span> Gündəlik istifadə üçün ideal</li>

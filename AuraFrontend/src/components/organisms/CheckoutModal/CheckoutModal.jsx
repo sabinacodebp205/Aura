@@ -39,7 +39,7 @@ export default function CheckoutModal({ isOpen, onClose, total }) {
 
         {step === 1 ? (
           <>
-            <h2>Sifarişi Tamamla</h2>
+            <h2>{t('checkoutModal.title')}</h2>
             <form onSubmit={handleSubmit}>
               <div className={styles.formGroup}>
                 <label>{t('checkout.fullName')}</label>
@@ -52,7 +52,7 @@ export default function CheckoutModal({ isOpen, onClose, total }) {
                 />
               </div>
               <div className={styles.formGroup}>
-                <label>Əlaqə nömrəsi</label>
+                <label>{t('checkoutModal.phone')}</label>
                 <input
                   type="tel"
                   required
@@ -62,7 +62,7 @@ export default function CheckoutModal({ isOpen, onClose, total }) {
                 />
               </div>
               <div className={styles.formGroup}>
-                <label>Çatdırılma ünvanı</label>
+                <label>{t('checkoutModal.address')}</label>
                 <input
                   type="text"
                   required
@@ -83,7 +83,7 @@ export default function CheckoutModal({ isOpen, onClose, total }) {
         ) : (
           <div className={styles.successMessage}>
             <h2>{t('checkout.successTitle')}</h2>
-            <p>Sifarişiniz qeydə alındı. Tezliklə sizinlə əlaqə saxlayacağıq.</p>
+            <p>{t('checkoutModal.success')}</p>
             <Button onClick={handleClose} fullWidth>{t('checkout.returnHome')}</Button>
           </div>
         )}

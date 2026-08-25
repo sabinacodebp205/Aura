@@ -248,7 +248,7 @@ export default function ProfilePage() {
                           </div>
                         ))
                       ) : (
-                        <span style={{color: '#666'}}>Məhsul tapılmadı</span>
+                        <span style={{color: '#666'}}>{t('profile.noProduct')}</span>
                       )}
                     </div>
                     
