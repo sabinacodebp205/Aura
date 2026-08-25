@@ -225,21 +225,16 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            {user && formData.name !== [user.name, user.surname].filter(Boolean).join(' ') && (
+            {user && (
+              formData.name !== [user.name, user.surname].filter(Boolean).join(' ') ||
+              formData.email !== (user.email || '') ||
+              !selectedAddressId ||
+              !addresses.find(a => a.id === selectedAddressId)?.street ||
+              !addresses.find(a => a.id === selectedAddressId)?.city ||
+              !addresses.find(a => a.id === selectedAddressId)?.country
+            ) && (
               <div className={styles.validationWarning}>
-                <p>Ad-Soyad məlumatı profilinizlə uyğun gəlmir.</p>
-              </div>
-            )}
-
-            {user && formData.email !== (user.email || '') && (
-              <div className={styles.validationWarning}>
-                <p>Email ünvanı profilinizlə uyğun gəlmir.</p>
-              </div>
-            )}
-
-            {(!selectedAddressId || !addresses.find(a => a.id === selectedAddressId)?.street || !addresses.find(a => a.id === selectedAddressId)?.city || !addresses.find(a => a.id === selectedAddressId)?.country) && (
-              <div className={styles.validationWarning}>
-                <p>Ünvan məlumatı profilinizlə uyğun gəlmir. Zəhmət olmasa <a href="#" onClick={(e) => { e.preventDefault(); navigate('/profile', { state: { tab: 'addresses' } }); }}>ünvan əlavə edin</a>.</p>
+                <p>Profil və sifariş məlumatları uyğun deyil.</p>
               </div>
             )}
 
