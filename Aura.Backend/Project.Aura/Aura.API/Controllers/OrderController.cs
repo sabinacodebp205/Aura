@@ -68,11 +68,6 @@ namespace Aura.API.Controllers
                 return BadRequest(new { message = "Seçilmiş ünvan tapılmadı. Zəhmət olmasa ünvan əlavə edin." });
             }
 
-            if (address.UserId != userId)
-            {
-                return BadRequest(new { message = "Sifariş məlumatları profil məlumatları ilə uyğun gəlmir (Ünvan sizə aid deyil)." });
-            }
-
             string expectedName = $"{user.Name} {user.Surname}".Trim();
             if (dto.Name != expectedName || dto.Email != user.Email)
             {
