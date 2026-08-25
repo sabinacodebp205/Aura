@@ -56,10 +56,10 @@ namespace Aura.API.Controllers
                 return Unauthorized();
 
             if (string.IsNullOrWhiteSpace(user.Name) || 
-                string.IsNullOrWhiteSpace(user.Surname) || 
-                string.IsNullOrWhiteSpace(user.PhoneNumber))
+                string.IsNullOrWhiteSpace(user.Surname) ||
+                string.IsNullOrWhiteSpace(user.Email))
             {
-                return BadRequest(new { message = "Sifariş vermək üçün profil məlumatlarınızı (Ad, Soyad, Telefon) tamamlayın." });
+                return BadRequest(new { message = "Sifariş vermək üçün profil məlumatlarınızı (Ad, Soyad, Email) tamamlayın." });
             }
 
             var address = await _addressService.GetByIdAsync(dto.AddressId);

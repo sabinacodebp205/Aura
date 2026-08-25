@@ -221,9 +221,15 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            {user && (!user.name || !user.surname || !user.phoneNumber) && (
+            {(!formData.name || formData.name.trim() === '') && (
               <div className={styles.validationWarning}>
-                <p>Sifariş vermək üçün <a href="#" onClick={(e) => { e.preventDefault(); navigate('/profile', { state: { tab: 'settings' } }); }}>profilinizi tamamlayın</a> (Ad, Soyad, Telefon).</p>
+                <p>Zəhmət olmasa Ad və Soyadınızı daxil edin.</p>
+              </div>
+            )}
+
+            {(!formData.email || !formData.email.includes('@')) && (
+              <div className={styles.validationWarning}>
+                <p>Zəhmət olmasa düzgün email adresi daxil edin.</p>
               </div>
             )}
 
@@ -238,7 +244,7 @@ export default function CheckoutPage() {
               form="checkout-form" 
               fullWidth 
               style={{ marginTop: '24px' }}
-              disabled={(user && (!user.name || !user.surname || !user.phoneNumber)) || (!selectedAddressId || !addresses.find(a => a.id === selectedAddressId)?.street || !addresses.find(a => a.id === selectedAddressId)?.city || !addresses.find(a => a.id === selectedAddressId)?.country)}
+              disabled={(!formData.name || formData.name.trim() === '') || (!formData.email || !formData.email.includes('@')) || (!selectedAddressId || !addresses.find(a => a.id === selectedAddressId)?.street || !addresses.find(a => a.id === selectedAddressId)?.city || !addresses.find(a => a.id === selectedAddressId)?.country)}
             >
               Sifarişi Təsdiqlə
             </Button>
