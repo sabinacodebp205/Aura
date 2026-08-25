@@ -2,14 +2,14 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { getAllFavorites, addFavorite, removeFavorite } from '../api/favoriteService';
 import { products as staticSeedProducts } from '../data/products';
+import { useAuth } from './AuthContext';
 
 const FavoritesContext = createContext(null);
 
-function isLoggedIn() {
-  return !!localStorage.getItem('jwt');
-}
 
 export function FavoritesProvider({ children }) {
+  const { isAuthenticated } = useAuth();
+
   // Store full favorite items from backend
   const [favorites, setFavorites] = useState([]);
   // Store list of favorited product IDs
@@ -18,7 +18,7 @@ export function FavoritesProvider({ children }) {
 
   // Fetch favorites from backend if logged in
   const fetchFavorites = useCallback(async () => {
-    if (!isLoggedIn()) {
+    if (!isAuthenticated) {
       setFavorites([]);
       setFavoriteIds([]);
       return;
@@ -35,22 +35,15 @@ export function FavoritesProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     fetchFavorites();
-
-    const handleLogout = () => {
-      setFavorites([]);
-      setFavoriteIds([]);
-    };
-    window.addEventListener('aura_logout', handleLogout);
-    return () => window.removeEventListener('aura_logout', handleLogout);
   }, [fetchFavorites]);
 
   const value = useMemo(() => {
     const toggleFavorite = async (productId, extraProductInfo = null) => {
-      if (!isLoggedIn()) {
+      if (!isAuthenticated) {
         alert('Favorilərə əlavə etmək üçün daxil olun');
         return;
       }
@@ -69,7 +62,7 @@ export function FavoritesProvider({ children }) {
       }
 
       // Backend sync if logged in
-      if (isLoggedIn()) {
+      if (isAuthenticated) {
         try {
           if (isCurrentlyFav) {
             // Find existing favorite record to get its backend ID
@@ -101,7 +94,7 @@ export function FavoritesProvider({ children }) {
       loading,
       refetchFavorites: fetchFavorites,
     };
-  }, [favorites, favoriteIds, loading, fetchFavorites]);
+  }, [favorites, favoriteIds, loading, fetchFavorites, isAuthenticated]);
 
   return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>;
 }
