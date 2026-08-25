@@ -39,20 +39,20 @@
 */
 @media (max-width: 768px) {
   .productLayout {
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.5fr);
+    grid-template-columns: 1fr;
     grid-template-areas: 
-      "gallery info"
-      "size size"
-      "details details"
-      "cart cart";
-    gap: 16px;
-    padding: 24px 16px 84px;
+      "gallery"
+      "info"
+      "size"
+      "details"
+      "cart";
+    gap: 24px;
+    padding: 24px 16px 40px;
     width: 100%;
   }
 
   .galleryArea { grid-area: gallery; }
   
-  /* Make gallery fill the 1.2fr space better */
   .galleryArea :global(.gallery-main) {
     border-radius: 12px;
   }

@@ -225,7 +225,7 @@
 
 @media (max-width: 768px) {
   .detailsGrid {
-    grid-template-columns: 1fr; /* Stack about and features on small screens if needed, but screenshot shows 1fr 1fr might fit? Let's keep 1fr 1fr for now unless it overflows. Actually screenshot shows them stacked or side by side? Screenshot shows "MƏHSUL HAQQINDA" on left, "XÜSUSİYYƏTLƏR" on right side by side. So I'll keep 1fr 1fr but reduce font sizes. */
+    grid-template-columns: 1fr;
     gap: 16px;
     padding: 16px;
   }
@@ -236,8 +236,13 @@
     font-size: 24px;
   }
   .fixedCartBar {
+    position: fixed;
+    bottom: 74px; /* Above BottomNav */
+    left: 0;
+    right: 0;
     border-radius: 0;
-    margin: 0 -16px; /* Bleed to edges */
+    margin: 0;
     padding: 16px;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
   }
 }
