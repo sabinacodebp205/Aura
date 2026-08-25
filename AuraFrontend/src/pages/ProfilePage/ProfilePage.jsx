@@ -248,7 +248,12 @@ export default function ProfilePage() {
                               )}
                               <span>{item.quantity}x {item.productName || 'Məhsul'}</span>
                             </div>
-                            <span>${(item.price * item.quantity).toFixed(2)}</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                              <span>${(item.price * item.quantity).toFixed(2)}</span>
+                              <Link to={`/product/${item.productId}`} className={styles['fav-view-btn']}>
+                                {t('favorites.viewDetails')}
+                              </Link>
+                            </div>
                           </div>
                         ))
                       ) : (

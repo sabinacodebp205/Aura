@@ -10,17 +10,19 @@ function isLoggedIn() {
 }
 
 export function FavoritesProvider({ children }) {
-  // Store full favorite items from backend / seed data
+  // Store full favorite items from backend
   const [favorites, setFavorites] = useState([]);
   // Store list of favorited product IDs
-  const [favoriteIds, setFavoriteIds] = useState(() => 
-    staticSeedProducts.filter((p) => p.isFavorite).map((p) => p.id)
-  );
+  const [favoriteIds, setFavoriteIds] = useState([]);
   const [loading, setLoading] = useState(false);
 
   // Fetch favorites from backend if logged in
   const fetchFavorites = useCallback(async () => {
-    if (!isLoggedIn()) return;
+    if (!isLoggedIn()) {
+      setFavorites([]);
+      setFavoriteIds([]);
+      return;
+    }
     setLoading(true);
     try {
       const data = await getAllFavorites();
@@ -48,6 +50,11 @@ export function FavoritesProvider({ children }) {
 
   const value = useMemo(() => {
     const toggleFavorite = async (productId, extraProductInfo = null) => {
+      if (!isLoggedIn()) {
+        alert('Favorilərə əlavə etmək üçün daxil olun');
+        return;
+      }
+
       const isCurrentlyFav = favoriteIds.includes(productId);
 
       // Optimistic update

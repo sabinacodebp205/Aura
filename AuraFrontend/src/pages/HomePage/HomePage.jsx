@@ -11,7 +11,7 @@ import ProductGrid from '../../components/organisms/ProductGrid/ProductGrid';
 import RecentlyViewedSection from '../../components/organisms/RecentlyViewedSection/RecentlyViewedSection';
 import { getAllProducts } from '../../api/productService';
 import { getAllCategories } from '../../api/categoryService';
-import { newArrivals } from '../../data/products';
+
 import styles from './HomePage.module.css';
 
 export default function HomePage() {

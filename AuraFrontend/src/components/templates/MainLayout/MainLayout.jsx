@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Topbar from '../../organisms/Topbar/Topbar';
 import BottomNav from '../../organisms/BottomNav/BottomNav';
-import ChatWidget from '../../organisms/ChatWidget/ChatWidget';
+
 import styles from './MainLayout.module.css';
 
 export default function MainLayout() {
@@ -12,7 +12,7 @@ export default function MainLayout() {
         <Outlet />
       </main>
       <BottomNav />
-      <ChatWidget />
+
     </div>
   );
 }

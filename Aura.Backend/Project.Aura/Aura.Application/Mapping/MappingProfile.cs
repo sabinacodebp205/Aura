@@ -56,6 +56,13 @@ namespace Aura.Application.Mapping
                     opt => opt.MapFrom(src => src.Images != null 
                         ? src.Images.OrderByDescending(i => i.IsMain).ThenBy(i => i.CreatedDate).Select(i => ToAbsoluteUrl(i.ImageUrl)).ToList() 
                         : new List<string>()))
+                .ForMember(dest => dest.ReviewCount,
+                    opt => opt.MapFrom(src => src.Reviews != null ? src.Reviews.Count : 0))
+                .ForMember(dest => dest.AverageRating,
+                    opt => opt.MapFrom(src =>
+                        (src.Reviews != null && src.Reviews.Any())
+                            ? src.Reviews.Average(r => r.Rating)
+                            : 0))
                 .ReverseMap();
 
             CreateMap<Product, ProductDetailsDto>()

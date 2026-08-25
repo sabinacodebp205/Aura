@@ -191,21 +191,6 @@
     "cancelOrder": "Sifarişi ləğv et",
     "cancelConfirm": "Sifarişi silmək istədiyinizə əminsiniz?"
   },
-  "chat": {
-    "launcher": "AI Köməkçi",
-    "headerTitle": "AURA Konsyerj",
-    "status": "AI Alış-veriş Köməkçisi",
-    "restart": "Söhbəti Yenidən Başlat",
-    "close": "Köməkçini Bağla",
-    "welcomeMsg": "Xoş gəlmisiniz! Mən sizin **AURA Alış-veriş Konsyerjinizəm**. Ölçü seçimi, parçalar, çatdırılma və ya tövsiyələrlə bağlı sizə necə kömək edə bilərəm?",
-    "promptSizing": "📏 Ölçü Bələdçisi",
-    "promptShipping": "🚚 Çatdırılma Məlumatı",
-    "promptReturns": "🔄 Geri Qaytarma Şərtləri",
-    "promptFabrics": "🧵 Parça və Keyfiyyət",
-    "promptHoodies": "🔥 Populyar Hudilər",
-    "inputPlaceholder": "Ölçü, parça, çatdırılma haqqında soruşun...",
-    "send": "Mesaj göndər",
-    "errorMsg": "Üzr istəyirəm, hal-hazırda əlaqə qurmaqda çətinlik çəkirəm. Ölçü, çatdırılma və ya parça qaydaları haqqında soruşa bilərsiniz!"
   },
   "recentlyViewed": {
     "eyebrow": "Tarixçəniz",

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +27,10 @@ namespace Aura.Application.DTOs.Product
         public string CategoryName { get; set; } = null!;
 
         public List<string> ImageUrls { get; set; } = new();
+
+        public double AverageRating { get; set; }
+
+        public int ReviewCount { get; set; }
     }
 
 }

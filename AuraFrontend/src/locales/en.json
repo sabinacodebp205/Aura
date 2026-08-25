@@ -191,21 +191,6 @@
     "cancelOrder": "Cancel order",
     "cancelConfirm": "Are you sure you want to remove this order?"
   },
-  "chat": {
-    "launcher": "AI Assistant",
-    "headerTitle": "AURA Concierge",
-    "status": "AI Shopping Assistant",
-    "restart": "Restart Conversation",
-    "close": "Close Assistant",
-    "welcomeMsg": "Welcome to **AURA**. I'm your AI Shopping Concierge. How can I assist you with sizing, materials, shipping, or recommendations today?",
-    "promptSizing": "📏 Sizing Guide",
-    "promptShipping": "🚚 Shipping & Delivery",
-    "promptReturns": "🔄 Return Policy",
-    "promptFabrics": "🧵 Fabric & Materials",
-    "promptHoodies": "🔥 Popular Hoodies",
-    "inputPlaceholder": "Ask about sizing, fabrics, shipping...",
-    "send": "Send message",
-    "errorMsg": "I apologize, but I'm currently having trouble connecting. Please feel free to ask about sizing, shipping policies, or materials in the meantime!"
   },
   "recentlyViewed": {
     "eyebrow": "Browsing History",
