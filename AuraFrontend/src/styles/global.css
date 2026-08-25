@@ -1821,52 +1821,86 @@ button {
   }
 }
 
-@media (max-width: 560px) {
-  .brand {
+@media (max-width: 768px) {
+  /* Typography & Readability */
+  body {
+    font-size: 16px; /* Prevent auto-zoom */
+    line-height: 1.5;
+  }
+  p {
+    max-width: 75ch; /* Maintain line length */
+  }
+  .hero h1, .page-shell h1, .section-heading h2 {
+    font-size: clamp(32px, 8vw, 48px);
+  }
+
+  /* Layout & Spacing */
+  .section-pad, .page-shell {
+    width: 100%;
+    padding: 24px 16px 84px; /* Reduced side padding */
+  }
+  .split-section, .editorial-grid, .collection-grid, .product-detail {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Product Grid */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px; /* Tighter gap */
+  }
+  .product-copy h3 {
     font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-
-  .brand-mark {
-    width: 30px;
-    height: 30px;
+  .product-copy p {
+    font-size: 14px;
   }
-
-  .hero h1 {
-    font-size: 58px;
+  
+  /* Touch Targets (Buttons, Icons) */
+  .button, .icon-button, .icon-tool, .favorite-button, button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 8px 16px;
   }
-
+  .favorite-button, .icon-button, .icon-tool {
+    padding: 0; /* Let grid/flex center it within 44x44 */
+  }
+  
+  /* Media & Hero */
+  .hero-media::after {
+    background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+  }
+  .hero-content {
+    padding: 24px;
+  }
   .home-slider .hero-content h1 {
-    font-size: 38px;
+    font-size: clamp(36px, 8vw, 48px);
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.6);
   }
-
   .hero p {
     font-size: 16px;
+    text-shadow: 0px 1px 3px rgba(0,0,0,0.6);
+  }
+  .home-command {
+    width: calc(100% - 32px);
+    margin: 16px auto;
+  }
+  
+  /* Forms */
+  input, textarea, select {
+    font-size: 16px !important;
+    width: 100%;
   }
 
-  .hero-actions,
-  .button-row {
-    display: grid;
-  }
-
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .story-card div {
-    inset: auto 12px 12px;
-  }
-
-  .ai-panel {
-    padding: 22px;
-  }
-
-  .concept-list {
-    grid-template-columns: 1fr;
-  }
-
-  .hoodie-shape {
-    width: 320px;
-    margin-left: -16px;
-    transform: scale(0.78);
-  }
+  /* Miscellaneous fixes from old media query */
+  .brand { font-size: 15px; }
+  .brand-mark { width: 30px; height: 30px; }
+  .hero-actions, .button-row { display: grid; gap: 12px; }
+  .story-card div { inset: auto 12px 12px; }
+  .ai-panel { padding: 22px; }
+  .concept-list { grid-template-columns: 1fr; }
+  .hoodie-shape { width: 320px; margin-left: -16px; transform: scale(0.78); }
 }

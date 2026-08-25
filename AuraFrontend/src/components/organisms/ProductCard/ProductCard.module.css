@@ -86,3 +86,21 @@
   color: var(--muted);
   text-decoration: line-through;
 }
+
+@media (max-width: 768px) {
+  .product-copy {
+    padding: 12px 10px 10px;
+  }
+  .product-copy h3 {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .product-copy span {
+    font-size: 11px;
+  }
+  .currentPrice {
+    font-size: 14px;
+  }
+}
