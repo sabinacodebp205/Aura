@@ -12,10 +12,14 @@
 }
 
 @media (max-width: 900px) {
+  .root {
+    padding: 24px 16px 84px;
+  }
   .checkoutLayout {
     grid-template-columns: 1fr;
     flex-direction: column-reverse;
     display: flex;
+    align-items: stretch;
   }
 }
 

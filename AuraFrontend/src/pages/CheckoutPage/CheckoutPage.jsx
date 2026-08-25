@@ -195,7 +195,7 @@ export default function CheckoutPage() {
               fullWidth 
               disabled={isSubmitDisabled}
             >
-              Sifarişi Təsdiqlə
+              {t('checkout.confirmOrder')}
             </Button>
           </div>
 
@@ -265,7 +265,7 @@ export default function CheckoutPage() {
                 style={{ marginTop: '24px' }}
                 disabled={isSubmitDisabled}
               >
-                Sifarişi Təsdiqlə
+                {t('checkout.confirmOrder')}
               </Button>
             </div>
           </div>
