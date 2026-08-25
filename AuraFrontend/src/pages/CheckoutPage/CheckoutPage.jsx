@@ -94,7 +94,12 @@ export default function CheckoutPage() {
       }, 500);
     } catch (err) {
       console.error("Error creating order:", err);
-      alert("Xəta baş verdi. Sifarişi tamamlamaq mümkün olmadı.");
+      const backendMsg = err.response?.data?.message;
+      if (backendMsg) {
+        alert(backendMsg);
+      } else {
+        alert("Xəta baş verdi. Sifarişi tamamlamaq mümkün olmadı.");
+      }
     }
   };
 
@@ -216,7 +221,25 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            <Button type="submit" form="checkout-form" fullWidth style={{ marginTop: '24px' }}>
+            {user && (!user.name || !user.surname || !user.phoneNumber) && (
+              <div className={styles.validationWarning}>
+                <p>Sifariş vermək üçün <a href="#" onClick={(e) => { e.preventDefault(); navigate('/profile', { state: { tab: 'settings' } }); }}>profilinizi tamamlayın</a> (Ad, Soyad, Telefon).</p>
+              </div>
+            )}
+
+            {(!selectedAddressId || !addresses.find(a => a.id === selectedAddressId)?.street || !addresses.find(a => a.id === selectedAddressId)?.city || !addresses.find(a => a.id === selectedAddressId)?.country) && (
+              <div className={styles.validationWarning}>
+                <p>Zəhmət olmasa <a href="#" onClick={(e) => { e.preventDefault(); navigate('/profile', { state: { tab: 'addresses' } }); }}>ünvan əlavə edin və ya tamamlayın</a> (Küçə, Şəhər, Ölkə).</p>
+              </div>
+            )}
+
+            <Button 
+              type="submit" 
+              form="checkout-form" 
+              fullWidth 
+              style={{ marginTop: '24px' }}
+              disabled={(user && (!user.name || !user.surname || !user.phoneNumber)) || (!selectedAddressId || !addresses.find(a => a.id === selectedAddressId)?.street || !addresses.find(a => a.id === selectedAddressId)?.city || !addresses.find(a => a.id === selectedAddressId)?.country)}
+            >
               Sifarişi Təsdiqlə
             </Button>
           </div>

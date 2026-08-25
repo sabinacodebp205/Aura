@@ -200,3 +200,23 @@
   color: var(--muted);
   margin-bottom: 32px;
 }
+
+.validationWarning {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.validationWarning p {
+  margin: 0;
+}
+
+.validationWarning a {
+  color: #856404;
+  text-decoration: underline;
+  font-weight: 500;
+}

@@ -3,6 +3,9 @@ using Aura.Application.Sevices.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Aura.Core.Entities;
+using Aura.Application.Sevices.Interfaces;
 
 namespace Aura.API.Controllers
 {
@@ -12,10 +15,14 @@ namespace Aura.API.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IAddressService _addressService;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, UserManager<AppUser> userManager, IAddressService addressService)
         {
             _orderService = orderService;
+            _userManager = userManager;
+            _addressService = addressService;
         }
 
         [HttpGet]
@@ -43,6 +50,30 @@ namespace Aura.API.Controllers
         {
             var userId = Guid.Parse(
                 User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+                return Unauthorized();
+
+            if (string.IsNullOrWhiteSpace(user.Name) || 
+                string.IsNullOrWhiteSpace(user.Surname) || 
+                string.IsNullOrWhiteSpace(user.PhoneNumber))
+            {
+                return BadRequest(new { message = "Sifariş vermək üçün profil məlumatlarınızı (Ad, Soyad, Telefon) tamamlayın." });
+            }
+
+            var address = await _addressService.GetByIdAsync(dto.AddressId);
+            if (address == null)
+            {
+                return BadRequest(new { message = "Seçilmiş ünvan tapılmadı. Zəhmət olmasa ünvan əlavə edin." });
+            }
+
+            if (string.IsNullOrWhiteSpace(address.Street) ||
+                string.IsNullOrWhiteSpace(address.City) ||
+                string.IsNullOrWhiteSpace(address.Country))
+            {
+                return BadRequest(new { message = "Seçilmiş ünvan məlumatları eksikdir (Küçə, Şəhər, Ölkə). Zəhmət olmasa ünvanı tamamlayın." });
+            }
 
             await _orderService.CreateAsync(dto, userId);
 
