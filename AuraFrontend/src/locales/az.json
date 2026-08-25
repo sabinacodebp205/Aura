@@ -18,7 +18,8 @@
     "cancel": "Ləğv et",
     "save": "Yadda saxla",
     "delete": "Sil",
-    "edit": "Redaktə et"
+    "edit": "Redaktə et",
+    "add": "Əlavə et"
   },
   "nav": {
     "home": "Əsas",
@@ -107,13 +108,17 @@
   },
   "cart": {
     "eyebrow": "Sifarişin rəsmiləşdirilməsi",
-    "title": "Səbətiniz",
+    "title": "Səbətinizdəki Məhsullar",
     "continueShopping": "Alış-verişə davam et",
     "emptyTitle": "Səbətiniz boşdur",
     "emptyDesc": "Səbətinizə hələ heç bir məhsul əlavə edilməyib.",
     "browseCatalog": "Kataloqa Bax",
     "remove": "Sil",
-    "quantity": "Say"
+    "quantity": "Say",
+    "products": "Məhsullar",
+    "clear": "Təmizlə",
+    "checkout": "Sifarişi Rəsmiləşdir",
+    "emptyMessage": "Səbətinizdə məhsul yoxdur."
   },
   "summary": {
     "title": "Sifariş Xülasəsi",
@@ -189,7 +194,19 @@
     "editModalTitle": "Profili Redaktə Et",
     "cancel": "Ləğv et",
     "cancelOrder": "Sifarişi ləğv et",
-    "cancelConfirm": "Sifarişi silmək istədiyinizə əminsiniz?"
+    "cancelConfirm": "Sifarişi silmək istədiyinizə əminsiniz?",
+    "details": "Profil Məlumatları",
+    "settings": "Hesab Parametrləri",
+    "welcome": "Xoş gəldiniz,",
+    "myOrders": "Sifarişlərim",
+    "myAddresses": "Ünvanlarım",
+    "logout": "Çıxış",
+    "orderNumber": "Sifariş nömrəsi:",
+    "date": "Tarix:",
+    "status": "Status:",
+    "total": "Cəmi:",
+    "itemCount": "Məhsul sayı:",
+    "save": "Yadda saxla"
   },
   "recentlyViewed": {
     "eyebrow": "Tarixçəniz",

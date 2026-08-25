@@ -18,7 +18,8 @@
     "cancel": "Cancel",
     "save": "Save",
     "delete": "Delete",
-    "edit": "Edit"
+    "edit": "Edit",
+    "add": "Add"
   },
   "nav": {
     "home": "Home",
@@ -107,13 +108,17 @@
   },
   "cart": {
     "eyebrow": "Checkout",
-    "title": "Your Cart",
-    "continueShopping": "Continue shopping",
+    "title": "Products in your Cart",
+    "continueShopping": "Continue Shopping",
     "emptyTitle": "Your Cart is empty",
     "emptyDesc": "No items have been added to your shopping cart yet.",
     "browseCatalog": "Browse Catalog",
     "remove": "Remove",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "products": "Products",
+    "clear": "Clear",
+    "checkout": "Checkout",
+    "emptyMessage": "There are no products in your cart."
   },
   "summary": {
     "title": "Order summary",
@@ -189,7 +194,19 @@
     "editModalTitle": "Edit Profile",
     "cancel": "Cancel",
     "cancelOrder": "Cancel order",
-    "cancelConfirm": "Are you sure you want to remove this order?"
+    "cancelConfirm": "Are you sure you want to remove this order?",
+    "details": "Profile Details",
+    "settings": "Account Settings",
+    "welcome": "Welcome,",
+    "myOrders": "My Orders",
+    "myAddresses": "My Addresses",
+    "logout": "Logout",
+    "orderNumber": "Order Number:",
+    "date": "Date:",
+    "status": "Status:",
+    "total": "Total:",
+    "itemCount": "Item count:",
+    "save": "Save"
   },
   "recentlyViewed": {
     "eyebrow": "Browsing History",

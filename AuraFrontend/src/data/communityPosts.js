@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 export const communityPosts = [
   {
     id: 'silver-moon-hoodie',
