@@ -63,10 +63,14 @@ namespace Aura.API
                 options.AddPolicy(FrontendCorsPolicy, policy =>
                 {
                     policy.WithOrigins(
-                    "http://localhost:5173",
-                    "http://127.0.0.1:5173",
-                    "http://localhost:5174",
-                    "http://127.0.0.1:5174")
+                        "http://localhost:5173",
+                        "http://127.0.0.1:5173",
+                        "http://localhost:5174",
+                        "http://127.0.0.1:5174",
+                        "https://aura-a2pljs860-sabinayi-bpa205-2231s-projects.vercel.app",
+                        "https://*.vercel.app"
+                    )
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
