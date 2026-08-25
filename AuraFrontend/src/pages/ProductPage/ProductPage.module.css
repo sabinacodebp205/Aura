@@ -43,9 +43,9 @@
     grid-template-areas: 
       "gallery"
       "info"
+      "cart"
       "size"
-      "details"
-      "cart";
+      "details";
     gap: 24px;
     padding: 24px 16px 40px;
     width: 100%;

@@ -1792,15 +1792,19 @@ button {
   }
 
   .cart-item {
-    grid-template-columns: 92px minmax(0, 1fr);
+    grid-template-columns: 92px 1fr auto;
+    grid-template-areas: 
+      "image info info"
+      "image qty price"
+      "image remove remove";
+    align-items: center;
   }
 
-  .cart-item strong,
-  .quantity-control,
-  .remove-button {
-    grid-column: 2;
-    justify-self: start;
-  }
+  .cart-item > img, .cart-item > .cart-image-placeholder { grid-area: image; }
+  .cart-item > div:first-of-type { grid-area: info; }
+  .cart-item > .quantity-control { grid-area: qty; justify-self: start; }
+  .cart-item > strong { grid-area: price; justify-self: end; }
+  .cart-item > .remove-button { grid-area: remove; justify-self: start; margin-top: 8px; }
 
   .profile-hero {
     display: flex;
