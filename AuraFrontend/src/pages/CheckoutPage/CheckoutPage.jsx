@@ -31,7 +31,7 @@ export default function CheckoutPage() {
   }, [formData]);
 
   useEffect(() => {
-    if (user && !formData.name && !formData.email) {
+    if (user) {
       setFormData((prev) => ({
         ...prev,
         name: [user.name, user.surname].filter(Boolean).join(' '),
@@ -76,6 +76,8 @@ export default function CheckoutPage() {
 
       const payload = {
         addressId: finalAddressId,
+        name: formData.name,
+        email: formData.email,
         orderItems: items.map(item => ({
           productId: item.productId || item.id,
           quantity: item.quantity
@@ -134,7 +136,8 @@ export default function CheckoutPage() {
                   required
                   placeholder="Adınız və Soyadınız"
                   value={formData.name}
-                  onChange={e => setFormData({ ...formData, name: e.target.value })}
+                  readOnly
+                  className={styles.readOnlyInput}
                 />
               </div>
               <div className={styles.formGroup}>
@@ -144,7 +147,8 @@ export default function CheckoutPage() {
                   required
                   placeholder="nümunə@email.com"
                   value={formData.email}
-                  onChange={e => setFormData({ ...formData, email: e.target.value })}
+                  readOnly
+                  className={styles.readOnlyInput}
                 />
               </div>
 
@@ -221,21 +225,21 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            {(!formData.name || formData.name.trim() === '') && (
+            {user && formData.name !== [user.name, user.surname].filter(Boolean).join(' ') && (
               <div className={styles.validationWarning}>
-                <p>Zəhmət olmasa Ad və Soyadınızı daxil edin.</p>
+                <p>Ad-Soyad məlumatı profilinizlə uyğun gəlmir.</p>
               </div>
             )}
 
-            {(!formData.email || !formData.email.includes('@')) && (
+            {user && formData.email !== (user.email || '') && (
               <div className={styles.validationWarning}>
-                <p>Zəhmət olmasa düzgün email adresi daxil edin.</p>
+                <p>Email ünvanı profilinizlə uyğun gəlmir.</p>
               </div>
             )}
 
             {(!selectedAddressId || !addresses.find(a => a.id === selectedAddressId)?.street || !addresses.find(a => a.id === selectedAddressId)?.city || !addresses.find(a => a.id === selectedAddressId)?.country) && (
               <div className={styles.validationWarning}>
-                <p>Zəhmət olmasa <a href="#" onClick={(e) => { e.preventDefault(); navigate('/profile', { state: { tab: 'addresses' } }); }}>ünvan əlavə edin və ya tamamlayın</a> (Küçə, Şəhər, Ölkə).</p>
+                <p>Ünvan məlumatı profilinizlə uyğun gəlmir. Zəhmət olmasa <a href="#" onClick={(e) => { e.preventDefault(); navigate('/profile', { state: { tab: 'addresses' } }); }}>ünvan əlavə edin</a>.</p>
               </div>
             )}
 
@@ -244,7 +248,15 @@ export default function CheckoutPage() {
               form="checkout-form" 
               fullWidth 
               style={{ marginTop: '24px' }}
-              disabled={(!formData.name || formData.name.trim() === '') || (!formData.email || !formData.email.includes('@')) || (!selectedAddressId || !addresses.find(a => a.id === selectedAddressId)?.street || !addresses.find(a => a.id === selectedAddressId)?.city || !addresses.find(a => a.id === selectedAddressId)?.country)}
+              disabled={
+                !user || 
+                formData.name !== [user.name, user.surname].filter(Boolean).join(' ') || 
+                formData.email !== (user.email || '') || 
+                !selectedAddressId || 
+                !addresses.find(a => a.id === selectedAddressId)?.street || 
+                !addresses.find(a => a.id === selectedAddressId)?.city || 
+                !addresses.find(a => a.id === selectedAddressId)?.country
+              }
             >
               Sifarişi Təsdiqlə
             </Button>

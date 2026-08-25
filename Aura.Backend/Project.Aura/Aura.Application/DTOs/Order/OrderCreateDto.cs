@@ -8,6 +8,10 @@ namespace Aura.Application.DTOs.Order
     {
         public Guid AddressId { get; set; }
 
+        public string? Name { get; set; }
+        
+        public string? Email { get; set; }
+
         public string? CouponCode { get; set; }
 
         public List<OrderItemCreateDto> OrderItems { get; set; } = new();
