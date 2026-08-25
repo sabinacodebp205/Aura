@@ -99,7 +99,7 @@
 /* Stats Grid */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   border-top: 1px solid var(--line);
   padding-top: 24px;
@@ -472,7 +472,7 @@
     align-self: center;
   }
   .stats-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
     padding-top: 16px;
   }

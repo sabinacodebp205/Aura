@@ -158,10 +158,7 @@ export default function ProfilePage() {
 
         {/* Stats Grid */}
         <div className={styles['stats-grid']}>
-          <div className={styles['stat-card']} onClick={() => setActiveTab('favorites')}>
-            <span className={styles['stat-number']}>{favorites.length}</span>
-            <span className={styles['stat-label']}>{t('profile.favoritesStat')}</span>
-          </div>
+
           <div className={styles['stat-card']} onClick={() => setActiveTab('orders')}>
             <span className={styles['stat-number']}>{orders.length}</span>
             <span className={styles['stat-label']}>{t('profile.ordersStat')}</span>
@@ -182,13 +179,7 @@ export default function ProfilePage() {
         >
           {t('profile.ordersTab', { count: orders.length })}
         </button>
-        <button
-          type="button"
-          className={`${styles['tab-btn']} ${activeTab === 'favorites' ? styles.active : ''}`}
-          onClick={() => setActiveTab('favorites')}
-        >
-          {t('profile.favoritesTab', { count: favorites.length })}
-        </button>
+
         <button
           type="button"
           className={`${styles['tab-btn']} ${activeTab === 'addresses' ? styles.active : ''}`}
@@ -281,41 +272,7 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* Favorites Tab */}
-        {activeTab === 'favorites' && (
-          <div className={styles['panel']}>
-            <h2>{t('favorites.title')}</h2>
-            {favorites.length === 0 ? (
-              <div className={styles['empty-box']}>
-                <p>{t('favorites.empty')}</p>
-                <Link to="/" className={styles['action-link']}>{t('favorites.exploreClothing')}</Link>
-              </div>
-            ) : (
-              <div className={styles['fav-grid']}>
-                {favorites.map((fav, index) => (
-                  <article key={fav.id || fav.productId || `fav-${index}`} className={styles['fav-card']}>
-                    {getImageUrl(fav.imageUrl) ? (
-                      <img
-                        src={getImageUrl(fav.imageUrl)}
-                        alt={fav.productName || 'Aura Piece'}
-                        onError={handleImageError}
-                      />
-                    ) : (
-                      <div className={styles['fav-image-placeholder']} aria-label="No image" />
-                    )}
-                    <div className={styles['fav-info']}>
-                      <h3>{fav.productName || 'Aura Piece'}</h3>
-                      <p className={styles['fav-price']}>${fav.price}</p>
-                      <Link to={`/product/${fav.productId}`} className={styles['fav-view-btn']}>
-                        {t('favorites.viewDetails')}
-                      </Link>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+
 
         {/* Addresses Tab */}
         {activeTab === 'addresses' && (
