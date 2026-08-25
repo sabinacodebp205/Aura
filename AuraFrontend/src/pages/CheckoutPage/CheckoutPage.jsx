@@ -65,6 +65,14 @@ export default function CheckoutPage() {
     );
   }
 
+  const isSubmitDisabled = !user || 
+    formData.name !== [user.name, user.surname].filter(Boolean).join(' ') || 
+    formData.email !== (user.email || '') || 
+    !selectedAddressId || 
+    !addresses.find(a => a.id === selectedAddressId)?.street || 
+    !addresses.find(a => a.id === selectedAddressId)?.city || 
+    !addresses.find(a => a.id === selectedAddressId)?.country;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -180,6 +188,17 @@ export default function CheckoutPage() {
             </div>
           </div>
 
+          <div className={styles.mobileSubmitAction}>
+            <Button 
+              type="submit" 
+              form="checkout-form" 
+              fullWidth 
+              disabled={isSubmitDisabled}
+            >
+              Sifarişi Təsdiqlə
+            </Button>
+          </div>
+
         </div>
 
         <div className={styles.sidebar}>
@@ -238,23 +257,17 @@ export default function CheckoutPage() {
               </div>
             )}
 
-            <Button 
-              type="submit" 
-              form="checkout-form" 
-              fullWidth 
-              style={{ marginTop: '24px' }}
-              disabled={
-                !user || 
-                formData.name !== [user.name, user.surname].filter(Boolean).join(' ') || 
-                formData.email !== (user.email || '') || 
-                !selectedAddressId || 
-                !addresses.find(a => a.id === selectedAddressId)?.street || 
-                !addresses.find(a => a.id === selectedAddressId)?.city || 
-                !addresses.find(a => a.id === selectedAddressId)?.country
-              }
-            >
-              Sifarişi Təsdiqlə
-            </Button>
+            <div className={styles.desktopSubmitAction}>
+              <Button 
+                type="submit" 
+                form="checkout-form" 
+                fullWidth 
+                style={{ marginTop: '24px' }}
+                disabled={isSubmitDisabled}
+              >
+                Sifarişi Təsdiqlə
+              </Button>
+            </div>
           </div>
         </div>
 

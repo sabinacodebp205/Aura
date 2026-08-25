@@ -220,3 +220,21 @@
   text-decoration: underline;
   font-weight: 500;
 }
+
+.mobileSubmitAction {
+  display: none;
+}
+.desktopSubmitAction {
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .mobileSubmitAction {
+    display: block;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+  .desktopSubmitAction {
+    display: none;
+  }
+}
