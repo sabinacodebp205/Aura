@@ -7,6 +7,6 @@ export const bottomNavLinks = [
   { label: 'Home', to: '/', icon: '⌂' },
   { label: 'Favorites', to: '/favorites', icon: '♡' },
   { label: 'Inspiration', to: '/inspiration', icon: '✦' },
-  { label: 'Profile', to: '/profile', icon: '◉' },
+  { label: 'Cart', to: '/cart', icon: '⌁' },
 ];
 
