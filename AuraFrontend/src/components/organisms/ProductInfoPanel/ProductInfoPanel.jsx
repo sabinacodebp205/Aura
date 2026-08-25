@@ -84,6 +84,7 @@ export function ProductSizeSelector({ availableSizes, selectedSize, onSelectSize
 }
 
 export function ProductDetailsGrid({ product }) {
+  const { t } = useTranslation();
   return (
     <div className={styles.detailsGrid}>
       <div className={styles.aboutCol}>
@@ -93,10 +94,10 @@ export function ProductDetailsGrid({ product }) {
       <div className={styles.featuresCol}>
         <h3>{t('productInfo.features')}</h3>
         <ul className={styles.featuresList}>
-          <li><span className={styles.check}>✔</span> Yumşaq və rahat parça</li>
-          <li><span className={styles.check}>✔</span> Gündəlik istifadə üçün ideal</li>
-          <li><span className={styles.check}>✔</span> Minimal və modern dizayn</li>
-          <li><span className={styles.check}>✔</span> Başqa rənglərdə mövcuddur</li>
+          <li><span className={styles.check}>✔</span> {t('productInfo.feat1')}</li>
+          <li><span className={styles.check}>✔</span> {t('productInfo.feat2')}</li>
+          <li><span className={styles.check}>✔</span> {t('productInfo.feat3')}</li>
+          <li><span className={styles.check}>✔</span> {t('productInfo.feat4')}</li>
         </ul>
       </div>
     </div>
