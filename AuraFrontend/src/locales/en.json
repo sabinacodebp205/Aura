@@ -317,5 +317,15 @@
     "phone": "Contact number",
     "address": "Delivery address",
     "success": "Your order has been recorded. We will contact you soon."
+  },
+  "addressForm": {
+    "addTitle": "Add New Address",
+    "editTitle": "Edit Address",
+    "country": "Country",
+    "city": "City",
+    "street": "Street",
+    "zipCode": "Zip Code",
+    "saving": "Saving...",
+    "error": "Could not save address"
   }
 }

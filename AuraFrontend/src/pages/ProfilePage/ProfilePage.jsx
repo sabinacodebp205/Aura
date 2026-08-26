@@ -5,8 +5,9 @@ import { useAuth } from '../../context/AuthContext';
 import { useFavorites } from '../../context/FavoritesContext';
 import { updateProfile } from '../../api/authService';
 import { getAllOrders, deleteOrder } from '../../api/orderService';
-import { getAllAddresses } from '../../api/addressService';
+import { getAllAddresses, createAddress, updateAddress, deleteAddress } from '../../api/addressService';
 import { getImageUrl, handleImageError } from '../../utils/imageUrl';
+import AddressFormModal from '../../components/organisms/AddressFormModal/AddressFormModal';
 import styles from './ProfilePage.module.css';
 
 export default function ProfilePage() {
@@ -19,6 +20,9 @@ export default function ProfilePage() {
   const [orders, setOrders] = useState([]);
   const [addresses, setAddresses] = useState([]);
   const [loadingData, setLoadingData] = useState(false);
+
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [editingAddress, setEditingAddress] = useState(null);
 
   // Edit Profile modal state
   const [isEditing, setIsEditing] = useState(false);
@@ -126,6 +130,37 @@ export default function ProfilePage() {
     } finally {
       setUpdateLoading(false);
     }
+  };
+
+  const handleAddAddressClick = () => {
+    setEditingAddress(null);
+    setIsAddressModalOpen(true);
+  };
+
+  const handleEditAddressClick = (addr) => {
+    setEditingAddress(addr);
+    setIsAddressModalOpen(true);
+  };
+
+  const handleDeleteAddress = async (id) => {
+    if (window.confirm(t('common.delete') + '?')) {
+      try {
+        await deleteAddress(id);
+        await loadUserData();
+      } catch (err) {
+        console.error(err);
+        alert(t('common.error'));
+      }
+    }
+  };
+
+  const handleAddressSubmit = async (formData, id) => {
+    if (id) {
+      await updateAddress({ ...formData, id });
+    } else {
+      await createAddress(formData);
+    }
+    await loadUserData();
   };
 
   return (
@@ -277,7 +312,12 @@ export default function ProfilePage() {
         {/* Addresses Tab */}
         {activeTab === 'addresses' && (
           <div className={styles['panel']}>
-            <h2>{t('profile.savedAddresses')}</h2>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+              <h2>{t('profile.savedAddresses')}</h2>
+              <button className={styles['edit-btn']} onClick={handleAddAddressClick}>
+                {t('common.add')}
+              </button>
+            </div>
             {addresses.length === 0 ? (
               <div className={styles['empty-box']}>
                 <p>{t('profile.noAddresses')}</p>
@@ -285,9 +325,19 @@ export default function ProfilePage() {
             ) : (
               <div className={styles['address-grid']}>
                 {addresses.map((addr) => (
-                  <div key={addr.id} className={styles['address-card']}>
-                    <strong>{addr.street}</strong>
-                    <p>{addr.city}, {addr.country} {addr.zipCode}</p>
+                  <div key={addr.id} className={styles['address-card']} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div style={{ flex: 1 }}>
+                      <strong>{addr.street}</strong>
+                      <p>{addr.city}, {addr.country} {addr.zipCode}</p>
+                    </div>
+                    <div style={{ display: 'flex', gap: '8px', flexDirection: 'column' }}>
+                      <button className={styles['edit-btn']} style={{ padding: '4px 12px', fontSize: '0.8rem' }} onClick={() => handleEditAddressClick(addr)}>
+                        {t('common.edit')}
+                      </button>
+                      <button className={styles['cancel-order-btn']} style={{ padding: '4px 12px', fontSize: '0.8rem' }} onClick={() => handleDeleteAddress(addr.id)}>
+                        {t('common.delete')}
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -416,6 +466,13 @@ export default function ProfilePage() {
           </div>
         </div>
       )}
+
+      <AddressFormModal 
+        isOpen={isAddressModalOpen}
+        onClose={() => setIsAddressModalOpen(false)}
+        onSubmit={handleAddressSubmit}
+        initialData={editingAddress}
+      />
     </main>
   );
 }

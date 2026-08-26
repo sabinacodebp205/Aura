@@ -317,5 +317,15 @@
     "phone": "Əlaqə nömrəsi",
     "address": "Çatdırılma ünvanı",
     "success": "Sifarişiniz qeydə alındı. Tezliklə sizinlə əlaqə saxlayacağıq."
+  },
+  "addressForm": {
+    "addTitle": "Yeni Ünvan Əlavə Et",
+    "editTitle": "Ünvanı Redaktə Et",
+    "country": "Ölkə",
+    "city": "Şəhər",
+    "street": "Küçə",
+    "zipCode": "Poçt indeksi",
+    "saving": "Yadda saxlanılır...",
+    "error": "Ünvanı yadda saxlamaq mümkün olmadı"
   }
 }
