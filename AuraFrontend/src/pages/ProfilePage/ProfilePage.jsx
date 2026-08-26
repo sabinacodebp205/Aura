@@ -314,9 +314,6 @@ export default function ProfilePage() {
           <div className={styles['panel']}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
               <h2>{t('profile.savedAddresses')}</h2>
-              <button className={styles['edit-btn']} onClick={handleAddAddressClick}>
-                {t('common.add')}
-              </button>
             </div>
             {addresses.length === 0 ? (
               <div className={styles['empty-box']}>
@@ -333,9 +330,6 @@ export default function ProfilePage() {
                     <div style={{ display: 'flex', gap: '8px', flexDirection: 'column' }}>
                       <button className={styles['edit-btn']} style={{ padding: '4px 12px', fontSize: '0.8rem' }} onClick={() => handleEditAddressClick(addr)}>
                         {t('common.edit')}
-                      </button>
-                      <button className={styles['cancel-order-btn']} style={{ padding: '4px 12px', fontSize: '0.8rem' }} onClick={() => handleDeleteAddress(addr.id)}>
-                        {t('common.delete')}
                       </button>
                     </div>
                   </div>
