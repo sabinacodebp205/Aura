@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.Address;
+using Aura.Application.DTOs.Address;
 using Aura.Application.Sevices.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,10 @@ namespace Aura.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var addresses = await _addressService.GetAllAsync();
+            var userId = Guid.Parse(
+                User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var addresses = await _addressService.GetAllAsync(userId);
 
             return Ok(addresses);
         }

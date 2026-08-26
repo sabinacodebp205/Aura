@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.Address;
+using Aura.Application.DTOs.Address;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace Aura.Application.Sevices.Interfaces
 {
     public interface IAddressService
     {
-        Task<ICollection<AddressGetDto>> GetAllAsync();
+        Task<ICollection<AddressGetDto>> GetAllAsync(Guid userId);
 
         Task<AddressGetDto?> GetByIdAsync(Guid id);
 

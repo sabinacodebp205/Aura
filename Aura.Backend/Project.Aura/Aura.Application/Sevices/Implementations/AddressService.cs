@@ -1,4 +1,4 @@
-﻿using Aura.Application.DTOs.Address;
+using Aura.Application.DTOs.Address;
 using Aura.Application.Sevices.Interfaces;
 using Aura.Core.Entities;
 using Aura.Core.Interfaces.Repositories;
@@ -24,9 +24,9 @@ namespace Aura.Application.Sevices.Implementations
             _mapper = mapper;
         }
 
-        public async Task<ICollection<AddressGetDto>> GetAllAsync()
+        public async Task<ICollection<AddressGetDto>> GetAllAsync(Guid userId)
         {
-            var addresses = await _unitOfWork.AddressRepository.GetAllAsync();
+            var addresses = await _unitOfWork.AddressRepository.FindAllAsync(a => a.UserId == userId);
 
             return _mapper.Map<ICollection<AddressGetDto>>(addresses);
         }
