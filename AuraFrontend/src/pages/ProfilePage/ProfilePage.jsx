@@ -314,6 +314,9 @@ export default function ProfilePage() {
           <div className={styles['panel']}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
               <h2>{t('profile.savedAddresses')}</h2>
+              <button className={styles['edit-btn']} onClick={handleAddAddressClick}>
+                {t('common.add')}
+              </button>
             </div>
             {addresses.length === 0 ? (
               <div className={styles['empty-box']}>
